@@ -156,11 +156,13 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
         {/* Brand Header */}
         <div className="p-7 pb-5 border-b border-stone-100 text-center">
           <div className="flex items-center justify-center gap-3 mb-2">
-            <img 
-              src="/src/assets/images/growth_mastery_logo_1791029865144.jpg" 
-              alt="Growth Mastery Logo" 
-              className="w-9 h-9 object-cover rounded-xl border border-stone-200 shadow-2xs" 
-            />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-700 via-indigo-600 to-violet-500 p-0.5 shadow-xs flex items-center justify-center shrink-0">
+              <img 
+                src="/src/assets/images/growth_mastery_logo_purple_1791037785600.jpg" 
+                alt="Growth Mastery Logo" 
+                className="w-full h-full object-cover rounded-[10px]" 
+              />
+            </div>
             <div className="text-left">
               <span className="font-bold text-lg text-stone-900 tracking-tight font-serif block">Growth Mastery</span>
               <span className="text-[10px] text-stone-400 uppercase tracking-wider font-mono">Academic Diagnostic Engine</span>
