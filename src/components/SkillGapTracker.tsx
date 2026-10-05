@@ -74,39 +74,39 @@ export const SkillGapTracker: React.FC<SkillGapTrackerProps> = ({
 
       {/* Summary KPI Badges */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-        <div className="p-4 rounded-xl bg-rose-50/80 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/40 flex items-center justify-between">
+        <div className="p-4 rounded-xl bg-white dark:bg-[#151C28] border border-rose-200 dark:border-rose-900/40 flex items-center justify-between shadow-xs">
           <div className="space-y-0.5">
-            <span className="text-xs font-bold uppercase tracking-wider text-rose-800 dark:text-rose-300">Skills Needing Focus</span>
-            <div className="text-2xl font-extrabold text-rose-950 dark:text-rose-100 tabular-nums">{weakCount}</div>
+            <span className="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">Skills Needing Focus</span>
+            <div className="text-2xl font-extrabold text-slate-900 dark:text-white tabular-nums">{weakCount}</div>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-rose-500 text-white flex items-center justify-center shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/40 flex items-center justify-center shadow-xs">
             <TrendingDown size={20} />
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-blue-50/80 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/40 flex items-center justify-between">
+        <div className="p-4 rounded-xl bg-white dark:bg-[#151C28] border border-blue-200 dark:border-blue-900/40 flex items-center justify-between shadow-xs">
           <div className="space-y-0.5">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-800 dark:text-blue-300">Moderate Mastery</span>
-            <div className="text-2xl font-extrabold text-blue-950 dark:text-blue-100 tabular-nums">{moderateCount}</div>
+            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">Moderate Mastery</span>
+            <div className="text-2xl font-extrabold text-slate-900 dark:text-white tabular-nums">{moderateCount}</div>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-blue-500 text-white flex items-center justify-center shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-900/40 flex items-center justify-center shadow-xs">
             <AlertTriangle size={18} />
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-emerald-50/80 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/40 flex items-center justify-between">
+        <div className="p-4 rounded-xl bg-white dark:bg-[#151C28] border border-emerald-200 dark:border-emerald-900/40 flex items-center justify-between shadow-xs">
           <div className="space-y-0.5">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">Proficient Topics</span>
-            <div className="text-2xl font-extrabold text-emerald-950 dark:text-emerald-100 tabular-nums">{strongCount}</div>
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Proficient Topics</span>
+            <div className="text-2xl font-extrabold text-slate-900 dark:text-white tabular-nums">{strongCount}</div>
           </div>
-          <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/40 flex items-center justify-center shadow-xs">
             <CheckCircle2 size={20} />
           </div>
         </div>
       </div>
 
       {/* Filters Bar */}
-      <div className="p-3.5 bg-slate-50 dark:bg-[#151C28] border border-slate-200 dark:border-stone-800 rounded-xl flex flex-wrap gap-3 items-center text-xs">
+      <div className="p-3.5 bg-white dark:bg-[#151C28] border border-slate-200 dark:border-stone-800 rounded-xl flex flex-wrap gap-3 items-center text-xs shadow-xs">
         <div className="flex items-center gap-1.5 text-slate-700 dark:text-stone-300 font-bold">
           <Filter size={14} className="text-indigo-600 dark:text-indigo-400" />
           <span>Filter by:</span>
@@ -116,7 +116,7 @@ export const SkillGapTracker: React.FC<SkillGapTrackerProps> = ({
         <select 
           value={filterDomain}
           onChange={(e) => setFilterDomain(e.target.value)}
-          className="px-3 py-1.5 bg-white dark:bg-[#192231] border border-slate-300 dark:border-stone-700 rounded-lg text-xs font-medium text-slate-800 dark:text-stone-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          className="px-3 py-1.5 bg-slate-50 dark:bg-[#192231] border border-slate-300 dark:border-stone-700 rounded-lg text-xs font-medium text-slate-800 dark:text-stone-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
         >
           <option value="all">All Domains & Courses</option>
           {domains.map(dom => (
@@ -128,7 +128,7 @@ export const SkillGapTracker: React.FC<SkillGapTrackerProps> = ({
         <select 
           value={filterLevel}
           onChange={(e) => setFilterLevel(e.target.value)}
-          className="px-3 py-1.5 bg-white dark:bg-[#192231] border border-slate-300 dark:border-stone-700 rounded-lg text-xs font-medium text-slate-800 dark:text-stone-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          className="px-3 py-1.5 bg-slate-50 dark:bg-[#192231] border border-slate-300 dark:border-stone-700 rounded-lg text-xs font-medium text-slate-800 dark:text-stone-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
         >
           <option value="all">All Mastery Levels</option>
           <option value="weak">Weak (&lt; 50%)</option>
@@ -173,12 +173,12 @@ export const SkillGapTracker: React.FC<SkillGapTrackerProps> = ({
             return (
               <div 
                 key={gap.id}
-                className={`p-5 rounded-2xl border flex flex-col justify-between space-y-4 transition-all ${
+                className={`p-5 rounded-2xl border flex flex-col justify-between space-y-4 transition-all bg-white dark:bg-[#151C28] ${
                   isWeak 
-                    ? "bg-gradient-to-b from-white to-rose-50/40 dark:from-[#151C28] dark:to-rose-950/20 border-rose-200/90 dark:border-rose-900/40 shadow-xs" 
+                    ? "border-rose-200 dark:border-rose-900/40 shadow-xs" 
                     : isStrong 
-                      ? "bg-gradient-to-b from-white to-emerald-50/40 dark:from-[#151C28] dark:to-emerald-950/20 border-emerald-200/90 dark:border-emerald-900/40 shadow-xs" 
-                      : "bg-gradient-to-b from-white to-blue-50/40 dark:from-[#151C28] dark:to-blue-950/20 border-blue-200/90 dark:border-blue-900/40 shadow-xs"
+                      ? "border-emerald-200 dark:border-emerald-900/40 shadow-xs" 
+                      : "border-blue-200 dark:border-blue-900/40 shadow-xs"
                 }`}
               >
                 <div className="space-y-3">
@@ -190,10 +190,10 @@ export const SkillGapTracker: React.FC<SkillGapTrackerProps> = ({
 
                     <span className={`px-2.5 py-1 rounded-full text-xs font-extrabold shadow-2xs border ${
                       isStrong
-                        ? "bg-emerald-100 text-emerald-800 border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/40"
+                        ? "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/50"
                         : isWeak
-                        ? "bg-rose-100 text-rose-800 border-rose-200 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800/40"
-                        : "bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/40"
+                        ? "bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800/50"
+                        : "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/50"
                     }`}>
                       {gap.level}
                     </span>
@@ -205,7 +205,7 @@ export const SkillGapTracker: React.FC<SkillGapTrackerProps> = ({
                       <span className="text-slate-500 dark:text-stone-400">Evaluated Score</span>
                       <span className="font-bold text-slate-900 dark:text-white tabular-nums">{gap.score}%</span>
                     </div>
-                    <div className="w-full bg-slate-100 dark:bg-stone-800 h-2.5 rounded-full overflow-hidden">
+                    <div className="w-full bg-slate-100 dark:bg-[#0B0F17] h-2.5 rounded-full overflow-hidden border border-slate-200/50 dark:border-stone-800">
                       <div 
                         className={`h-full rounded-full transition-all ${
                           isStrong ? "bg-emerald-500" : isWeak ? "bg-rose-500" : "bg-blue-500"
@@ -217,9 +217,9 @@ export const SkillGapTracker: React.FC<SkillGapTrackerProps> = ({
                 </div>
 
                 <div className="pt-3 border-t border-slate-100 dark:border-stone-800/70 space-y-3 text-xs">
-                  <div className="pl-3 border-l-2 border-indigo-500/50 py-1 space-y-1">
-                    <span className="text-[9px] font-bold text-slate-400 dark:text-stone-500 uppercase tracking-wider block font-mono">Diagnostic Insight</span>
-                    <p className="text-slate-600 dark:text-stone-300 leading-relaxed text-xs font-sans italic">
+                  <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#0E141E] border border-slate-100 dark:border-stone-800/60 space-y-1">
+                    <span className="text-[9px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider block font-mono">Diagnostic Insight</span>
+                    <p className="text-slate-600 dark:text-stone-300 leading-relaxed text-xs font-sans">
                       {gap.reason}
                     </p>
                   </div>
