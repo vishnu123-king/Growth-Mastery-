@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { KeyRound, Mail, User as UserIcon, LogIn, AlertCircle, CheckCircle, Shield, Briefcase, GraduationCap, Sparkles } from "lucide-react";
 import { apiFetch } from "../lib/api";
 import { UserRole } from "../types";
+import logoUrl from "../assets/images/growth_mastery_logo_purple_1791037785600.jpg";
 
 interface AuthPageProps {
   onAuthSuccess: (user: any) => void;
@@ -158,7 +159,7 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
           <div className="flex items-center justify-center gap-3 mb-2">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-700 via-indigo-600 to-violet-500 p-0.5 shadow-xs flex items-center justify-center shrink-0">
               <img 
-                src="/src/assets/images/growth_mastery_logo_purple_1791037785600.jpg" 
+                src={logoUrl} 
                 alt="Growth Mastery Logo" 
                 className="w-full h-full object-cover rounded-[10px]" 
               />

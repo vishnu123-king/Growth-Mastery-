@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { AuthPage } from "./components/AuthPage";
 import { apiFetch } from "./lib/api";
+import logoUrl from "./assets/images/growth_mastery_logo_purple_1791037785600.jpg";
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -410,7 +411,7 @@ export default function App() {
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-700 via-indigo-600 to-blue-500 p-0.5 shadow-xs flex items-center justify-center shrink-0">
               <img 
-                src="/src/assets/images/growth_mastery_logo_purple_1791037785600.jpg" 
+                src={logoUrl} 
                 alt="Growth Mastery Logo" 
                 className="w-full h-full object-cover rounded-[6px]" 
               />
