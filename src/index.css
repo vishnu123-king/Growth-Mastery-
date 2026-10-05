@@ -170,6 +170,13 @@ body.dark .text-gray-500 {
 }
 
 /* Accessible Dark Mode Badge Overrides & Premium Teal Success Accent */
+html.dark .text-emerald-950,
+body.dark .text-emerald-950,
+html.dark .text-teal-950,
+body.dark .text-teal-950 {
+  color: #A7F3D0 !important;
+}
+
 html.dark .text-emerald-900,
 html.dark .text-emerald-800,
 html.dark .text-emerald-700,
@@ -202,7 +209,11 @@ body.dark [class*="bg-emerald-100/"],
 body.dark [class*="bg-teal-50/"],
 body.dark [class*="bg-teal-100/"] {
   background-color: rgba(20, 184, 166, 0.15) !important;
-  border-color: rgba(20, 184, 166, 0.3) !important;
+}
+
+html.dark .text-rose-950,
+body.dark .text-rose-950 {
+  color: #FECDD3 !important;
 }
 
 html.dark .text-rose-900,
@@ -225,7 +236,11 @@ html.dark [class*="bg-rose-100/"],
 body.dark [class*="bg-rose-50/"],
 body.dark [class*="bg-rose-100/"] {
   background-color: rgba(239, 68, 68, 0.15) !important;
-  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+html.dark .text-amber-950,
+body.dark .text-amber-950 {
+  color: #FDE68A !important;
 }
 
 html.dark .text-amber-900,
@@ -248,7 +263,11 @@ html.dark [class*="bg-amber-100/"],
 body.dark [class*="bg-amber-50/"],
 body.dark [class*="bg-amber-100/"] {
   background-color: rgba(245, 158, 11, 0.15) !important;
-  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+html.dark .text-purple-950,
+body.dark .text-purple-950 {
+  color: #F3E8FF !important;
 }
 
 html.dark .text-purple-900,
@@ -271,7 +290,11 @@ html.dark [class*="bg-purple-100/"],
 body.dark [class*="bg-purple-50/"],
 body.dark [class*="bg-purple-100/"] {
   background-color: rgba(147, 51, 234, 0.15) !important;
-  border-color: rgba(147, 51, 234, 0.3) !important;
+}
+
+html.dark .text-blue-950,
+body.dark .text-blue-950 {
+  color: #BFDBFE !important;
 }
 
 html.dark .text-blue-900,
@@ -294,10 +317,14 @@ html.dark [class*="bg-blue-100/"],
 body.dark [class*="bg-blue-50/"],
 body.dark [class*="bg-blue-100/"] {
   background-color: rgba(59, 130, 246, 0.15) !important;
-  border-color: rgba(59, 130, 246, 0.3) !important;
 }
 
 /* Accessible Dark Mode Indigo / Selection Overrides */
+html.dark .text-indigo-950,
+body.dark .text-indigo-950 {
+  color: #E0E7FF !important;
+}
+
 html.dark .text-indigo-900,
 html.dark .text-indigo-800,
 html.dark .text-indigo-700,
@@ -320,7 +347,6 @@ body.dark [class*="bg-indigo-50/"],
 body.dark [class*="bg-indigo-100/"],
 body.dark [class*="bg-indigo-900/"] {
   background-color: rgba(99, 102, 241, 0.15) !important; /* Cool indigo dark mode highlight */
-  border-color: rgba(99, 102, 241, 0.3) !important;
 }
 
 /* Dark mode inputs and textareas */
