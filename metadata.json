@@ -1,0 +1,6 @@
+{
+  "name": "Growth Mastery - AI-Powered Personalized Learning & Skill-Gap Platform",
+  "description": "Growth Mastery is an advanced AI-powered learning platform that evaluates student knowledge, identifies competency gaps, generates personalized recommendations, and creates custom quizzes from study materials.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

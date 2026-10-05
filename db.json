@@ -1,0 +1,1774 @@
+{
+  "users": [
+    {
+      "id": "student-demo",
+      "email": "dhivyabharathikarthi07@gmail.com",
+      "name": "Demo Student",
+      "learningPreferences": "I prefer step-by-step documentation, interactive quizzes, and short video tutorials.",
+      "createdAt": "2026-10-03T10:56:59.871Z",
+      "role": "student",
+      "passwordHash": "703b0a3d6ad75b649a28adde7d83c6251da457549263bc7ff45ec709b0a8448b"
+    },
+    {
+      "id": "student-jsal3x7u9",
+      "email": "darika@gmail.com",
+      "name": "darika",
+      "learningPreferences": "I prefer interactive assessments.",
+      "passwordHash": "8d3a9fe2acb95365654e9427d421aa76a31367d9a483548a8491aa2fa278f803",
+      "createdAt": "2026-10-03T11:01:33.589Z",
+      "role": "student"
+    },
+    {
+      "id": "admin-root",
+      "email": "admin@skillgap.ai",
+      "name": "System Administrator",
+      "role": "admin",
+      "passwordHash": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+      "createdAt": "2026-10-03T11:13:26.989Z",
+      "learningPreferences": "Full admin privileged access to curriculum, exams, and settings."
+    },
+    {
+      "id": "teacher-1",
+      "email": "teacher@skillgap.ai",
+      "name": "Prof. Sarah Jenkins",
+      "role": "teacher",
+      "passwordHash": "cde383eee8ee7a4400adf7a15f716f179a2eb97646b37e089eb8d6d04e663416",
+      "createdAt": "2026-10-03T11:13:26.989Z",
+      "learningPreferences": "Senior Curriculum Director & Assessment Specialist"
+    }
+  ],
+  "domains": [
+    {
+      "id": "domain-python",
+      "name": "Python Programming",
+      "description": "Master Python fundamentals, control flow, functions, object-oriented design, and robust exception handling.",
+      "createdAt": "2026-10-03T11:13:26.989Z",
+      "deadline": "2026-11-02",
+      "instructor": "Prof. Sarah Jenkins",
+      "status": "active",
+      "enrolledStudentsCount": 28
+    },
+    {
+      "id": "domain-webdev",
+      "name": "Full-Stack Web Development",
+      "description": "Learn HTML/CSS layouts, modern JavaScript, frontend React application development, backend Express APIs, and databases.",
+      "createdAt": "2026-10-03T11:13:26.989Z",
+      "deadline": "2026-11-17",
+      "instructor": "Alex Rivera",
+      "status": "active",
+      "enrolledStudentsCount": 34
+    },
+    {
+      "id": "domain-dsa",
+      "name": "Data Structures & Algorithms",
+      "description": "Asymptotic notation, arrays, linked lists, binary search trees, sorting, recursion, dynamic programming, and graphs.",
+      "createdAt": "2026-10-03T11:13:26.989Z",
+      "deadline": "2026-12-02",
+      "instructor": "Dr. Marcus Vance",
+      "status": "active",
+      "enrolledStudentsCount": 19
+    }
+  ],
+  "competencies": [
+    {
+      "id": "comp-py-fund",
+      "domainId": "domain-python",
+      "name": "Python Basics & Variables",
+      "description": "Variables, primitive data types (integers, strings, booleans, floats), and core mathematical operators."
+    },
+    {
+      "id": "comp-py-flow",
+      "domainId": "domain-python",
+      "name": "Control Flow & Loops",
+      "description": "Conditional statements (if-elif-else) and loop structures (for, while) with break/continue."
+    },
+    {
+      "id": "comp-py-func",
+      "domainId": "domain-python",
+      "name": "Functions & Scope",
+      "description": "Defining functions, arguments (*args, **kwargs), return values, scope rules (LEGB), and lambda expressions."
+    },
+    {
+      "id": "comp-py-oop",
+      "domainId": "domain-python",
+      "name": "Object-Oriented Programming (OOP)",
+      "description": "Classes, object instantiation, constructors, inheritance, polymorphism, and encapsulation."
+    },
+    {
+      "id": "comp-py-exceptions",
+      "domainId": "domain-python",
+      "name": "Exception & File Handling",
+      "description": "Robust exception handling (try-except-finally) and reading/writing text/JSON files securely."
+    },
+    {
+      "id": "comp-web-htmlcss",
+      "domainId": "domain-webdev",
+      "name": "HTML & CSS Layouts",
+      "description": "Semantic tags, box model, layouts using Flexbox/CSS Grid, and mobile-first responsive design."
+    },
+    {
+      "id": "comp-web-js",
+      "domainId": "domain-webdev",
+      "name": "JavaScript Basics (ES6+)",
+      "description": "Variables (let/const), arrow functions, array methods (map/filter/reduce), promises, async/await, and DOM manipulation."
+    },
+    {
+      "id": "comp-web-react",
+      "domainId": "domain-webdev",
+      "name": "React Components & Hooks",
+      "description": "Functional components, props, state management (useState), lifecycle handling (useEffect), and custom hooks."
+    },
+    {
+      "id": "comp-web-backend",
+      "domainId": "domain-webdev",
+      "name": "Backend APIs & Express",
+      "description": "Creating web servers with Express, RESTful endpoints, routing, parsing request bodies, and CORS."
+    },
+    {
+      "id": "comp-web-db",
+      "domainId": "domain-webdev",
+      "name": "Database & SQL Foundations",
+      "description": "Relational database design, table schemas, primary/foreign keys, and basic SQL commands (SELECT, INSERT, JOIN)."
+    },
+    {
+      "id": "comp-dsa-complexity",
+      "domainId": "domain-dsa",
+      "name": "Time & Space Complexity",
+      "description": "Big-O notation, asymptotic analysis, worst-case, best-case, and amortized runtime."
+    },
+    {
+      "id": "comp-dsa-arrays",
+      "domainId": "domain-dsa",
+      "name": "Arrays & Strings",
+      "description": "Sliding window, two-pointer techniques, prefix sums, and string matching algorithms."
+    },
+    {
+      "id": "comp-dsa-trees",
+      "domainId": "domain-dsa",
+      "name": "Trees & Binary Search",
+      "description": "Binary tree traversals (inorder, preorder, postorder), binary search trees, and heap properties."
+    }
+  ],
+  "questions": [
+    {
+      "id": "q-py-fund-1",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-py-fund",
+      "questionText": "What will be the output of `print(type(5 / 2))` in Python 3?",
+      "questionType": "mcq",
+      "options": [
+        "<class 'int'>",
+        "<class 'float'>",
+        "<class 'double'>",
+        "<class 'complex'>"
+      ],
+      "correctAnswer": "<class 'float'>",
+      "explanation": "In Python 3, the `/` operator performs float division, so `5 / 2` yields `2.5`, which is a float. Floor division `5 // 2` would yield an integer.",
+      "difficulty": "beginner"
+    },
+    {
+      "id": "q-py-fund-2",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-py-fund",
+      "questionText": "Which of the following is an invalid variable name in Python?",
+      "questionType": "mcq",
+      "options": [
+        "_my_var",
+        "myVar2",
+        "2myVar",
+        "my_var_abc"
+      ],
+      "correctAnswer": "2myVar",
+      "explanation": "Variable names in Python cannot start with a digit. They must start with a letter or an underscore.",
+      "difficulty": "beginner"
+    },
+    {
+      "id": "q-py-flow-1",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-py-flow",
+      "questionText": "What is the output of the following loop?\n```python\nfor i in range(1, 5):\n    if i == 3:\n        break\n    print(i, end='')\n```",
+      "questionType": "mcq",
+      "options": [
+        "1234",
+        "123",
+        "12",
+        "124"
+      ],
+      "correctAnswer": "12",
+      "explanation": "The loop iterates through 1, 2, 3, 4. When `i` equals 3, the `break` statement terminates the loop immediately. Hence, only 1 and 2 are printed.",
+      "difficulty": "intermediate"
+    },
+    {
+      "id": "q-py-flow-2",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-py-flow",
+      "questionText": "What does the `continue` statement do inside a loop in Python?",
+      "questionType": "mcq",
+      "options": [
+        "Stops the loop completely",
+        "Skips the rest of the current iteration and jumps to the next iteration",
+        "Exits the current function",
+        "Repeats the current iteration once more"
+      ],
+      "correctAnswer": "Skips the rest of the current iteration and jumps to the next iteration",
+      "explanation": "The `continue` statement skips all remaining expressions inside the current loop iteration and moves the execution thread back to the loop's start for the next item.",
+      "difficulty": "beginner"
+    },
+    {
+      "id": "q-py-func-1",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-py-func",
+      "questionText": "In Python, how is local/global scope evaluated when resolving variable names? (Order of evaluation)",
+      "questionType": "mcq",
+      "options": [
+        "Global, Enclosing, Local, Built-in",
+        "Local, Enclosing, Global, Built-in (LEGB)",
+        "Local, Global, Built-in, Enclosing",
+        "Built-in, Global, Enclosing, Local"
+      ],
+      "correctAnswer": "Local, Enclosing, Global, Built-in (LEGB)",
+      "explanation": "Python looks up variables in the LEGB rule order: Local (L), Enclosing (E), Global (G), and Built-in (B).",
+      "difficulty": "intermediate"
+    },
+    {
+      "id": "q-py-func-2",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-py-func",
+      "questionText": "What is the output of this Python code?\n```python\nfunc = lambda x, y: x * y\nprint(func(4, 5))\n```",
+      "questionType": "mcq",
+      "options": [
+        "9",
+        "20",
+        "44444",
+        "Error"
+      ],
+      "correctAnswer": "20",
+      "explanation": "Lambda expressions are short anonymous functions. The lambda here accepts two variables, x and y, and returns their multiplication. 4 * 5 = 20.",
+      "difficulty": "intermediate"
+    },
+    {
+      "id": "q-py-oop-1",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-py-oop",
+      "questionText": "Which keyword or method represents Python's constructor in a class declaration?",
+      "questionType": "mcq",
+      "options": [
+        "__init__",
+        "constructor",
+        "new",
+        "init"
+      ],
+      "correctAnswer": "__init__",
+      "explanation": "The custom double-underscore method `__init__` acts as Python's initializer/constructor and runs automatically when an instance of a class is created.",
+      "difficulty": "beginner"
+    },
+    {
+      "id": "q-py-oop-2",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-py-oop",
+      "questionText": "How does multiple inheritance handle method resolution in Python?",
+      "questionType": "mcq",
+      "options": [
+        "It raises a syntax error",
+        "Using Method Resolution Order (MRO) via the C3 linearization algorithm",
+        "By randomly selecting a parent method",
+        "By always choosing the parent method that comes first alphabetically"
+      ],
+      "correctAnswer": "Using Method Resolution Order (MRO) via the C3 linearization algorithm",
+      "explanation": "Python implements Method Resolution Order (MRO) calculated via the C3 Linearization algorithm to safely resolve overlapping attributes in multiple inheritance hierarchies.",
+      "difficulty": "advanced"
+    },
+    {
+      "id": "q-py-exc-1",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-py-exceptions",
+      "questionText": "Which block in Python always executes regardless of whether an exception was raised or handled?",
+      "questionType": "mcq",
+      "options": [
+        "try",
+        "except",
+        "finally",
+        "else"
+      ],
+      "correctAnswer": "finally",
+      "explanation": "The `finally` block is executed unconditionally after `try` and any `except`/`else` clauses, making it ideal for cleaning up resources such as database connections or file descriptors.",
+      "difficulty": "beginner"
+    },
+    {
+      "id": "q-web-css-1",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-web-htmlcss",
+      "questionText": "Which CSS Flexbox property aligns items along the cross axis?",
+      "questionType": "mcq",
+      "options": [
+        "justify-content",
+        "align-items",
+        "flex-direction",
+        "flex-wrap"
+      ],
+      "correctAnswer": "align-items",
+      "explanation": "`justify-content` aligns flex items along the main axis, while `align-items` aligns flex items along the perpendicular cross axis.",
+      "difficulty": "beginner"
+    },
+    {
+      "id": "q-web-css-2",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-web-htmlcss",
+      "questionText": "In CSS Box Model, what is the correct order of components from outside to inside?",
+      "questionType": "mcq",
+      "options": [
+        "Margin, Border, Padding, Content",
+        "Border, Margin, Padding, Content",
+        "Padding, Margin, Border, Content",
+        "Content, Padding, Border, Margin"
+      ],
+      "correctAnswer": "Margin, Border, Padding, Content",
+      "explanation": "From the outermost boundary inward: Margin (outer clear area), Border, Padding (space around content), and Content (text/image/elements).",
+      "difficulty": "beginner"
+    },
+    {
+      "id": "q-web-js-1",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-web-js",
+      "questionText": "What is the difference between `==` and `===` in JavaScript?",
+      "questionType": "mcq",
+      "options": [
+        "There is no difference",
+        "`==` checks value only with type coercion, while `===` checks both value and type strictly",
+        "`===` converts types before comparing",
+        "`==` is used for objects only"
+      ],
+      "correctAnswer": "`==` checks value only with type coercion, while `===` checks both value and type strictly",
+      "explanation": "`==` performs abstract equality with implicit type conversion (e.g., `'5' == 5` is true), while strict equality `===` requires both operands to share the same type without coercion (`'5' === 5` is false).",
+      "difficulty": "beginner"
+    },
+    {
+      "id": "q-web-js-2",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-web-js",
+      "questionText": "What will `Promise.all([p1, p2])` do if `p1` rejects?",
+      "questionType": "mcq",
+      "options": [
+        "Wait for p2 to complete before rejecting",
+        "Reject immediately with p1's reason without waiting for p2 (fail-fast)",
+        "Ignore p1 and resolve p2",
+        "Return an array with null for p1"
+      ],
+      "correctAnswer": "Reject immediately with p1's reason without waiting for p2 (fail-fast)",
+      "explanation": "`Promise.all()` is fail-fast: if any promise in the iterable rejects, the whole returned promise immediately rejects with that first rejection reason.",
+      "difficulty": "intermediate"
+    },
+    {
+      "id": "q-web-react-1",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-web-react",
+      "questionText": "When does the cleanup function returned from `useEffect` run in React?",
+      "questionType": "mcq",
+      "options": [
+        "Only when the entire browser window is refreshed",
+        "Before the component unmounts and before re-running the effect on dependency change",
+        "Immediately after every DOM repaint",
+        "Only if an unhandled JavaScript error occurs"
+      ],
+      "correctAnswer": "Before the component unmounts and before re-running the effect on dependency change",
+      "explanation": "React executes the cleanup function returned by `useEffect` before the component is removed from the UI (unmounted) and prior to re-running the effect whenever dependencies change.",
+      "difficulty": "intermediate"
+    },
+    {
+      "id": "q-web-be-1",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-web-backend",
+      "questionText": "In Express.js, what is the purpose of `express.json()` middleware?",
+      "questionType": "mcq",
+      "options": [
+        "To automatically convert SQL queries to JSON",
+        "To parse incoming HTTP request bodies with JSON payloads and populate `req.body`",
+        "To encrypt responses with JSON Web Tokens",
+        "To format server error logs in JSON"
+      ],
+      "correctAnswer": "To parse incoming HTTP request bodies with JSON payloads and populate `req.body`",
+      "explanation": "`express.json()` is a built-in middleware based on body-parser that parses incoming requests with `Content-Type: application/json` and places the parsed object on `req.body`.",
+      "difficulty": "beginner"
+    },
+    {
+      "id": "q-web-db-1",
+      "assessmentId": "seed-pool",
+      "competencyId": "comp-web-db",
+      "questionText": "Which SQL clause is used to filter records based on an aggregate function (e.g., `COUNT(*) > 5`)?",
+      "questionType": "mcq",
+      "options": [
+        "WHERE",
+        "HAVING",
+        "GROUP BY",
+        "ORDER BY"
+      ],
+      "correctAnswer": "HAVING",
+      "explanation": "The `WHERE` clause filters rows before grouping/aggregation. The `HAVING` clause filters summarized groups after the `GROUP BY` aggregation has been applied.",
+      "difficulty": "intermediate"
+    }
+  ],
+  "assessmentTemplates": [
+    {
+      "id": "template-py-midterm",
+      "domainId": "domain-python",
+      "title": "Python Core Competency & Logic Midterm",
+      "description": "Comprehensive timed evaluation assessing variables, functions, OOP patterns, and error handling with strict tab-locking.",
+      "timeLimitMinutes": 15,
+      "deadline": "2026-10-17",
+      "proctoringStrict": true,
+      "questions": [
+        {
+          "id": "q-py-fund-1",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-py-fund",
+          "questionText": "What will be the output of `print(type(5 / 2))` in Python 3?",
+          "questionType": "mcq",
+          "options": [
+            "<class 'int'>",
+            "<class 'float'>",
+            "<class 'double'>",
+            "<class 'complex'>"
+          ],
+          "correctAnswer": "<class 'float'>",
+          "explanation": "In Python 3, the `/` operator performs float division, so `5 / 2` yields `2.5`, which is a float. Floor division `5 // 2` would yield an integer.",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-py-fund-2",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-py-fund",
+          "questionText": "Which of the following is an invalid variable name in Python?",
+          "questionType": "mcq",
+          "options": [
+            "_my_var",
+            "myVar2",
+            "2myVar",
+            "my_var_abc"
+          ],
+          "correctAnswer": "2myVar",
+          "explanation": "Variable names in Python cannot start with a digit. They must start with a letter or an underscore.",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-py-flow-1",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-py-flow",
+          "questionText": "What is the output of the following loop?\n```python\nfor i in range(1, 5):\n    if i == 3:\n        break\n    print(i, end='')\n```",
+          "questionType": "mcq",
+          "options": [
+            "1234",
+            "123",
+            "12",
+            "124"
+          ],
+          "correctAnswer": "12",
+          "explanation": "The loop iterates through 1, 2, 3, 4. When `i` equals 3, the `break` statement terminates the loop immediately. Hence, only 1 and 2 are printed.",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "q-py-flow-2",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-py-flow",
+          "questionText": "What does the `continue` statement do inside a loop in Python?",
+          "questionType": "mcq",
+          "options": [
+            "Stops the loop completely",
+            "Skips the rest of the current iteration and jumps to the next iteration",
+            "Exits the current function",
+            "Repeats the current iteration once more"
+          ],
+          "correctAnswer": "Skips the rest of the current iteration and jumps to the next iteration",
+          "explanation": "The `continue` statement skips all remaining expressions inside the current loop iteration and moves the execution thread back to the loop's start for the next item.",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-py-func-1",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-py-func",
+          "questionText": "In Python, how is local/global scope evaluated when resolving variable names? (Order of evaluation)",
+          "questionType": "mcq",
+          "options": [
+            "Global, Enclosing, Local, Built-in",
+            "Local, Enclosing, Global, Built-in (LEGB)",
+            "Local, Global, Built-in, Enclosing",
+            "Built-in, Global, Enclosing, Local"
+          ],
+          "correctAnswer": "Local, Enclosing, Global, Built-in (LEGB)",
+          "explanation": "Python looks up variables in the LEGB rule order: Local (L), Enclosing (E), Global (G), and Built-in (B).",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "q-py-func-2",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-py-func",
+          "questionText": "What is the output of this Python code?\n```python\nfunc = lambda x, y: x * y\nprint(func(4, 5))\n```",
+          "questionType": "mcq",
+          "options": [
+            "9",
+            "20",
+            "44444",
+            "Error"
+          ],
+          "correctAnswer": "20",
+          "explanation": "Lambda expressions are short anonymous functions. The lambda here accepts two variables, x and y, and returns their multiplication. 4 * 5 = 20.",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "q-py-oop-1",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-py-oop",
+          "questionText": "Which keyword or method represents Python's constructor in a class declaration?",
+          "questionType": "mcq",
+          "options": [
+            "__init__",
+            "constructor",
+            "new",
+            "init"
+          ],
+          "correctAnswer": "__init__",
+          "explanation": "The custom double-underscore method `__init__` acts as Python's initializer/constructor and runs automatically when an instance of a class is created.",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-py-oop-2",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-py-oop",
+          "questionText": "How does multiple inheritance handle method resolution in Python?",
+          "questionType": "mcq",
+          "options": [
+            "It raises a syntax error",
+            "Using Method Resolution Order (MRO) via the C3 linearization algorithm",
+            "By randomly selecting a parent method",
+            "By always choosing the parent method that comes first alphabetically"
+          ],
+          "correctAnswer": "Using Method Resolution Order (MRO) via the C3 linearization algorithm",
+          "explanation": "Python implements Method Resolution Order (MRO) calculated via the C3 Linearization algorithm to safely resolve overlapping attributes in multiple inheritance hierarchies.",
+          "difficulty": "advanced"
+        },
+        {
+          "id": "q-py-exc-1",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-py-exceptions",
+          "questionText": "Which block in Python always executes regardless of whether an exception was raised or handled?",
+          "questionType": "mcq",
+          "options": [
+            "try",
+            "except",
+            "finally",
+            "else"
+          ],
+          "correctAnswer": "finally",
+          "explanation": "The `finally` block is executed unconditionally after `try` and any `except`/`else` clauses, making it ideal for cleaning up resources such as database connections or file descriptors.",
+          "difficulty": "beginner"
+        }
+      ],
+      "createdBy": "Prof. Sarah Jenkins",
+      "createdAt": "2026-10-03T11:13:26.989Z",
+      "isPublished": true
+    },
+    {
+      "id": "template-web-fullstack",
+      "domainId": "domain-webdev",
+      "title": "Full-Stack Web Readiness Evaluation",
+      "description": "Standard industry readiness test covering React hooks, Flexbox, asynchronous JS, Express REST routes, and SQL.",
+      "timeLimitMinutes": 20,
+      "deadline": "2026-10-24",
+      "proctoringStrict": true,
+      "questions": [
+        {
+          "id": "q-web-css-1",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-web-htmlcss",
+          "questionText": "Which CSS Flexbox property aligns items along the cross axis?",
+          "questionType": "mcq",
+          "options": [
+            "justify-content",
+            "align-items",
+            "flex-direction",
+            "flex-wrap"
+          ],
+          "correctAnswer": "align-items",
+          "explanation": "`justify-content` aligns flex items along the main axis, while `align-items` aligns flex items along the perpendicular cross axis.",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-web-css-2",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-web-htmlcss",
+          "questionText": "In CSS Box Model, what is the correct order of components from outside to inside?",
+          "questionType": "mcq",
+          "options": [
+            "Margin, Border, Padding, Content",
+            "Border, Margin, Padding, Content",
+            "Padding, Margin, Border, Content",
+            "Content, Padding, Border, Margin"
+          ],
+          "correctAnswer": "Margin, Border, Padding, Content",
+          "explanation": "From the outermost boundary inward: Margin (outer clear area), Border, Padding (space around content), and Content (text/image/elements).",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-web-js-1",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-web-js",
+          "questionText": "What is the difference between `==` and `===` in JavaScript?",
+          "questionType": "mcq",
+          "options": [
+            "There is no difference",
+            "`==` checks value only with type coercion, while `===` checks both value and type strictly",
+            "`===` converts types before comparing",
+            "`==` is used for objects only"
+          ],
+          "correctAnswer": "`==` checks value only with type coercion, while `===` checks both value and type strictly",
+          "explanation": "`==` performs abstract equality with implicit type conversion (e.g., `'5' == 5` is true), while strict equality `===` requires both operands to share the same type without coercion (`'5' === 5` is false).",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-web-js-2",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-web-js",
+          "questionText": "What will `Promise.all([p1, p2])` do if `p1` rejects?",
+          "questionType": "mcq",
+          "options": [
+            "Wait for p2 to complete before rejecting",
+            "Reject immediately with p1's reason without waiting for p2 (fail-fast)",
+            "Ignore p1 and resolve p2",
+            "Return an array with null for p1"
+          ],
+          "correctAnswer": "Reject immediately with p1's reason without waiting for p2 (fail-fast)",
+          "explanation": "`Promise.all()` is fail-fast: if any promise in the iterable rejects, the whole returned promise immediately rejects with that first rejection reason.",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "q-web-react-1",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-web-react",
+          "questionText": "When does the cleanup function returned from `useEffect` run in React?",
+          "questionType": "mcq",
+          "options": [
+            "Only when the entire browser window is refreshed",
+            "Before the component unmounts and before re-running the effect on dependency change",
+            "Immediately after every DOM repaint",
+            "Only if an unhandled JavaScript error occurs"
+          ],
+          "correctAnswer": "Before the component unmounts and before re-running the effect on dependency change",
+          "explanation": "React executes the cleanup function returned by `useEffect` before the component is removed from the UI (unmounted) and prior to re-running the effect whenever dependencies change.",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "q-web-be-1",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-web-backend",
+          "questionText": "In Express.js, what is the purpose of `express.json()` middleware?",
+          "questionType": "mcq",
+          "options": [
+            "To automatically convert SQL queries to JSON",
+            "To parse incoming HTTP request bodies with JSON payloads and populate `req.body`",
+            "To encrypt responses with JSON Web Tokens",
+            "To format server error logs in JSON"
+          ],
+          "correctAnswer": "To parse incoming HTTP request bodies with JSON payloads and populate `req.body`",
+          "explanation": "`express.json()` is a built-in middleware based on body-parser that parses incoming requests with `Content-Type: application/json` and places the parsed object on `req.body`.",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-web-db-1",
+          "assessmentId": "seed-pool",
+          "competencyId": "comp-web-db",
+          "questionText": "Which SQL clause is used to filter records based on an aggregate function (e.g., `COUNT(*) > 5`)?",
+          "questionType": "mcq",
+          "options": [
+            "WHERE",
+            "HAVING",
+            "GROUP BY",
+            "ORDER BY"
+          ],
+          "correctAnswer": "HAVING",
+          "explanation": "The `WHERE` clause filters rows before grouping/aggregation. The `HAVING` clause filters summarized groups after the `GROUP BY` aggregation has been applied.",
+          "difficulty": "intermediate"
+        }
+      ],
+      "createdBy": "Prof. Sarah Jenkins",
+      "createdAt": "2026-10-03T11:13:26.989Z",
+      "isPublished": true
+    }
+  ],
+  "assessments": [
+    {
+      "id": "assess-9rcjxabuh",
+      "title": "Python Programming Skill Evaluation",
+      "studentId": "student-demo",
+      "domainId": "domain-python",
+      "status": "completed",
+      "startedAt": "2026-10-03T11:13:36.239Z",
+      "questions": [
+        {
+          "id": "q-py-fund-2",
+          "assessmentId": "assess-9rcjxabuh",
+          "competencyId": "comp-py-fund",
+          "questionText": "Which of the following is an invalid variable name in Python?",
+          "questionType": "mcq",
+          "options": [
+            "_my_var",
+            "myVar2",
+            "2myVar",
+            "my_var_abc"
+          ],
+          "correctAnswer": "2myVar",
+          "explanation": "Variable names in Python cannot start with a digit. They must start with a letter or an underscore.",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-py-fund-1",
+          "assessmentId": "assess-9rcjxabuh",
+          "competencyId": "comp-py-fund",
+          "questionText": "What will be the output of `print(type(5 / 2))` in Python 3?",
+          "questionType": "mcq",
+          "options": [
+            "<class 'int'>",
+            "<class 'float'>",
+            "<class 'double'>",
+            "<class 'complex'>"
+          ],
+          "correctAnswer": "<class 'float'>",
+          "explanation": "In Python 3, the `/` operator performs float division, so `5 / 2` yields `2.5`, which is a float. Floor division `5 // 2` would yield an integer.",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-py-flow-1",
+          "assessmentId": "assess-9rcjxabuh",
+          "competencyId": "comp-py-flow",
+          "questionText": "What is the output of the following loop?\n```python\nfor i in range(1, 5):\n    if i == 3:\n        break\n    print(i, end='')\n```",
+          "questionType": "mcq",
+          "options": [
+            "1234",
+            "123",
+            "12",
+            "124"
+          ],
+          "correctAnswer": "12",
+          "explanation": "The loop iterates through 1, 2, 3, 4. When `i` equals 3, the `break` statement terminates the loop immediately. Hence, only 1 and 2 are printed.",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "q-py-flow-2",
+          "assessmentId": "assess-9rcjxabuh",
+          "competencyId": "comp-py-flow",
+          "questionText": "What does the `continue` statement do inside a loop in Python?",
+          "questionType": "mcq",
+          "options": [
+            "Stops the loop completely",
+            "Skips the rest of the current iteration and jumps to the next iteration",
+            "Exits the current function",
+            "Repeats the current iteration once more"
+          ],
+          "correctAnswer": "Skips the rest of the current iteration and jumps to the next iteration",
+          "explanation": "The `continue` statement skips all remaining expressions inside the current loop iteration and moves the execution thread back to the loop's start for the next item.",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-py-func-2",
+          "assessmentId": "assess-9rcjxabuh",
+          "competencyId": "comp-py-func",
+          "questionText": "What is the output of this Python code?\n```python\nfunc = lambda x, y: x * y\nprint(func(4, 5))\n```",
+          "questionType": "mcq",
+          "options": [
+            "9",
+            "20",
+            "44444",
+            "Error"
+          ],
+          "correctAnswer": "20",
+          "explanation": "Lambda expressions are short anonymous functions. The lambda here accepts two variables, x and y, and returns their multiplication. 4 * 5 = 20.",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "q-py-func-1",
+          "assessmentId": "assess-9rcjxabuh",
+          "competencyId": "comp-py-func",
+          "questionText": "In Python, how is local/global scope evaluated when resolving variable names? (Order of evaluation)",
+          "questionType": "mcq",
+          "options": [
+            "Global, Enclosing, Local, Built-in",
+            "Local, Enclosing, Global, Built-in (LEGB)",
+            "Local, Global, Built-in, Enclosing",
+            "Built-in, Global, Enclosing, Local"
+          ],
+          "correctAnswer": "Local, Enclosing, Global, Built-in (LEGB)",
+          "explanation": "Python looks up variables in the LEGB rule order: Local (L), Enclosing (E), Global (G), and Built-in (B).",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "q-py-oop-1",
+          "assessmentId": "assess-9rcjxabuh",
+          "competencyId": "comp-py-oop",
+          "questionText": "Which keyword or method represents Python's constructor in a class declaration?",
+          "questionType": "mcq",
+          "options": [
+            "__init__",
+            "constructor",
+            "new",
+            "init"
+          ],
+          "correctAnswer": "__init__",
+          "explanation": "The custom double-underscore method `__init__` acts as Python's initializer/constructor and runs automatically when an instance of a class is created.",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-py-oop-2",
+          "assessmentId": "assess-9rcjxabuh",
+          "competencyId": "comp-py-oop",
+          "questionText": "How does multiple inheritance handle method resolution in Python?",
+          "questionType": "mcq",
+          "options": [
+            "It raises a syntax error",
+            "Using Method Resolution Order (MRO) via the C3 linearization algorithm",
+            "By randomly selecting a parent method",
+            "By always choosing the parent method that comes first alphabetically"
+          ],
+          "correctAnswer": "Using Method Resolution Order (MRO) via the C3 linearization algorithm",
+          "explanation": "Python implements Method Resolution Order (MRO) calculated via the C3 Linearization algorithm to safely resolve overlapping attributes in multiple inheritance hierarchies.",
+          "difficulty": "advanced"
+        },
+        {
+          "id": "q-py-exc-1",
+          "assessmentId": "assess-9rcjxabuh",
+          "competencyId": "comp-py-exceptions",
+          "questionText": "Which block in Python always executes regardless of whether an exception was raised or handled?",
+          "questionType": "mcq",
+          "options": [
+            "try",
+            "except",
+            "finally",
+            "else"
+          ],
+          "correctAnswer": "finally",
+          "explanation": "The `finally` block is executed unconditionally after `try` and any `except`/`else` clauses, making it ideal for cleaning up resources such as database connections or file descriptors.",
+          "difficulty": "beginner"
+        }
+      ],
+      "answers": {
+        "q-py-fund-2": "_my_var",
+        "q-py-fund-1": "<class 'float'>",
+        "q-py-flow-1": "1234",
+        "q-py-flow-2": "Skips the rest of the current iteration and jumps to the next iteration",
+        "q-py-func-2": "9",
+        "q-py-func-1": "Local, Enclosing, Global, Built-in (LEGB)",
+        "q-py-oop-1": "__init__",
+        "q-py-oop-2": "Using Method Resolution Order (MRO) via the C3 linearization algorithm",
+        "q-py-exc-1": "try"
+      },
+      "timeLimitMinutes": 15,
+      "deadline": "2026-11-02",
+      "submittedAt": "2026-10-03T11:13:36.256Z",
+      "score": 56
+    },
+    {
+      "id": "assess-z704zehkv",
+      "title": "Full-Stack Web Development Skill Evaluation",
+      "studentId": "student-demo",
+      "domainId": "domain-webdev",
+      "status": "completed",
+      "startedAt": "2026-10-03T11:13:42.160Z",
+      "questions": [
+        {
+          "id": "q-web-css-2",
+          "assessmentId": "assess-z704zehkv",
+          "competencyId": "comp-web-htmlcss",
+          "questionText": "In CSS Box Model, what is the correct order of components from outside to inside?",
+          "questionType": "mcq",
+          "options": [
+            "Margin, Border, Padding, Content",
+            "Border, Margin, Padding, Content",
+            "Padding, Margin, Border, Content",
+            "Content, Padding, Border, Margin"
+          ],
+          "correctAnswer": "Margin, Border, Padding, Content",
+          "explanation": "From the outermost boundary inward: Margin (outer clear area), Border, Padding (space around content), and Content (text/image/elements).",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-web-css-1",
+          "assessmentId": "assess-z704zehkv",
+          "competencyId": "comp-web-htmlcss",
+          "questionText": "Which CSS Flexbox property aligns items along the cross axis?",
+          "questionType": "mcq",
+          "options": [
+            "justify-content",
+            "align-items",
+            "flex-direction",
+            "flex-wrap"
+          ],
+          "correctAnswer": "align-items",
+          "explanation": "`justify-content` aligns flex items along the main axis, while `align-items` aligns flex items along the perpendicular cross axis.",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-web-js-2",
+          "assessmentId": "assess-z704zehkv",
+          "competencyId": "comp-web-js",
+          "questionText": "What will `Promise.all([p1, p2])` do if `p1` rejects?",
+          "questionType": "mcq",
+          "options": [
+            "Wait for p2 to complete before rejecting",
+            "Reject immediately with p1's reason without waiting for p2 (fail-fast)",
+            "Ignore p1 and resolve p2",
+            "Return an array with null for p1"
+          ],
+          "correctAnswer": "Reject immediately with p1's reason without waiting for p2 (fail-fast)",
+          "explanation": "`Promise.all()` is fail-fast: if any promise in the iterable rejects, the whole returned promise immediately rejects with that first rejection reason.",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "q-web-js-1",
+          "assessmentId": "assess-z704zehkv",
+          "competencyId": "comp-web-js",
+          "questionText": "What is the difference between `==` and `===` in JavaScript?",
+          "questionType": "mcq",
+          "options": [
+            "There is no difference",
+            "`==` checks value only with type coercion, while `===` checks both value and type strictly",
+            "`===` converts types before comparing",
+            "`==` is used for objects only"
+          ],
+          "correctAnswer": "`==` checks value only with type coercion, while `===` checks both value and type strictly",
+          "explanation": "`==` performs abstract equality with implicit type conversion (e.g., `'5' == 5` is true), while strict equality `===` requires both operands to share the same type without coercion (`'5' === 5` is false).",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-web-react-1",
+          "assessmentId": "assess-z704zehkv",
+          "competencyId": "comp-web-react",
+          "questionText": "When does the cleanup function returned from `useEffect` run in React?",
+          "questionType": "mcq",
+          "options": [
+            "Only when the entire browser window is refreshed",
+            "Before the component unmounts and before re-running the effect on dependency change",
+            "Immediately after every DOM repaint",
+            "Only if an unhandled JavaScript error occurs"
+          ],
+          "correctAnswer": "Before the component unmounts and before re-running the effect on dependency change",
+          "explanation": "React executes the cleanup function returned by `useEffect` before the component is removed from the UI (unmounted) and prior to re-running the effect whenever dependencies change.",
+          "difficulty": "intermediate"
+        },
+        {
+          "id": "q-web-be-1",
+          "assessmentId": "assess-z704zehkv",
+          "competencyId": "comp-web-backend",
+          "questionText": "In Express.js, what is the purpose of `express.json()` middleware?",
+          "questionType": "mcq",
+          "options": [
+            "To automatically convert SQL queries to JSON",
+            "To parse incoming HTTP request bodies with JSON payloads and populate `req.body`",
+            "To encrypt responses with JSON Web Tokens",
+            "To format server error logs in JSON"
+          ],
+          "correctAnswer": "To parse incoming HTTP request bodies with JSON payloads and populate `req.body`",
+          "explanation": "`express.json()` is a built-in middleware based on body-parser that parses incoming requests with `Content-Type: application/json` and places the parsed object on `req.body`.",
+          "difficulty": "beginner"
+        },
+        {
+          "id": "q-web-db-1",
+          "assessmentId": "assess-z704zehkv",
+          "competencyId": "comp-web-db",
+          "questionText": "Which SQL clause is used to filter records based on an aggregate function (e.g., `COUNT(*) > 5`)?",
+          "questionType": "mcq",
+          "options": [
+            "WHERE",
+            "HAVING",
+            "GROUP BY",
+            "ORDER BY"
+          ],
+          "correctAnswer": "HAVING",
+          "explanation": "The `WHERE` clause filters rows before grouping/aggregation. The `HAVING` clause filters summarized groups after the `GROUP BY` aggregation has been applied.",
+          "difficulty": "intermediate"
+        }
+      ],
+      "answers": {
+        "q-web-css-2": "Margin, Border, Padding, Content"
+      },
+      "timeLimitMinutes": 15,
+      "deadline": "2026-11-17",
+      "submittedAt": "2026-10-03T11:13:42.176Z",
+      "autoSubmittedReason": "Tab switched or browser window minimized during active examination",
+      "score": 14
+    }
+  ],
+  "assessmentResults": [
+    {
+      "id": "result-0y0fsazbx",
+      "assessmentId": "assess-9rcjxabuh",
+      "studentId": "student-demo",
+      "overallScore": 56,
+      "completedAt": "2026-10-03T11:13:36.257Z",
+      "topicBreakdown": {
+        "comp-py-fund": {
+          "competencyId": "comp-py-fund",
+          "competencyName": "Python Basics & Variables",
+          "correct": 1,
+          "total": 2,
+          "percentage": 50
+        },
+        "comp-py-flow": {
+          "competencyId": "comp-py-flow",
+          "competencyName": "Control Flow & Loops",
+          "correct": 1,
+          "total": 2,
+          "percentage": 50
+        },
+        "comp-py-func": {
+          "competencyId": "comp-py-func",
+          "competencyName": "Functions & Scope",
+          "correct": 1,
+          "total": 2,
+          "percentage": 50
+        },
+        "comp-py-oop": {
+          "competencyId": "comp-py-oop",
+          "competencyName": "Object-Oriented Programming (OOP)",
+          "correct": 2,
+          "total": 2,
+          "percentage": 100
+        },
+        "comp-py-exceptions": {
+          "competencyId": "comp-py-exceptions",
+          "competencyName": "Exception & File Handling",
+          "correct": 0,
+          "total": 1,
+          "percentage": 0
+        }
+      },
+      "assessment": {
+        "id": "assess-9rcjxabuh",
+        "title": "Python Programming Skill Evaluation",
+        "studentId": "student-demo",
+        "domainId": "domain-python",
+        "status": "completed",
+        "startedAt": "2026-10-03T11:13:36.239Z",
+        "questions": [
+          {
+            "id": "q-py-fund-2",
+            "assessmentId": "assess-9rcjxabuh",
+            "competencyId": "comp-py-fund",
+            "questionText": "Which of the following is an invalid variable name in Python?",
+            "questionType": "mcq",
+            "options": [
+              "_my_var",
+              "myVar2",
+              "2myVar",
+              "my_var_abc"
+            ],
+            "correctAnswer": "2myVar",
+            "explanation": "Variable names in Python cannot start with a digit. They must start with a letter or an underscore.",
+            "difficulty": "beginner"
+          },
+          {
+            "id": "q-py-fund-1",
+            "assessmentId": "assess-9rcjxabuh",
+            "competencyId": "comp-py-fund",
+            "questionText": "What will be the output of `print(type(5 / 2))` in Python 3?",
+            "questionType": "mcq",
+            "options": [
+              "<class 'int'>",
+              "<class 'float'>",
+              "<class 'double'>",
+              "<class 'complex'>"
+            ],
+            "correctAnswer": "<class 'float'>",
+            "explanation": "In Python 3, the `/` operator performs float division, so `5 / 2` yields `2.5`, which is a float. Floor division `5 // 2` would yield an integer.",
+            "difficulty": "beginner"
+          },
+          {
+            "id": "q-py-flow-1",
+            "assessmentId": "assess-9rcjxabuh",
+            "competencyId": "comp-py-flow",
+            "questionText": "What is the output of the following loop?\n```python\nfor i in range(1, 5):\n    if i == 3:\n        break\n    print(i, end='')\n```",
+            "questionType": "mcq",
+            "options": [
+              "1234",
+              "123",
+              "12",
+              "124"
+            ],
+            "correctAnswer": "12",
+            "explanation": "The loop iterates through 1, 2, 3, 4. When `i` equals 3, the `break` statement terminates the loop immediately. Hence, only 1 and 2 are printed.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q-py-flow-2",
+            "assessmentId": "assess-9rcjxabuh",
+            "competencyId": "comp-py-flow",
+            "questionText": "What does the `continue` statement do inside a loop in Python?",
+            "questionType": "mcq",
+            "options": [
+              "Stops the loop completely",
+              "Skips the rest of the current iteration and jumps to the next iteration",
+              "Exits the current function",
+              "Repeats the current iteration once more"
+            ],
+            "correctAnswer": "Skips the rest of the current iteration and jumps to the next iteration",
+            "explanation": "The `continue` statement skips all remaining expressions inside the current loop iteration and moves the execution thread back to the loop's start for the next item.",
+            "difficulty": "beginner"
+          },
+          {
+            "id": "q-py-func-2",
+            "assessmentId": "assess-9rcjxabuh",
+            "competencyId": "comp-py-func",
+            "questionText": "What is the output of this Python code?\n```python\nfunc = lambda x, y: x * y\nprint(func(4, 5))\n```",
+            "questionType": "mcq",
+            "options": [
+              "9",
+              "20",
+              "44444",
+              "Error"
+            ],
+            "correctAnswer": "20",
+            "explanation": "Lambda expressions are short anonymous functions. The lambda here accepts two variables, x and y, and returns their multiplication. 4 * 5 = 20.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q-py-func-1",
+            "assessmentId": "assess-9rcjxabuh",
+            "competencyId": "comp-py-func",
+            "questionText": "In Python, how is local/global scope evaluated when resolving variable names? (Order of evaluation)",
+            "questionType": "mcq",
+            "options": [
+              "Global, Enclosing, Local, Built-in",
+              "Local, Enclosing, Global, Built-in (LEGB)",
+              "Local, Global, Built-in, Enclosing",
+              "Built-in, Global, Enclosing, Local"
+            ],
+            "correctAnswer": "Local, Enclosing, Global, Built-in (LEGB)",
+            "explanation": "Python looks up variables in the LEGB rule order: Local (L), Enclosing (E), Global (G), and Built-in (B).",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q-py-oop-1",
+            "assessmentId": "assess-9rcjxabuh",
+            "competencyId": "comp-py-oop",
+            "questionText": "Which keyword or method represents Python's constructor in a class declaration?",
+            "questionType": "mcq",
+            "options": [
+              "__init__",
+              "constructor",
+              "new",
+              "init"
+            ],
+            "correctAnswer": "__init__",
+            "explanation": "The custom double-underscore method `__init__` acts as Python's initializer/constructor and runs automatically when an instance of a class is created.",
+            "difficulty": "beginner"
+          },
+          {
+            "id": "q-py-oop-2",
+            "assessmentId": "assess-9rcjxabuh",
+            "competencyId": "comp-py-oop",
+            "questionText": "How does multiple inheritance handle method resolution in Python?",
+            "questionType": "mcq",
+            "options": [
+              "It raises a syntax error",
+              "Using Method Resolution Order (MRO) via the C3 linearization algorithm",
+              "By randomly selecting a parent method",
+              "By always choosing the parent method that comes first alphabetically"
+            ],
+            "correctAnswer": "Using Method Resolution Order (MRO) via the C3 linearization algorithm",
+            "explanation": "Python implements Method Resolution Order (MRO) calculated via the C3 Linearization algorithm to safely resolve overlapping attributes in multiple inheritance hierarchies.",
+            "difficulty": "advanced"
+          },
+          {
+            "id": "q-py-exc-1",
+            "assessmentId": "assess-9rcjxabuh",
+            "competencyId": "comp-py-exceptions",
+            "questionText": "Which block in Python always executes regardless of whether an exception was raised or handled?",
+            "questionType": "mcq",
+            "options": [
+              "try",
+              "except",
+              "finally",
+              "else"
+            ],
+            "correctAnswer": "finally",
+            "explanation": "The `finally` block is executed unconditionally after `try` and any `except`/`else` clauses, making it ideal for cleaning up resources such as database connections or file descriptors.",
+            "difficulty": "beginner"
+          }
+        ],
+        "answers": {
+          "q-py-fund-2": "_my_var",
+          "q-py-fund-1": "<class 'float'>",
+          "q-py-flow-1": "1234",
+          "q-py-flow-2": "Skips the rest of the current iteration and jumps to the next iteration",
+          "q-py-func-2": "9",
+          "q-py-func-1": "Local, Enclosing, Global, Built-in (LEGB)",
+          "q-py-oop-1": "__init__",
+          "q-py-oop-2": "Using Method Resolution Order (MRO) via the C3 linearization algorithm",
+          "q-py-exc-1": "try"
+        },
+        "timeLimitMinutes": 15,
+        "deadline": "2026-11-02",
+        "submittedAt": "2026-10-03T11:13:36.256Z",
+        "score": 56
+      }
+    },
+    {
+      "id": "result-74j7dyv4w",
+      "assessmentId": "assess-z704zehkv",
+      "studentId": "student-demo",
+      "overallScore": 14,
+      "completedAt": "2026-10-03T11:13:42.176Z",
+      "topicBreakdown": {
+        "comp-web-htmlcss": {
+          "competencyId": "comp-web-htmlcss",
+          "competencyName": "HTML & CSS Layouts",
+          "correct": 1,
+          "total": 2,
+          "percentage": 50
+        },
+        "comp-web-js": {
+          "competencyId": "comp-web-js",
+          "competencyName": "JavaScript Basics (ES6+)",
+          "correct": 0,
+          "total": 2,
+          "percentage": 0
+        },
+        "comp-web-react": {
+          "competencyId": "comp-web-react",
+          "competencyName": "React Components & Hooks",
+          "correct": 0,
+          "total": 1,
+          "percentage": 0
+        },
+        "comp-web-backend": {
+          "competencyId": "comp-web-backend",
+          "competencyName": "Backend APIs & Express",
+          "correct": 0,
+          "total": 1,
+          "percentage": 0
+        },
+        "comp-web-db": {
+          "competencyId": "comp-web-db",
+          "competencyName": "Database & SQL Foundations",
+          "correct": 0,
+          "total": 1,
+          "percentage": 0
+        }
+      },
+      "autoSubmittedReason": "Tab switched or browser window minimized during active examination",
+      "assessment": {
+        "id": "assess-z704zehkv",
+        "title": "Full-Stack Web Development Skill Evaluation",
+        "studentId": "student-demo",
+        "domainId": "domain-webdev",
+        "status": "completed",
+        "startedAt": "2026-10-03T11:13:42.160Z",
+        "questions": [
+          {
+            "id": "q-web-css-2",
+            "assessmentId": "assess-z704zehkv",
+            "competencyId": "comp-web-htmlcss",
+            "questionText": "In CSS Box Model, what is the correct order of components from outside to inside?",
+            "questionType": "mcq",
+            "options": [
+              "Margin, Border, Padding, Content",
+              "Border, Margin, Padding, Content",
+              "Padding, Margin, Border, Content",
+              "Content, Padding, Border, Margin"
+            ],
+            "correctAnswer": "Margin, Border, Padding, Content",
+            "explanation": "From the outermost boundary inward: Margin (outer clear area), Border, Padding (space around content), and Content (text/image/elements).",
+            "difficulty": "beginner"
+          },
+          {
+            "id": "q-web-css-1",
+            "assessmentId": "assess-z704zehkv",
+            "competencyId": "comp-web-htmlcss",
+            "questionText": "Which CSS Flexbox property aligns items along the cross axis?",
+            "questionType": "mcq",
+            "options": [
+              "justify-content",
+              "align-items",
+              "flex-direction",
+              "flex-wrap"
+            ],
+            "correctAnswer": "align-items",
+            "explanation": "`justify-content` aligns flex items along the main axis, while `align-items` aligns flex items along the perpendicular cross axis.",
+            "difficulty": "beginner"
+          },
+          {
+            "id": "q-web-js-2",
+            "assessmentId": "assess-z704zehkv",
+            "competencyId": "comp-web-js",
+            "questionText": "What will `Promise.all([p1, p2])` do if `p1` rejects?",
+            "questionType": "mcq",
+            "options": [
+              "Wait for p2 to complete before rejecting",
+              "Reject immediately with p1's reason without waiting for p2 (fail-fast)",
+              "Ignore p1 and resolve p2",
+              "Return an array with null for p1"
+            ],
+            "correctAnswer": "Reject immediately with p1's reason without waiting for p2 (fail-fast)",
+            "explanation": "`Promise.all()` is fail-fast: if any promise in the iterable rejects, the whole returned promise immediately rejects with that first rejection reason.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q-web-js-1",
+            "assessmentId": "assess-z704zehkv",
+            "competencyId": "comp-web-js",
+            "questionText": "What is the difference between `==` and `===` in JavaScript?",
+            "questionType": "mcq",
+            "options": [
+              "There is no difference",
+              "`==` checks value only with type coercion, while `===` checks both value and type strictly",
+              "`===` converts types before comparing",
+              "`==` is used for objects only"
+            ],
+            "correctAnswer": "`==` checks value only with type coercion, while `===` checks both value and type strictly",
+            "explanation": "`==` performs abstract equality with implicit type conversion (e.g., `'5' == 5` is true), while strict equality `===` requires both operands to share the same type without coercion (`'5' === 5` is false).",
+            "difficulty": "beginner"
+          },
+          {
+            "id": "q-web-react-1",
+            "assessmentId": "assess-z704zehkv",
+            "competencyId": "comp-web-react",
+            "questionText": "When does the cleanup function returned from `useEffect` run in React?",
+            "questionType": "mcq",
+            "options": [
+              "Only when the entire browser window is refreshed",
+              "Before the component unmounts and before re-running the effect on dependency change",
+              "Immediately after every DOM repaint",
+              "Only if an unhandled JavaScript error occurs"
+            ],
+            "correctAnswer": "Before the component unmounts and before re-running the effect on dependency change",
+            "explanation": "React executes the cleanup function returned by `useEffect` before the component is removed from the UI (unmounted) and prior to re-running the effect whenever dependencies change.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q-web-be-1",
+            "assessmentId": "assess-z704zehkv",
+            "competencyId": "comp-web-backend",
+            "questionText": "In Express.js, what is the purpose of `express.json()` middleware?",
+            "questionType": "mcq",
+            "options": [
+              "To automatically convert SQL queries to JSON",
+              "To parse incoming HTTP request bodies with JSON payloads and populate `req.body`",
+              "To encrypt responses with JSON Web Tokens",
+              "To format server error logs in JSON"
+            ],
+            "correctAnswer": "To parse incoming HTTP request bodies with JSON payloads and populate `req.body`",
+            "explanation": "`express.json()` is a built-in middleware based on body-parser that parses incoming requests with `Content-Type: application/json` and places the parsed object on `req.body`.",
+            "difficulty": "beginner"
+          },
+          {
+            "id": "q-web-db-1",
+            "assessmentId": "assess-z704zehkv",
+            "competencyId": "comp-web-db",
+            "questionText": "Which SQL clause is used to filter records based on an aggregate function (e.g., `COUNT(*) > 5`)?",
+            "questionType": "mcq",
+            "options": [
+              "WHERE",
+              "HAVING",
+              "GROUP BY",
+              "ORDER BY"
+            ],
+            "correctAnswer": "HAVING",
+            "explanation": "The `WHERE` clause filters rows before grouping/aggregation. The `HAVING` clause filters summarized groups after the `GROUP BY` aggregation has been applied.",
+            "difficulty": "intermediate"
+          }
+        ],
+        "answers": {
+          "q-web-css-2": "Margin, Border, Padding, Content"
+        },
+        "timeLimitMinutes": 15,
+        "deadline": "2026-11-17",
+        "submittedAt": "2026-10-03T11:13:42.176Z",
+        "autoSubmittedReason": "Tab switched or browser window minimized during active examination",
+        "score": 14
+      }
+    }
+  ],
+  "skillGaps": [
+    {
+      "id": "gap-3yao2n772",
+      "studentId": "student-demo",
+      "competencyId": "comp-py-fund",
+      "competencyName": "Python Basics & Variables",
+      "domainId": "domain-python",
+      "score": 50,
+      "level": "Moderate",
+      "priority": "Medium",
+      "reason": "Scoring 50% indicates a foundational understanding of basic types and variable assignments, but gaps persist in type casting, operators, and memory references. Step-by-step documentation and quick interactive quizzes will help reinforce core syntax.",
+      "updatedAt": "2026-10-03T11:13:41.187Z"
+    },
+    {
+      "id": "gap-o7wi5brne",
+      "studentId": "student-demo",
+      "competencyId": "comp-py-flow",
+      "competencyName": "Control Flow & Loops",
+      "domainId": "domain-python",
+      "score": 50,
+      "level": "Moderate",
+      "priority": "Medium",
+      "reason": "A 50% score shows partial grasp of conditional logic and looping structures, yet complex nested loops and break/continue statements require reinforcement through short visual tutorials.",
+      "updatedAt": "2026-10-03T11:13:41.187Z"
+    },
+    {
+      "id": "gap-6g72gmoei",
+      "studentId": "student-demo",
+      "competencyId": "comp-py-func",
+      "competencyName": "Functions & Scope",
+      "domainId": "domain-python",
+      "score": 50,
+      "level": "Moderate",
+      "priority": "Medium",
+      "reason": "Attaining 50% reflects familiarity with defining standard functions, but deeper concepts like *args, **kwargs, lambda functions, and variable scope rules need further practice.",
+      "updatedAt": "2026-10-03T11:13:41.187Z"
+    },
+    {
+      "id": "gap-dump2mti5",
+      "studentId": "student-demo",
+      "competencyId": "comp-py-oop",
+      "competencyName": "Object-Oriented Programming (OOP)",
+      "domainId": "domain-python",
+      "score": 100,
+      "level": "Strong",
+      "priority": "Low",
+      "reason": "Achieving 100% demonstrates full mastery of object-oriented design patterns, inheritance, polymorphism, and class encapsulation.",
+      "updatedAt": "2026-10-03T11:13:41.187Z"
+    },
+    {
+      "id": "gap-et45brvht",
+      "studentId": "student-demo",
+      "competencyId": "comp-py-exceptions",
+      "competencyName": "Exception & File Handling",
+      "domainId": "domain-python",
+      "score": 0,
+      "level": "Weak",
+      "priority": "High",
+      "reason": "A 0% score reveals an urgent need to learn try-except-finally blocks, custom exception handling, and context managers for file I/O operations, which can be bridged via structured documentation.",
+      "updatedAt": "2026-10-03T11:13:41.187Z"
+    },
+    {
+      "id": "gap-x7z8833p6",
+      "studentId": "student-demo",
+      "competencyId": "comp-web-htmlcss",
+      "competencyName": "HTML & CSS Layouts",
+      "domainId": "domain-webdev",
+      "score": 50,
+      "level": "Moderate",
+      "priority": "Medium",
+      "reason": "Scored 50% in HTML & CSS Layouts. Foundational understanding exists; recommended targeted exercises to reach mastery.",
+      "updatedAt": "2026-10-03T11:13:42.176Z"
+    },
+    {
+      "id": "gap-3oi08uwhy",
+      "studentId": "student-demo",
+      "competencyId": "comp-web-js",
+      "competencyName": "JavaScript Basics (ES6+)",
+      "domainId": "domain-webdev",
+      "score": 0,
+      "level": "Weak",
+      "priority": "High",
+      "reason": "Scored 0% in JavaScript Basics (ES6+). Critical competency gap requiring immediate review.",
+      "updatedAt": "2026-10-03T11:13:42.176Z"
+    },
+    {
+      "id": "gap-9tkguxqjt",
+      "studentId": "student-demo",
+      "competencyId": "comp-web-react",
+      "competencyName": "React Components & Hooks",
+      "domainId": "domain-webdev",
+      "score": 0,
+      "level": "Weak",
+      "priority": "High",
+      "reason": "Scored 0% in React Components & Hooks. Critical competency gap requiring immediate review.",
+      "updatedAt": "2026-10-03T11:13:42.176Z"
+    },
+    {
+      "id": "gap-qqf6ozmfv",
+      "studentId": "student-demo",
+      "competencyId": "comp-web-backend",
+      "competencyName": "Backend APIs & Express",
+      "domainId": "domain-webdev",
+      "score": 0,
+      "level": "Weak",
+      "priority": "High",
+      "reason": "Scored 0% in Backend APIs & Express. Critical competency gap requiring immediate review.",
+      "updatedAt": "2026-10-03T11:13:42.177Z"
+    },
+    {
+      "id": "gap-3ns6639zh",
+      "studentId": "student-demo",
+      "competencyId": "comp-web-db",
+      "competencyName": "Database & SQL Foundations",
+      "domainId": "domain-webdev",
+      "score": 0,
+      "level": "Weak",
+      "priority": "High",
+      "reason": "Scored 0% in Database & SQL Foundations. Critical competency gap requiring immediate review.",
+      "updatedAt": "2026-10-03T11:13:42.177Z"
+    }
+  ],
+  "learningResources": [
+    {
+      "id": "res-py-fund-1",
+      "title": "Official Python Tutorial: Introduction",
+      "description": "Read the official Python introduction covering numbers, strings, and lists.",
+      "resourceType": "documentation",
+      "source": "python.org",
+      "url": "https://docs.python.org/3/tutorial/introduction.html",
+      "domainId": "domain-python",
+      "competencyId": "comp-py-fund",
+      "createdAt": "2026-10-03T11:13:26.989Z"
+    },
+    {
+      "id": "res-py-flow-1",
+      "title": "Python Control Flow Guide",
+      "description": "Detailed walk-through of Python conditional statements and loop statements.",
+      "resourceType": "tutorial",
+      "source": "Real Python",
+      "url": "https://realpython.com/python-conditional-statements/",
+      "domainId": "domain-python",
+      "competencyId": "comp-py-flow",
+      "createdAt": "2026-10-03T11:13:26.989Z"
+    },
+    {
+      "id": "res-py-func-1",
+      "title": "Defining Functions in Python",
+      "description": "Learn how to write clean, reusable modular functions, arguments, and return types.",
+      "resourceType": "article",
+      "source": "W3Schools",
+      "url": "https://www.w3schools.com/python/python_functions.asp",
+      "domainId": "domain-python",
+      "competencyId": "comp-py-func",
+      "createdAt": "2026-10-03T11:13:26.989Z"
+    },
+    {
+      "id": "res-py-oop-1",
+      "title": "Introduction to OOP in Python",
+      "description": "Master OOP principles: classes, objects, inheritance, and encapsulation with coding exercises.",
+      "resourceType": "tutorial",
+      "source": "Real Python",
+      "url": "https://realpython.com/python3-object-oriented-programming/",
+      "domainId": "domain-python",
+      "competencyId": "comp-py-oop",
+      "createdAt": "2026-10-03T11:13:26.989Z"
+    },
+    {
+      "id": "res-py-except-1",
+      "title": "Errors and Exceptions Handling in Python",
+      "description": "Master debugging and exceptions with Python's standard try-except blocks.",
+      "resourceType": "documentation",
+      "source": "python.org",
+      "url": "https://docs.python.org/3/tutorial/errors.html",
+      "domainId": "domain-python",
+      "competencyId": "comp-py-exceptions",
+      "createdAt": "2026-10-03T11:13:26.989Z"
+    },
+    {
+      "id": "res-web-htmlcss-1",
+      "title": "A Complete Guide to Flexbox",
+      "description": "Deep dive into CSS Flexbox properties with comprehensive visual guides.",
+      "resourceType": "article",
+      "source": "CSS-Tricks",
+      "url": "https://css-tricks.com/snippets/css/a-guide-to-flexbox/",
+      "domainId": "domain-webdev",
+      "competencyId": "comp-web-htmlcss",
+      "createdAt": "2026-10-03T11:13:26.989Z"
+    },
+    {
+      "id": "res-web-js-1",
+      "title": "MDN: JavaScript Async/Await",
+      "description": "A comprehensive guide to asynchronous programming using modern JavaScript Promises.",
+      "resourceType": "documentation",
+      "source": "MDN Web Docs",
+      "url": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises",
+      "domainId": "domain-webdev",
+      "competencyId": "comp-web-js",
+      "createdAt": "2026-10-03T11:13:26.989Z"
+    },
+    {
+      "id": "res-web-react-1",
+      "title": "React Official Docs: Managing State",
+      "description": "Learn how to think in React and manage complex states using standard built-in hooks.",
+      "resourceType": "documentation",
+      "source": "React Dev",
+      "url": "https://react.dev/learn/managing-state",
+      "domainId": "domain-webdev",
+      "competencyId": "comp-web-react",
+      "createdAt": "2026-10-03T11:13:26.989Z"
+    },
+    {
+      "id": "res-web-express-1",
+      "title": "Building REST APIs with Express",
+      "description": "A step-by-step tutorial on setting up routes, handling requests, and responding with JSON.",
+      "resourceType": "tutorial",
+      "source": "LogRocket",
+      "url": "https://blog.logrocket.com/build-rest-api-node-express-typescript/",
+      "domainId": "domain-webdev",
+      "competencyId": "comp-web-backend",
+      "createdAt": "2026-10-03T11:13:26.989Z"
+    },
+    {
+      "id": "res-web-db-1",
+      "title": "Intro to Relational Databases and SQL",
+      "description": "Learn how SQL works, how relationships are modeled, and standard JOIN query syntax.",
+      "resourceType": "video",
+      "source": "freeCodeCamp",
+      "url": "https://www.youtube.com/watch?v=HXV3zeQKqGY",
+      "domainId": "domain-webdev",
+      "competencyId": "comp-web-db",
+      "createdAt": "2026-10-03T11:13:26.989Z"
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "rec-vk9pba7fi",
+      "studentId": "student-demo",
+      "competencyId": "comp-py-fund",
+      "competencyName": "Python Basics & Variables",
+      "resourceId": "res-py-fund-1",
+      "customTitle": "Official Python Tutorial: Introduction",
+      "customDescription": "Read the official Python introduction covering numbers, strings, and lists.",
+      "customUrl": "https://docs.python.org/3/tutorial/introduction.html",
+      "reason": "Targeted to overcome your moderate competency gap (50%) in Python Basics & Variables.",
+      "priority": "Medium",
+      "createdAt": "2026-10-03T11:13:36.257Z",
+      "completed": false
+    },
+    {
+      "id": "rec-roumfjdzn",
+      "studentId": "student-demo",
+      "competencyId": "comp-py-flow",
+      "competencyName": "Control Flow & Loops",
+      "resourceId": "res-py-flow-1",
+      "customTitle": "Python Control Flow Guide",
+      "customDescription": "Detailed walk-through of Python conditional statements and loop statements.",
+      "customUrl": "https://realpython.com/python-conditional-statements/",
+      "reason": "Targeted to overcome your moderate competency gap (50%) in Control Flow & Loops.",
+      "priority": "Medium",
+      "createdAt": "2026-10-03T11:13:36.257Z",
+      "completed": false
+    },
+    {
+      "id": "rec-9bm1phtma",
+      "studentId": "student-demo",
+      "competencyId": "comp-py-func",
+      "competencyName": "Functions & Scope",
+      "resourceId": "res-py-func-1",
+      "customTitle": "Defining Functions in Python",
+      "customDescription": "Learn how to write clean, reusable modular functions, arguments, and return types.",
+      "customUrl": "https://www.w3schools.com/python/python_functions.asp",
+      "reason": "Targeted to overcome your moderate competency gap (50%) in Functions & Scope.",
+      "priority": "Medium",
+      "createdAt": "2026-10-03T11:13:36.257Z",
+      "completed": false
+    },
+    {
+      "id": "rec-ahix3a0xh",
+      "studentId": "student-demo",
+      "competencyId": "comp-py-exceptions",
+      "competencyName": "Exception & File Handling",
+      "resourceId": "res-py-except-1",
+      "customTitle": "Errors and Exceptions Handling in Python",
+      "customDescription": "Master debugging and exceptions with Python's standard try-except blocks.",
+      "customUrl": "https://docs.python.org/3/tutorial/errors.html",
+      "reason": "Targeted to overcome your weak competency gap (0%) in Exception & File Handling.",
+      "priority": "High",
+      "createdAt": "2026-10-03T11:13:36.257Z",
+      "completed": false
+    },
+    {
+      "id": "rec-4zbawn4x8",
+      "studentId": "student-demo",
+      "competencyId": "comp-web-htmlcss",
+      "competencyName": "HTML & CSS Layouts",
+      "resourceId": "res-web-htmlcss-1",
+      "customTitle": "A Complete Guide to Flexbox",
+      "customDescription": "Deep dive into CSS Flexbox properties with comprehensive visual guides.",
+      "customUrl": "https://css-tricks.com/snippets/css/a-guide-to-flexbox/",
+      "reason": "Targeted to overcome your moderate competency gap (50%) in HTML & CSS Layouts.",
+      "priority": "Medium",
+      "createdAt": "2026-10-03T11:13:42.176Z",
+      "completed": false
+    },
+    {
+      "id": "rec-fmuhe9znp",
+      "studentId": "student-demo",
+      "competencyId": "comp-web-js",
+      "competencyName": "JavaScript Basics (ES6+)",
+      "resourceId": "res-web-js-1",
+      "customTitle": "MDN: JavaScript Async/Await",
+      "customDescription": "A comprehensive guide to asynchronous programming using modern JavaScript Promises.",
+      "customUrl": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises",
+      "reason": "Targeted to overcome your weak competency gap (0%) in JavaScript Basics (ES6+).",
+      "priority": "High",
+      "createdAt": "2026-10-03T11:13:42.176Z",
+      "completed": false
+    },
+    {
+      "id": "rec-idlmetv2w",
+      "studentId": "student-demo",
+      "competencyId": "comp-web-react",
+      "competencyName": "React Components & Hooks",
+      "resourceId": "res-web-react-1",
+      "customTitle": "React Official Docs: Managing State",
+      "customDescription": "Learn how to think in React and manage complex states using standard built-in hooks.",
+      "customUrl": "https://react.dev/learn/managing-state",
+      "reason": "Targeted to overcome your weak competency gap (0%) in React Components & Hooks.",
+      "priority": "High",
+      "createdAt": "2026-10-03T11:13:42.177Z",
+      "completed": false
+    },
+    {
+      "id": "rec-32cvy1r4i",
+      "studentId": "student-demo",
+      "competencyId": "comp-web-backend",
+      "competencyName": "Backend APIs & Express",
+      "resourceId": "res-web-express-1",
+      "customTitle": "Building REST APIs with Express",
+      "customDescription": "A step-by-step tutorial on setting up routes, handling requests, and responding with JSON.",
+      "customUrl": "https://blog.logrocket.com/build-rest-api-node-express-typescript/",
+      "reason": "Targeted to overcome your weak competency gap (0%) in Backend APIs & Express.",
+      "priority": "High",
+      "createdAt": "2026-10-03T11:13:42.177Z",
+      "completed": false
+    },
+    {
+      "id": "rec-j9d0etmjp",
+      "studentId": "student-demo",
+      "competencyId": "comp-web-db",
+      "competencyName": "Database & SQL Foundations",
+      "resourceId": "res-web-db-1",
+      "customTitle": "Intro to Relational Databases and SQL",
+      "customDescription": "Learn how SQL works, how relationships are modeled, and standard JOIN query syntax.",
+      "customUrl": "https://www.youtube.com/watch?v=HXV3zeQKqGY",
+      "reason": "Targeted to overcome your weak competency gap (0%) in Database & SQL Foundations.",
+      "priority": "High",
+      "createdAt": "2026-10-03T11:13:42.177Z",
+      "completed": false
+    }
+  ],
+  "materials": [],
+  "quizzes": [],
+  "quizAttempts": [],
+  "aiGenerationLogs": [
+    {
+      "studentId": "student-demo",
+      "operation": "SKILL_GAP_ANALYSIS",
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "success",
+      "latencyMs": 4925,
+      "id": "log-l7m9y0bvi",
+      "createdAt": "2026-10-03T11:13:41.186Z"
+    }
+  ],
+  "aiTutorConversations": [],
+  "featureFlags": {
+    "enableAIAssessments": true,
+    "enableAITutor": true,
+    "enableAIQuizStudio": true,
+    "enableStrictProctoring": true,
+    "enableFreePracticeSources": true,
+    "enableStudentRegistration": true,
+    "enablePeerDiscussions": true
+  }
+}
