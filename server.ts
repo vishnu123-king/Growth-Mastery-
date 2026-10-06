@@ -289,7 +289,7 @@ async function startServer() {
                 <select id="presetEmail" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold cursor-pointer">
                   <option value="admin@skillgap.ai|System Administrator|admin">Admin - admin@skillgap.ai</option>
                   <option value="teacher@skillgap.ai|Prof. Sarah Jenkins|teacher">Teacher - teacher@skillgap.ai</option>
-                  <option value="dhivyabharathikarthi07@gmail.com|Demo Student|student">Student - Demo Student (dhivyabharathikarthi07@gmail.com)</option>
+                  <option value="vishnutech10@gmail.com|Demo Student|student">Student - Demo Student (vishnutech10@gmail.com)</option>
                   <option value="custom">Use Custom Google Account...</option>
                 </select>
               </div>

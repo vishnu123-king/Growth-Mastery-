@@ -210,7 +210,7 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
             <div className="grid grid-cols-3 gap-2">
               <button
                 type="button"
-                onClick={() => handleQuickDemoLogin("dhivyabharathikarthi07@gmail.com", "student123")}
+                onClick={() => handleQuickDemoLogin("vishnutech10@gmail.com", "vishnu12@#3")}
                 className="p-2.5 bg-white hover:bg-indigo-50/80 border border-stone-200 rounded-xl text-left transition-all cursor-pointer shadow-2xs hover:border-indigo-300 group"
               >
                 <div className="flex items-center gap-1.5 text-stone-900 text-xs font-bold group-hover:text-indigo-700">

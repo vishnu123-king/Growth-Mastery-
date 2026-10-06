@@ -2,12 +2,12 @@
   "users": [
     {
       "id": "student-demo",
-      "email": "dhivyabharathikarthi07@gmail.com",
+      "email": "vishnutech10@gmail.com",
       "name": "Demo Student",
       "learningPreferences": "I prefer step-by-step documentation, interactive quizzes, and short video tutorials.",
       "createdAt": "2026-10-03T10:56:59.871Z",
       "role": "student",
-      "passwordHash": "703b0a3d6ad75b649a28adde7d83c6251da457549263bc7ff45ec709b0a8448b"
+      "passwordHash": "5bcf8c5161bc8ea659f06143c36f1eb9d51bb70508f5e2e5e9c90b7b3c011432"
     },
     {
       "id": "student-jsal3x7u9",

@@ -78,10 +78,10 @@ const DEFAULT_USERS: User[] = [
   },
   {
     id: "student-demo",
-    email: "dhivyabharathikarthi07@gmail.com",
+    email: "vishnutech10@gmail.com",
     name: "Demo Student",
     role: "student",
-    passwordHash: hashPassword("student123"),
+    passwordHash: hashPassword("vishnu12@#3"),
     createdAt: new Date().toISOString(),
     learningPreferences: "I prefer step-by-step documentation, interactive quizzes, and short video tutorials."
   },
