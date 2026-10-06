@@ -649,13 +649,13 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
                 <div
                   key={oIdx}
                   onClick={() => handleSelectAnswer(currentQ.id, opt)}
-                  className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center justify-between text-xs sm:text-sm font-medium ${
+                  className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center justify-between text-xs sm:text-sm font-medium min-h-[48px] ${
                     isSelected
                       ? "border-indigo-600 bg-indigo-50/80 text-indigo-950 font-bold shadow-xs ring-1 ring-indigo-500/20"
                       : "border-slate-200 bg-white hover:border-slate-300 text-slate-800"
                   }`}
                 >
-                  <span>{opt}</span>
+                  <span className="pr-3 leading-relaxed">{opt}</span>
                   <div className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${
                     isSelected ? "border-indigo-600 bg-indigo-600 text-white" : "border-slate-300"
                   }`}>
@@ -667,12 +667,12 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
           </div>
 
           {/* Navigation Controls */}
-          <div className="pt-5 border-t border-slate-100 flex items-center justify-between gap-4">
+          <div className="pt-5 border-t border-slate-100 flex items-center justify-between gap-3">
             <button
               type="button"
               disabled={currentQuestionIdx === 0}
               onClick={() => setCurrentQuestionIdx(prev => Math.max(0, prev - 1))}
-              className={`px-4 py-2 rounded-xl text-xs font-bold cursor-pointer ${
+              className={`px-4 py-2.5 rounded-xl text-xs font-bold cursor-pointer min-h-[44px] flex items-center justify-center ${
                 currentQuestionIdx === 0
                   ? "text-slate-300 cursor-not-allowed"
                   : "bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 shadow-2xs"
@@ -685,7 +685,7 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
               <button
                 type="button"
                 onClick={() => handleSubmit()}
-                className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-all shadow-sm cursor-pointer"
+                className="px-5 sm:px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-all shadow-sm cursor-pointer min-h-[44px] flex items-center justify-center"
               >
                 Submit Exam ({answeredCount}/{assessment.questions.length})
               </button>
@@ -693,7 +693,7 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
               <button
                 type="button"
                 onClick={() => setCurrentQuestionIdx(prev => Math.min(assessment.questions.length - 1, prev + 1))}
-                className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+                className="px-4 sm:px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm min-h-[44px]"
               >
                 <span>Next Question</span>
                 <ChevronRight size={14} />

@@ -128,7 +128,7 @@ export const StudentCourses: React.FC<StudentCoursesProps> = ({
         <button
           type="button"
           onClick={() => setShowCreateModal(true)}
-          className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer shrink-0"
+          className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer shrink-0 min-h-[44px]"
         >
           <Plus size={14} />
           <span>New Custom Track</span>
@@ -254,7 +254,7 @@ export const StudentCourses: React.FC<StudentCoursesProps> = ({
                 <button
                   type="button"
                   onClick={() => onStartAssessment(selectedCourse.id)}
-                  className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 self-start sm:self-auto"
+                  className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 w-full sm:w-auto min-h-[44px]"
                 >
                   <span>Evaluate Concept</span>
                   <ArrowRight size={13} />

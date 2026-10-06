@@ -66,7 +66,7 @@ export const SkillGapTracker: React.FC<SkillGapTrackerProps> = ({
         <button 
           type="button"
           onClick={onNavigateToAssessment}
-          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm cursor-pointer shrink-0"
+          className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm cursor-pointer shrink-0 min-h-[44px] flex items-center justify-center"
         >
           Retake Assessment
         </button>
@@ -106,37 +106,39 @@ export const SkillGapTracker: React.FC<SkillGapTrackerProps> = ({
       </div>
 
       {/* Filters Bar */}
-      <div className="p-3.5 bg-white dark:bg-[#151C28] border border-slate-200 dark:border-stone-800 rounded-xl flex flex-wrap gap-3 items-center text-xs shadow-xs">
-        <div className="flex items-center gap-1.5 text-slate-700 dark:text-stone-300 font-bold">
+      <div className="p-3.5 bg-white dark:bg-[#151C28] border border-slate-200 dark:border-stone-800 rounded-xl flex flex-col sm:flex-row gap-3 items-stretch sm:items-center text-xs shadow-xs">
+        <div className="flex items-center gap-1.5 text-slate-700 dark:text-stone-300 font-bold shrink-0">
           <Filter size={14} className="text-indigo-600 dark:text-indigo-400" />
           <span>Filter by:</span>
         </div>
 
-        {/* Filter by Domain */}
-        <select 
-          value={filterDomain}
-          onChange={(e) => setFilterDomain(e.target.value)}
-          className="px-3 py-1.5 bg-slate-50 dark:bg-[#192231] border border-slate-300 dark:border-stone-700 rounded-lg text-xs font-medium text-slate-800 dark:text-stone-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-        >
-          <option value="all">All Domains & Courses</option>
-          {domains.map(dom => (
-            <option key={dom.id} value={dom.id}>{dom.name}</option>
-          ))}
-        </select>
+        <div className="flex flex-col sm:flex-row gap-2.5 flex-1">
+          {/* Filter by Domain */}
+          <select 
+            value={filterDomain}
+            onChange={(e) => setFilterDomain(e.target.value)}
+            className="w-full sm:w-auto px-3 py-2 bg-slate-50 dark:bg-[#192231] border border-slate-300 dark:border-stone-700 rounded-lg text-xs font-medium text-slate-800 dark:text-stone-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 min-h-[40px]"
+          >
+            <option value="all">All Domains & Courses</option>
+            {domains.map(dom => (
+              <option key={dom.id} value={dom.id}>{dom.name}</option>
+            ))}
+          </select>
 
-        {/* Filter by Level */}
-        <select 
-          value={filterLevel}
-          onChange={(e) => setFilterLevel(e.target.value)}
-          className="px-3 py-1.5 bg-slate-50 dark:bg-[#192231] border border-slate-300 dark:border-stone-700 rounded-lg text-xs font-medium text-slate-800 dark:text-stone-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-        >
-          <option value="all">All Mastery Levels</option>
-          <option value="weak">Weak (&lt; 50%)</option>
-          <option value="moderate">Moderate (50% - 79%)</option>
-          <option value="strong">Proficient (&ge; 80%)</option>
-        </select>
+          {/* Filter by Level */}
+          <select 
+            value={filterLevel}
+            onChange={(e) => setFilterLevel(e.target.value)}
+            className="w-full sm:w-auto px-3 py-2 bg-slate-50 dark:bg-[#192231] border border-slate-300 dark:border-stone-700 rounded-lg text-xs font-medium text-slate-800 dark:text-stone-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 min-h-[40px]"
+          >
+            <option value="all">All Mastery Levels</option>
+            <option value="weak">Weak (&lt; 50%)</option>
+            <option value="moderate">Moderate (50% - 79%)</option>
+            <option value="strong">Proficient (&ge; 80%)</option>
+          </select>
+        </div>
 
-        <span className="text-slate-400 dark:text-stone-500 text-xs ml-auto font-medium">
+        <span className="text-slate-400 dark:text-stone-500 text-xs sm:ml-auto font-medium">
           Showing {filteredGaps.length} of {skillGaps.length}
         </span>
       </div>

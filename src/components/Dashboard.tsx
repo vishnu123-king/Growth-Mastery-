@@ -28,32 +28,32 @@ export const Dashboard: React.FC<DashboardProps> = ({
     <div className="space-y-10" id="student-dashboard">
       
       {/* 1. HERO / PRIMARY SECTION */}
-      <div className="bg-gradient-to-r from-indigo-900 via-indigo-850 to-blue-900 text-white rounded-3xl p-8 sm:p-10 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-indigo-900 via-indigo-850 to-blue-900 text-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10 relative overflow-hidden">
         {/* Editorial Background Geometry */}
         <div className="absolute right-0 top-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/3 pointer-events-none blur-3xl"></div>
         <div className="absolute left-1/3 bottom-0 w-80 h-80 bg-indigo-500/10 rounded-full translate-y-1/2 pointer-events-none"></div>
 
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div className="space-y-3 max-w-xl">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8">
+          <div className="space-y-2.5 sm:space-y-3 max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/10 border border-white/20 text-white text-[11px] font-bold uppercase tracking-wider backdrop-blur-xs">
               <Sparkles size={13} className="text-amber-300" />
               <span>Diagnostic Learning Engine</span>
             </div>
             
-            <h1 className="text-3xl sm:text-4xl font-serif font-bold tracking-tight text-white leading-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold tracking-tight text-white leading-tight">
               Welcome back, {userName || "Scholar"}
             </h1>
             
-            <p className="text-sm sm:text-base text-indigo-100/90 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm lg:text-base text-indigo-100/90 leading-relaxed font-sans">
               Your overall evaluated mastery level is at <strong className="text-white font-bold">{summary?.overallCompetency || 0}%</strong>. Currently tracking <span className="text-amber-300 font-bold">{activeWeakGaps.length} target areas</span> needing diagnostic focus.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3.5 shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => onNavigate("assessment")}
-              className="px-6 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 rounded-xl text-xs font-bold transition-all shadow-md flex items-center gap-2 cursor-pointer font-sans"
+              className="px-5 sm:px-6 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 rounded-xl text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer font-sans min-h-[44px]"
             >
               <Target size={15} />
               <span>Start Assessment</span>
@@ -62,7 +62,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <button
               type="button"
               onClick={() => onNavigate("skill-gaps")}
-              className="px-5 py-3 bg-white/10 hover:bg-white/15 text-white border border-white/20 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+              className="px-5 py-3 bg-white/10 hover:bg-white/15 text-white border border-white/20 rounded-xl text-xs font-semibold transition-colors cursor-pointer min-h-[44px] flex items-center justify-center text-center"
             >
               <span>Verify Skill Profile</span>
             </button>
@@ -71,10 +71,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
       </div>
 
       {/* 2. DASHBOARD INFORMATION HIERARCHY (Inline metrics, no card containers) */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4 border-t border-stone-200/60 dark:border-stone-800/80">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-4 border-t border-stone-200/60 dark:border-stone-800/80">
         <div className="space-y-1">
           <span className="text-[10px] font-bold text-stone-400 dark:text-stone-500 uppercase tracking-widest block font-mono">Overall Progress</span>
-          <div className="text-3xl font-extrabold text-stone-900 dark:text-stone-100 font-mono tracking-tight">
+          <div className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-stone-100 font-mono tracking-tight">
             {summary?.overallCompetency || 0}%
           </div>
           <div className="w-full bg-stone-200 dark:bg-stone-800 h-1.5 rounded-full overflow-hidden mt-2">
@@ -85,38 +85,38 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </div>
         </div>
 
-        <div className="space-y-1 border-l border-stone-200 dark:border-stone-800 pl-6">
+        <div className="space-y-1 border-l border-stone-200 dark:border-stone-800 pl-4 sm:pl-6">
           <span className="text-[10px] font-bold text-stone-400 dark:text-stone-500 uppercase tracking-widest block font-mono">Study Streak</span>
-          <div className="text-3xl font-extrabold text-stone-900 dark:text-stone-100 font-mono tracking-tight flex items-baseline gap-1">
+          <div className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-stone-100 font-mono tracking-tight flex items-baseline gap-1">
             <span>{summary?.streakDays || 0}</span>
-            <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider font-sans">Days active</span>
+            <span className="text-[10px] sm:text-xs font-semibold text-stone-500 uppercase tracking-wider font-sans">Days active</span>
           </div>
-          <p className="text-[11px] text-stone-500 dark:text-stone-400 mt-2 font-sans">Consistent daily momentum</p>
+          <p className="text-[10px] sm:text-[11px] text-stone-500 dark:text-stone-400 mt-2 font-sans truncate">Daily momentum</p>
         </div>
 
-        <div className="space-y-1 border-l border-stone-200 dark:border-stone-800 pl-6">
+        <div className="space-y-1 border-t sm:border-t-0 sm:border-l border-stone-200 dark:border-stone-800 pt-3 sm:pt-0 sm:pl-6">
           <span className="text-[10px] font-bold text-stone-400 dark:text-stone-500 uppercase tracking-widest block font-mono">Unresolved Gaps</span>
-          <div className="text-3xl font-extrabold text-stone-900 dark:text-stone-100 font-mono tracking-tight">
+          <div className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-stone-100 font-mono tracking-tight">
             {activeWeakGaps.length}
           </div>
           <button 
             type="button" 
             onClick={() => onNavigate("skill-gaps")}
-            className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 mt-2 block hover:underline"
+            className="text-[10px] sm:text-[11px] font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 mt-2 block hover:underline"
           >
             Track focus areas →
           </button>
         </div>
 
-        <div className="space-y-1 border-l border-stone-200 dark:border-stone-800 pl-6">
+        <div className="space-y-1 border-t sm:border-t-0 sm:border-l border-stone-200 dark:border-stone-800 pt-3 sm:pt-0 pl-4 sm:pl-6">
           <span className="text-[10px] font-bold text-stone-400 dark:text-stone-500 uppercase tracking-widest block font-mono">Completed Units</span>
-          <div className="text-3xl font-extrabold text-stone-900 dark:text-stone-100 font-mono tracking-tight">
+          <div className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-stone-100 font-mono tracking-tight">
             {summary?.completedResourcesCount || 0}
           </div>
           <button 
             type="button" 
             onClick={() => onNavigate("recommendations")}
-            className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 mt-2 block hover:underline"
+            className="text-[10px] sm:text-[11px] font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 mt-2 block hover:underline"
           >
             Review remediation →
           </button>
