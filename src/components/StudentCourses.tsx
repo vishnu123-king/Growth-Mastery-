@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LearningDomain, AssessmentTemplate, User } from "../types";
-import { Calendar, Clock, Plus, Loader2, ArrowRight, BookOpen, CheckCircle2, Sparkles, UserCheck, ChevronRight } from "lucide-react";
+import { Calendar, Clock, Plus, Loader2, ArrowRight, BookOpen, CheckCircle2, Sparkles, UserCheck, ChevronRight, AlertCircle } from "lucide-react";
 import { apiFetch } from "../lib/api";
 
 interface StudentCoursesProps {
@@ -209,101 +209,148 @@ export const StudentCourses: React.FC<StudentCoursesProps> = ({
         {/* Right Column: Selected Course details rendering directly */}
         <div className="lg:col-span-7 space-y-8">
           {selectedCourse ? (
-            <div className="space-y-8">
-              
-              {/* Selected syllabus meta section */}
-              <div className="space-y-3.5 border-b border-stone-200/60 dark:border-stone-800 pb-6">
-                <div className="flex items-center gap-2 text-[11px] font-mono font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
-                  <BookOpen size={13} />
-                  <span>Syllabus & Competency Rubrics</span>
-                  <span className="text-stone-300 dark:text-stone-700">·</span>
-                  <span className="text-stone-500 dark:text-stone-400 font-normal">{selectedCourse.instructor || "Faculty Director"}</span>
-                </div>
+            (() => {
+              const enrolled = isEnrolled(selectedCourse);
+              return (
+                <div className="space-y-8">
+                  {/* Selected syllabus meta section */}
+                  <div className="space-y-3.5 border-b border-stone-200/60 dark:border-stone-800 pb-6">
+                    <div className="flex items-center justify-between gap-2 text-[11px] font-mono font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                      <div className="flex items-center gap-2">
+                        <BookOpen size={13} />
+                        <span>Syllabus & Competency Rubrics</span>
+                        <span className="text-stone-300 dark:text-stone-700">·</span>
+                        <span className="text-stone-500 dark:text-stone-400 font-normal">{selectedCourse.instructor || "Faculty Director"}</span>
+                      </div>
+                      <div>
+                        {enrolled ? (
+                          <span className="px-2.5 py-1 text-[10px] font-bold text-indigo-700 bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800/40 rounded-lg">
+                            Enrolled
+                          </span>
+                        ) : (
+                          <span className="px-2.5 py-1 text-[10px] font-bold text-stone-500 bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg">
+                            Unenrolled
+                          </span>
+                        )}
+                      </div>
+                    </div>
 
-                <h2 className="text-xl sm:text-2xl font-bold font-serif text-stone-900 dark:text-stone-100 tracking-tight leading-snug">
-                  {selectedCourse.name}
-                </h2>
-                
-                <p className="text-stone-600 dark:text-stone-300 text-xs sm:text-sm leading-relaxed font-sans">
-                  {selectedCourse.description}
-                </p>
-                
-                {selectedCourse.deadline && (
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 text-xs font-mono font-medium">
-                    <Calendar size={12} className="text-stone-400" />
-                    <span>Target completion deadline: {selectedCourse.deadline}</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Assessment launch bar - unboxed flat design banner */}
-              <div className="bg-indigo-50/70 dark:bg-indigo-900/10 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-5 border border-indigo-100 dark:border-indigo-900/20">
-                <div className="space-y-1">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-300 flex items-center gap-1.5">
-                    <Sparkles size={13} />
-                    <span>Dynamic Diagnostics</span>
-                  </div>
-                  <h3 className="text-sm font-bold text-stone-900 dark:text-stone-100">
-                    Evaluate Topic Understanding
-                  </h3>
-                  <p className="text-xs text-stone-600 dark:text-stone-300 leading-relaxed max-w-md font-sans">
-                    Take an evaluation for this course to generate skill-gap matrix scores and personalized remediation recommendations.
-                  </p>
-                </div>
-                
-                <button
-                  type="button"
-                  onClick={() => onStartAssessment(selectedCourse.id)}
-                  className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 w-full sm:w-auto min-h-[44px]"
-                >
-                  <span>Evaluate Concept</span>
-                  <ArrowRight size={13} />
-                </button>
-              </div>
-
-              {/* Scheduled Formal Exams Table */}
-              {templates.filter(t => t.domainId === selectedCourse.id).length > 0 && (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between border-b border-stone-150 dark:border-stone-800 pb-2">
-                    <h3 className="text-xs font-bold uppercase tracking-widest font-mono text-stone-400">
-                      Assigned Examination Boards
-                    </h3>
-                    <span className="text-[10px] text-stone-400 font-mono uppercase">Strict Single-Tab</span>
+                    <h2 className="text-xl sm:text-2xl font-bold font-serif text-stone-900 dark:text-stone-100 tracking-tight leading-snug">
+                      {selectedCourse.name}
+                    </h2>
+                    
+                    <p className="text-stone-600 dark:text-stone-300 text-xs sm:text-sm leading-relaxed font-sans">
+                      {selectedCourse.description}
+                    </p>
+                    
+                    {selectedCourse.deadline && (
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 text-xs font-mono font-medium">
+                        <Calendar size={12} className="text-stone-400" />
+                        <span>Target completion deadline: {selectedCourse.deadline}</span>
+                      </div>
+                    )}
                   </div>
 
-                  <div className="divide-y divide-stone-100 dark:divide-stone-800">
-                    {templates.filter(t => t.domainId === selectedCourse.id).map(tmpl => (
-                      <div key={tmpl.id} className="py-4 flex items-center justify-between gap-4 text-xs">
-                        <div className="space-y-1">
-                          <span className="font-bold text-stone-900 dark:text-stone-100 text-sm block">{tmpl.title}</span>
-                          <div className="flex items-center gap-2.5 text-stone-500 dark:text-stone-400 text-[11px] font-mono">
-                            <span className="flex items-center gap-1 font-semibold text-stone-700 dark:text-stone-300">
-                              <Clock size={11} className="text-indigo-500" /> {tmpl.timeLimitMinutes} min limit
-                            </span>
-                            <span>·</span>
-                            <span>{tmpl.questions?.length || 0} questions</span>
-                            {tmpl.deadline && (
-                              <>
-                                <span>·</span>
-                                <span className="text-amber-700 dark:text-amber-400 font-medium">Due {tmpl.deadline}</span>
-                              </>
-                            )}
-                          </div>
+                  {/* Conditional state based on enrollment */}
+                  {!enrolled ? (
+                    <div className="bg-amber-50/50 dark:bg-amber-950/10 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-5 border border-amber-200/60 dark:border-amber-900/20">
+                      <div className="space-y-1">
+                        <div className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 flex items-center gap-1.5">
+                          <AlertCircle size={13} />
+                          <span>Path Locked</span>
                         </div>
-
+                        <h3 className="text-sm font-bold text-stone-900 dark:text-stone-100">
+                          Enroll to Unlock Course Resources
+                        </h3>
+                        <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed max-w-md font-sans">
+                          You are currently not enrolled in this learning path. Enroll now to take academic diagnostics, launch assigned proctored exams, trace your skill competency matrices, and seek dynamic study guidance from the AI Tutor.
+                        </p>
+                      </div>
+                      
+                      <button
+                        type="button"
+                        onClick={(e) => handleToggleEnrollment(selectedCourse.id, e)}
+                        disabled={enrollingId === selectedCourse.id}
+                        className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 w-full sm:w-auto min-h-[44px]"
+                      >
+                        <span>{enrollingId === selectedCourse.id ? "Enrolling..." : "Enroll in Learning Path"}</span>
+                        <ArrowRight size={13} />
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      {/* Assessment launch bar - unboxed flat design banner */}
+                      <div className="bg-indigo-50/70 dark:bg-indigo-900/10 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-5 border border-indigo-100 dark:border-indigo-900/20">
+                        <div className="space-y-1">
+                          <div className="text-[10px] font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-300 flex items-center gap-1.5">
+                            <Sparkles size={13} />
+                            <span>Dynamic Diagnostics</span>
+                          </div>
+                          <h3 className="text-sm font-bold text-stone-900 dark:text-stone-100">
+                            Evaluate Topic Understanding
+                          </h3>
+                          <p className="text-xs text-stone-600 dark:text-stone-300 leading-relaxed max-w-md font-sans">
+                            Take an evaluation for this course to generate skill-gap matrix scores and personalized remediation recommendations.
+                          </p>
+                        </div>
+                        
                         <button
                           type="button"
-                          onClick={() => onStartAssessment(selectedCourse.id, tmpl.id)}
-                          className="px-4 py-2 bg-stone-900 hover:bg-stone-800 dark:bg-stone-800 dark:hover:bg-stone-700 text-white rounded-lg text-xs font-bold cursor-pointer transition-colors shadow-2xs shrink-0"
+                          onClick={() => onStartAssessment(selectedCourse.id)}
+                          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 w-full sm:w-auto min-h-[44px]"
                         >
-                          Start Exam
+                          <span>Evaluate Concept</span>
+                          <ArrowRight size={13} />
                         </button>
                       </div>
-                    ))}
-                  </div>
+
+                      {/* Scheduled Formal Exams Table */}
+                      {templates.filter(t => t.domainId === selectedCourse.id).length > 0 && (
+                        <div className="space-y-4">
+                          <div className="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-2">
+                            <h3 className="text-xs font-bold uppercase tracking-widest font-mono text-stone-400">
+                              Assigned Examination Boards
+                            </h3>
+                            <span className="text-[10px] text-stone-400 font-mono uppercase">Strict Single-Tab</span>
+                          </div>
+
+                          <div className="divide-y divide-stone-100 dark:divide-stone-800">
+                            {templates.filter(t => t.domainId === selectedCourse.id).map(tmpl => (
+                              <div key={tmpl.id} className="py-4 flex items-center justify-between gap-4 text-xs">
+                                <div className="space-y-1">
+                                  <span className="font-bold text-stone-900 dark:text-stone-100 text-sm block">{tmpl.title}</span>
+                                  <div className="flex items-center gap-2.5 text-stone-500 dark:text-stone-400 text-[11px] font-mono">
+                                    <span className="flex items-center gap-1 font-semibold text-stone-700 dark:text-stone-300">
+                                      <Clock size={11} className="text-indigo-500" /> {tmpl.timeLimitMinutes} min limit
+                                    </span>
+                                    <span>·</span>
+                                    <span>{tmpl.questions?.length || 0} questions</span>
+                                    {tmpl.deadline && (
+                                      <>
+                                        <span>·</span>
+                                        <span className="text-amber-700 dark:text-amber-400 font-medium">Due {tmpl.deadline}</span>
+                                      </>
+                                    )}
+                                  </div>
+                                </div>
+
+                                <button
+                                  type="button"
+                                  onClick={() => onStartAssessment(selectedCourse.id, tmpl.id)}
+                                  className="px-4 py-2 bg-stone-900 hover:bg-stone-800 dark:bg-stone-800 dark:hover:bg-stone-700 text-white rounded-lg text-xs font-bold cursor-pointer transition-colors shadow-2xs shrink-0"
+                                >
+                                  Start Exam
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
                 </div>
-              )}
-            </div>
+              );
+            })()
           ) : (
             <div className="py-16 text-center text-stone-400 dark:text-stone-500 text-xs">
               <BookOpen className="w-8 h-8 text-stone-300 dark:text-stone-700 mx-auto mb-2" />

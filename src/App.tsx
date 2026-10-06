@@ -592,6 +592,38 @@ export default function App() {
     </nav>
   );
 
+  const isEnrolledInAny = currentUser?.enrolledCourseIds && currentUser.enrolledCourseIds.length > 0;
+  const isStudent = currentUser?.role === "student";
+
+  const renderLockedUnenrolledView = (tabName: string, description: string) => (
+    <div className="p-8 sm:p-12 text-center bg-white dark:bg-[#151C28] rounded-3xl border border-stone-200 dark:border-stone-800 shadow-sm max-w-2xl mx-auto space-y-6 my-6 sm:my-10 fade-in">
+      <div className="w-16 h-16 bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center mx-auto border border-amber-200 dark:border-amber-800/60 shadow-xs">
+        <AlertCircle size={32} />
+      </div>
+      <div className="space-y-3">
+        <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-900/30">
+          Learning Path Locked
+        </span>
+        <h2 className="text-2xl font-bold font-serif text-stone-900 dark:text-white tracking-tight pt-1">
+          {tabName} Locked
+        </h2>
+        <p className="text-stone-600 dark:text-stone-300 text-sm max-w-md mx-auto leading-relaxed">
+          {description}
+        </p>
+      </div>
+      <div className="pt-2">
+        <button
+          type="button"
+          onClick={() => handleTabClick("courses")}
+          className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer mx-auto min-h-[44px]"
+        >
+          <BookOpen size={14} />
+          <span>Explore Course Directory & Enroll</span>
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-[#FAF9F5] dark:bg-[#0B0F17] flex font-sans text-stone-900 dark:text-stone-100 selection:bg-indigo-600 selection:text-white" id="application-container">
       
@@ -873,60 +905,84 @@ export default function App() {
             )}
 
             {activeTab === "dashboard" && (
-              <Dashboard 
-                summary={summary || { overallCompetency: 0, topicScores: [], assessmentHistory: [], quizHistory: [], streakDays: 0, completedResourcesCount: 0 }} 
-                recommendations={recommendations} 
-                userName={currentUser.name}
-                onNavigate={setActiveTab}
-                onCompleteRec={handleCompleteRec}
-              />
+              !isEnrolledInAny && isStudent ? (
+                renderLockedUnenrolledView("Learning Progress Dashboard", "Your learning progress dashboard tracks diagnostic scores, study statistics, and weak areas. To activate progress analytics, please select and enroll in a course from our directory.")
+              ) : (
+                <Dashboard 
+                  summary={summary || { overallCompetency: 0, topicScores: [], assessmentHistory: [], quizHistory: [], streakDays: 0, completedResourcesCount: 0 }} 
+                  recommendations={recommendations} 
+                  userName={currentUser.name}
+                  onNavigate={setActiveTab}
+                  onCompleteRec={handleCompleteRec}
+                />
+              )
             )}
 
             {activeTab === "assessment" && (
-              <AssessmentFlow 
-                domains={domains}
-                onStartAssessment={handleStartAssessment}
-                onSubmitAssessment={handleSubmitAssessment}
-                onNavigateToDashboard={() => setActiveTab("dashboard")}
-                initialAssessment={practiceAssessment}
-                onClearInitialAssessment={() => setPracticeAssessment(null)}
-                onAssessmentStatusChange={(active, forceSubmitFn) => {
-                  setIsAssessmentActive(active);
-                  forceSubmitRef.current = forceSubmitFn || null;
-                }}
-                enableStrictProctoring={features.enableStrictProctoring}
-              />
+              !isEnrolledInAny && isStudent ? (
+                renderLockedUnenrolledView("Diagnostic Assessment Centre", "Adaptive diagnostic exams and formal syllabus evaluations are custom-tailored to specific learning paths. Enroll in a course now to launch assessments.")
+              ) : (
+                <AssessmentFlow 
+                  domains={domains}
+                  onStartAssessment={handleStartAssessment}
+                  onSubmitAssessment={handleSubmitAssessment}
+                  onNavigateToDashboard={() => setActiveTab("dashboard")}
+                  initialAssessment={practiceAssessment}
+                  onClearInitialAssessment={() => setPracticeAssessment(null)}
+                  onAssessmentStatusChange={(active, forceSubmitFn) => {
+                    setIsAssessmentActive(active);
+                    forceSubmitRef.current = forceSubmitFn || null;
+                  }}
+                  enableStrictProctoring={features.enableStrictProctoring}
+                />
+              )
             )}
 
             {activeTab === "skill-gaps" && (
-              <SkillGapTracker 
-                skillGaps={skillGaps}
-                domains={domains}
-                onNavigateToAssessment={() => setActiveTab("assessment")}
-                onPracticeGap={handlePracticeGap}
-              />
+              !isEnrolledInAny && isStudent ? (
+                renderLockedUnenrolledView("Skills & Gap Matrix", "The competency gap matrix traces your evaluated strengths and weaknesses across all course topics. Enroll in a course to unlock your skill gap tracker.")
+              ) : (
+                <SkillGapTracker 
+                  skillGaps={skillGaps}
+                  domains={domains}
+                  onNavigateToAssessment={() => setActiveTab("assessment")}
+                  onPracticeGap={handlePracticeGap}
+                />
+              )
             )}
 
             {activeTab === "recommendations" && (
-              <RecommendationsList 
-                recommendations={recommendations}
-                onCompleteRec={handleCompleteRec}
-                onNavigateToAssessment={() => setActiveTab("assessment")}
-              />
+              !isEnrolledInAny && isStudent ? (
+                renderLockedUnenrolledView("Remediation Recommendations", "AI study recommendations and tailored reference modules are synthesized from your diagnostic results. Select a course and complete an evaluation to generate study resources.")
+              ) : (
+                <RecommendationsList 
+                  recommendations={recommendations}
+                  onCompleteRec={handleCompleteRec}
+                  onNavigateToAssessment={() => setActiveTab("assessment")}
+                />
+              )
             )}
 
             {activeTab === "quiz" && features.enableAIQuizStudio && (
-              <MaterialQuizFlow 
-                materials={materials}
-                onUploadMaterial={handleUploadMaterial}
-                onGenerateQuiz={handleGenerateQuiz}
-                onSubmitQuiz={handleSubmitQuiz}
-                onNavigateToDashboard={() => setActiveTab("dashboard")}
-              />
+              !isEnrolledInAny && isStudent ? (
+                renderLockedUnenrolledView("AI Document Quiz Studio", "The AI quiz studio generates tailored diagnostic checks from study documents and lecture notes. Enroll in a learning path to begin practicing topics.")
+              ) : (
+                <MaterialQuizFlow 
+                  materials={materials}
+                  onUploadMaterial={handleUploadMaterial}
+                  onGenerateQuiz={handleGenerateQuiz}
+                  onSubmitQuiz={handleSubmitQuiz}
+                  onNavigateToDashboard={() => setActiveTab("dashboard")}
+                />
+              )
             )}
 
             {activeTab === "ai-tutor" && features.enableAITutor && (
-              <AITutor />
+              !isEnrolledInAny && isStudent ? (
+                renderLockedUnenrolledView("AI Study Tutor", "The interactive AI study tutor requires an active syllabus context to provide targeted academic coaching. Please select and enroll in a course.")
+              ) : (
+                <AITutor />
+              )
             )}
 
             {activeTab === "practice-sources" && features.enableFreePracticeSources && (

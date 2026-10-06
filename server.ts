@@ -29,7 +29,7 @@ function toStudentSafeAssessment(assessment: Assessment): Assessment {
   };
 }
 
-function getCurrentUser(req: express.Request): any {
+function getCurrentUser(req: express.Request, fallbackToDemo = false): any {
   // 1. Try custom headers / authorization
   let userId = req.headers["x-user-id"] as string;
   if (!userId) {
@@ -58,7 +58,10 @@ function getCurrentUser(req: express.Request): any {
   }
 
   // 4. Default to demo student
-  return db.getDemoUser();
+  if (fallbackToDemo) {
+    return db.getDemoUser();
+  }
+  return null;
 }
 
 async function startServer() {
@@ -68,6 +71,40 @@ async function startServer() {
   app.use(express.json({ limit: "15mb" }));
 
   // ==================== API ROUTES ====================
+
+  // Protected API authentication gateway
+  app.use("/api/v1", (req, res, next) => {
+    const publicPaths = [
+      "/auth/register",
+      "/auth/register-credentials",
+      "/auth/login",
+      "/auth/login-credentials",
+      "/auth/logout",
+      "/auth/switch-role",
+      "/auth/google/url",
+      "/auth/google/callback",
+      "/auth/google-simulation",
+      "/features"
+    ];
+    
+    // Normalize path for comparison (removing query params and trailing slash)
+    let checkPath = req.path;
+    if (checkPath.endsWith("/")) {
+      checkPath = checkPath.slice(0, -1);
+    }
+    
+    const isPublic = publicPaths.some(p => checkPath === p || checkPath.startsWith(p + "/"));
+    if (isPublic) {
+      return next();
+    }
+    
+    const user = getCurrentUser(req, false);
+    if (!user) {
+      return res.status(401).json({ error: "Unauthenticated. Please log in." });
+    }
+    
+    next();
+  });
 
   // --- Auth & Role Endpoints ---
   app.post("/api/v1/auth/register", (req, res) => {
@@ -249,38 +286,106 @@ async function startServer() {
             <form id="simForm" class="space-y-4">
               <div>
                 <label class="block text-xs font-bold text-slate-500 mb-1">Select Persona</label>
-                <select id="presetEmail" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                <select id="presetEmail" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold cursor-pointer">
                   <option value="admin@skillgap.ai|System Administrator|admin">Admin - admin@skillgap.ai</option>
                   <option value="teacher@skillgap.ai|Prof. Sarah Jenkins|teacher">Teacher - teacher@skillgap.ai</option>
-                  <option value="dhivyabharathikarthi07@gmail.com|Demo Student|student">Student - Demo Student</option>
+                  <option value="dhivyabharathikarthi07@gmail.com|Demo Student|student">Student - Demo Student (dhivyabharathikarthi07@gmail.com)</option>
+                  <option value="custom">Use Custom Google Account...</option>
                 </select>
               </div>
-              <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all">
+
+              <!-- Custom Fields (hidden by default) -->
+              <div id="customFields" class="hidden space-y-3.5 border-t border-slate-100 pt-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-500 mb-1">Custom Name</label>
+                  <input id="customName" type="text" placeholder="e.g. John Doe" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-500 mb-1">Custom Email Address</label>
+                  <input id="customEmail" type="email" placeholder="e.g. john@university.edu" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-500 mb-1">Custom Role</label>
+                  <select id="customRole" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold cursor-pointer">
+                    <option value="student">Student / Learner</option>
+                    <option value="teacher">Instructor / Faculty</option>
+                    <option value="admin">Administrator / Lead</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer">
                 Continue to Platform
               </button>
             </form>
           </div>
           <script>
+            const presetSel = document.getElementById("presetEmail");
+            const customDiv = document.getElementById("customFields");
+            presetSel.addEventListener("change", () => {
+              if (presetSel.value === "custom") {
+                customDiv.classList.remove("hidden");
+              } else {
+                customDiv.classList.add("hidden");
+              }
+            });
+
             document.getElementById("simForm").addEventListener("submit", async (e) => {
               e.preventDefault();
-              const [email, name, role] = document.getElementById("presetEmail").value.split("|");
+              const selection = presetSel.value;
+              let email, name, role;
+              if (selection === "custom") {
+                email = document.getElementById("customEmail").value.trim();
+                name = document.getElementById("customName").value.trim() || "Google Scholar";
+                role = document.getElementById("customRole").value;
+                if (!email) {
+                  alert("Email is required for custom account");
+                  return;
+                }
+              } else {
+                const parts = selection.split("|");
+                email = parts[0];
+                name = parts[1];
+                role = parts[2];
+              }
+
               try {
-                const res = await fetch("/api/v1/auth/login", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ email })
-                });
-                if (res.ok) {
-                  const user = await res.json();
+                let user;
+                // If custom, register first so name and role are respected
+                if (selection === "custom") {
+                  const regRes = await fetch("/api/v1/auth/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, name, role, preferences: "I prefer interactive assessments." })
+                  });
+                  if (regRes.ok) {
+                    user = await regRes.json();
+                  }
+                }
+                
+                if (!user) {
+                  const res = await fetch("/api/v1/auth/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email })
+                  });
+                  if (res.ok) {
+                    user = await res.json();
+                  }
+                }
+
+                if (user) {
                   if (window.opener) {
                     window.opener.postMessage({ type: "OAUTH_AUTH_SUCCESS", userId: user.id }, "*");
                     window.close();
                   } else {
                     window.location.href = "/";
                   }
+                } else {
+                  alert("Authentication failed");
                 }
               } catch (err) {
-                alert("Login failed");
+                alert("Login failed: " + err.message);
               }
             });
           </script>
@@ -290,13 +395,19 @@ async function startServer() {
   });
 
   app.get("/api/v1/auth/me", (req, res) => {
-    const user = getCurrentUser(req);
+    const user = getCurrentUser(req, false);
+    if (!user) {
+      return res.status(401).json({ error: "Unauthenticated" });
+    }
     res.json(user);
   });
 
   app.patch("/api/v1/auth/me", (req, res) => {
     const { learningPreferences } = req.body;
-    const user = getCurrentUser(req);
+    const user = getCurrentUser(req, false);
+    if (!user) {
+      return res.status(401).json({ error: "Unauthenticated" });
+    }
     const updated = db.updateUserPreferences(user.id, learningPreferences || "");
     res.json(updated || user);
   });
@@ -374,7 +485,16 @@ async function startServer() {
 
   // --- Domain / Course Endpoints ---
   app.get("/api/v1/domains", (req, res) => {
-    res.json(db.getDomains());
+    const user = getCurrentUser(req, false);
+    let domains = db.getDomains();
+    if (user) {
+      if (user.role === "student") {
+        domains = domains.filter(d => !d.studentId || d.studentId === user.id);
+      } else if (user.role === "teacher") {
+        domains = domains.filter(d => !d.studentId);
+      }
+    }
+    res.json(domains);
   });
 
   app.get("/api/v1/domains/:id/competencies", (req, res) => {

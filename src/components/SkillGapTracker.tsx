@@ -239,11 +239,7 @@ export const SkillGapTracker: React.FC<SkillGapTrackerProps> = ({
                           <span>Generating targeted practice quiz...</span>
                         </>
                       ) : (
-                        <>
-                          <Sparkles size={13} />
-                          <span>Practice this topic</span>
-                          <ArrowRight size={13} />
-                        </>
+                        <span>Practice this topic</span>
                       )}
                     </button>
                   )}

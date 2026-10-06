@@ -877,7 +877,8 @@ class Database {
       instructor: params.instructor || "Curriculum Faculty",
       status: "active",
       enrolledStudentsCount: params.studentId ? 1 : 0,
-      assignedStudentIds: params.studentId ? [params.studentId] : []
+      assignedStudentIds: params.studentId ? [params.studentId] : [],
+      studentId: params.studentId
     };
     this.data.domains.push(newDomain);
 

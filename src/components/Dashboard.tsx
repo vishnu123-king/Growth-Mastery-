@@ -268,7 +268,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           
           {/* Recent Evaluations Timeline */}
           <div className="space-y-5">
-            <h3 className="text-lg font-bold text-stone-900 dark:text-stone-100 font-serif border-b border-stone-150 dark:border-stone-800 pb-3">
+            <h3 className="text-lg font-bold text-stone-900 dark:text-stone-100 font-serif border-b border-stone-200 dark:border-stone-800 pb-3">
               Diagnostic Activity Feed
             </h3>
 

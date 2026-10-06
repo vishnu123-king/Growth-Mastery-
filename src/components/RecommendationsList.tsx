@@ -61,7 +61,7 @@ export const RecommendationsList: React.FC<RecommendationsListProps> = ({
             </div>
             <div className="bg-white/15 border border-white/20 rounded-xl px-4 py-3 backdrop-blur-xs text-center min-w-[100px]">
               <span className="block text-2xl font-bold text-white font-mono">{completedCount}</span>
-              <span className="text-[10px] uppercase font-bold tracking-wider text-emerald-200">Mastered</span>
+              <span className="text-[10px] uppercase font-bold tracking-wider text-indigo-200">Mastered</span>
             </div>
           </div>
         </div>
@@ -87,7 +87,7 @@ export const RecommendationsList: React.FC<RecommendationsListProps> = ({
             onClick={() => setFilterMode('completed')}
             className={`py-2 px-3.5 rounded-lg transition-all cursor-pointer flex items-center gap-2 ${
               filterMode === 'completed' 
-                ? "bg-emerald-700 text-white font-bold shadow-xs" 
+                ? "bg-indigo-650 text-white font-bold shadow-xs" 
                 : "text-stone-600 hover:text-stone-900 hover:bg-stone-100"
             }`}
           >
@@ -163,7 +163,7 @@ export const RecommendationsList: React.FC<RecommendationsListProps> = ({
                 {/* Top color indicator stripe */}
                 <div className={`h-1.5 w-full ${
                   rec.completed 
-                    ? "bg-emerald-500" 
+                    ? "bg-indigo-600" 
                     : isHigh 
                       ? "bg-rose-500" 
                       : "bg-amber-500"
@@ -228,7 +228,7 @@ export const RecommendationsList: React.FC<RecommendationsListProps> = ({
                         onClick={() => onCompleteRec(rec.id)}
                         className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                           rec.completed 
-                            ? "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100" 
+                            ? "bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100/50" 
                             : "bg-stone-900 hover:bg-indigo-600 text-white shadow-2xs"
                         }`}
                       >

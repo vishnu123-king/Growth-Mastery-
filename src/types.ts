@@ -33,6 +33,7 @@ export interface LearningDomain {
   status?: 'active' | 'archived';
   enrolledStudentsCount?: number;
   assignedStudentIds?: string[];
+  studentId?: string;
 }
 
 export interface Competency {

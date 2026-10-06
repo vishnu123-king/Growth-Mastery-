@@ -391,77 +391,91 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
   // --- Step 3: View Graded Results ---
   if (result) {
     const isPassing = result.overallScore >= 70;
+    
+    // Calculate actual completion percentage based on questions actually answered with non-empty responses vs total questions
+    const studentAnswers = result.assessment?.answers || answers || {};
+    const answeredCount = Object.values(studentAnswers).filter(val => typeof val === 'string' && val.trim().length > 0).length;
+    const totalQuestions = result.assessment?.questions?.length || 1;
+    const completionPercent = Math.round((answeredCount / totalQuestions) * 100);
+
     return (
-      <div className="space-y-7" id="assessment-results">
+      <div className="space-y-8" id="assessment-results">
         {/* Results Banner */}
-        <div className={`border-2 rounded-2xl p-7 text-center space-y-4 ${
-          isPassing 
-            ? "border-emerald-200 bg-gradient-to-b from-emerald-50 to-white" 
-            : "border-rose-200 bg-gradient-to-b from-rose-50 to-white"
-        }`}>
-          <div className="space-y-1">
-            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white border shadow-2xs text-slate-700">
+        <div className="border border-stone-200 dark:border-stone-800 rounded-2xl p-7 text-center space-y-5 bg-white dark:bg-[#151C28] shadow-md">
+          <div className="space-y-1.5">
+            <span className="px-3.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wider bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-900/30">
               Examination Graded & Recorded
             </span>
-            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight pt-1">
+            <h1 className="text-3xl sm:text-4xl font-bold font-serif text-stone-900 dark:text-white tracking-tight pt-1">
               Assessment Results
             </h1>
-            <p className="text-slate-500 text-xs max-w-md mx-auto">
-              Your answers have been verified against answer rubrics and recorded in your learning profile.
+            <p className="text-stone-600 dark:text-stone-300 text-base max-w-lg mx-auto leading-relaxed">
+              Your answers have been verified against academic answer rubrics and committed to your personalized learning profile.
             </p>
           </div>
 
           {result.autoSubmittedReason && (
-            <div className="p-2.5 bg-rose-100 border border-rose-200 rounded-xl text-rose-900 text-xs font-semibold max-w-md mx-auto">
+            <div className="p-3.5 bg-rose-50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/30 rounded-xl text-rose-900 dark:text-rose-300 text-sm font-semibold max-w-md mx-auto">
               Submitted via Proctoring Monitor: {result.autoSubmittedReason}
             </div>
           )}
 
-          <div className="pt-2">
-            <div className="text-5xl font-extrabold text-slate-900 tabular-nums">
-              {result.overallScore}%
+          {/* Side-by-side metric cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto pt-2">
+            <div className="p-5 bg-stone-50 dark:bg-stone-900/20 rounded-xl border border-stone-200 dark:border-stone-800 shadow-xs">
+              <div className="text-5xl font-extrabold text-indigo-600 dark:text-indigo-400 tabular-nums">
+                {result.overallScore}%
+              </div>
+              <span className="text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider block mt-1.5">
+                Overall Mastery Score
+              </span>
             </div>
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mt-1">
-              Overall Mastery Score
-            </span>
+            <div className="p-5 bg-stone-50 dark:bg-stone-900/20 rounded-xl border border-stone-200 dark:border-stone-800 shadow-xs">
+              <div className="text-5xl font-extrabold text-stone-900 dark:text-white tabular-nums">
+                {completionPercent}%
+              </div>
+              <span className="text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider block mt-1.5">
+                Questions Completed ({answeredCount}/{totalQuestions})
+              </span>
+            </div>
           </div>
         </div>
 
         {/* Topic Breakdown */}
-        <div className="space-y-3.5">
-          <h2 className="text-sm font-bold text-slate-900">Topic Competency Analysis</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+        <div className="space-y-4">
+          <h2 className="text-lg sm:text-xl font-bold text-stone-900 dark:text-white font-serif">Topic Competency Analysis</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {Object.values(result.topicBreakdown).map((topic: any) => {
               const score = topic.percentage;
-              let badgeColor = "bg-rose-100 text-rose-800";
+              let badgeColor = "bg-rose-50 text-rose-800 dark:bg-rose-950/20 dark:text-rose-300 border border-rose-200 dark:border-rose-900/40";
               let badgeText = "Needs Focus";
               let barColor = "bg-rose-500";
 
               if (score >= 80) {
-                badgeColor = "bg-emerald-100 text-emerald-800";
+                badgeColor = "bg-indigo-50 text-indigo-800 dark:bg-indigo-950/20 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-900/40";
                 badgeText = "Proficient";
-                barColor = "bg-emerald-500";
+                barColor = "bg-indigo-600 dark:bg-indigo-500";
               } else if (score >= 50) {
-                badgeColor = "bg-blue-100 text-blue-800";
+                badgeColor = "bg-blue-50 text-blue-800 dark:bg-blue-950/20 dark:text-blue-300 border border-blue-200 dark:border-blue-900/40";
                 badgeText = "Moderate";
                 barColor = "bg-blue-500";
               }
 
               return (
-                <div key={topic.competencyId} className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs space-y-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="font-bold text-slate-900 text-xs sm:text-sm">{topic.competencyName}</h3>
-                    <span className={`px-2.5 py-0.5 text-[10px] font-bold rounded-full ${badgeColor}`}>
+                <div key={topic.competencyId} className="p-5 bg-white dark:bg-[#151C28] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-xs space-y-3.5">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="font-bold text-stone-900 dark:text-white text-base sm:text-lg leading-snug">{topic.competencyName}</h3>
+                    <span className={`px-2.5 py-0.5 text-[10px] font-bold rounded-md ${badgeColor}`}>
                       {badgeText}
                     </span>
                   </div>
                   
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between text-xs font-semibold text-slate-600">
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm font-medium text-stone-600 dark:text-stone-300">
                       <span>Correct: {topic.correct}/{topic.total}</span>
-                      <span className="font-bold text-slate-900 tabular-nums">{score}%</span>
+                      <span className="font-bold text-stone-900 dark:text-white tabular-nums">{score}%</span>
                     </div>
-                    <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div className="w-full bg-slate-100 dark:bg-stone-800 h-2.5 rounded-full overflow-hidden">
                       <div className={`${barColor} h-full rounded-full transition-all`} style={{ width: `${score}%` }} />
                     </div>
                   </div>
@@ -472,57 +486,57 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
         </div>
 
         {/* Question Solutions Review */}
-        <div className="space-y-3.5">
-          <h2 className="text-sm font-bold text-slate-900">Detailed Question Review</h2>
-          <div className="space-y-3.5">
+        <div className="space-y-5">
+          <h2 className="text-xl sm:text-2xl font-bold text-stone-900 dark:text-white font-serif">Detailed Question Review</h2>
+          <div className="space-y-4">
             {assessment.questions.map((q, idx) => {
               const studentAns = (assessment.answers[q.id] || answers[q.id] || "").trim();
               const correctAns = (q.correctAnswer || "").trim();
               const isCorrect = studentAns.length > 0 && studentAns.toLowerCase() === correctAns.toLowerCase();
 
               return (
-                <div key={q.id} className="p-5 sm:p-6 bg-white rounded-2xl border border-slate-200 shadow-xs space-y-4">
+                <div key={q.id} className="p-6 sm:p-7 bg-white dark:bg-[#151C28] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-xs space-y-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="space-y-1">
-                      <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-wider">Question {idx + 1}</span>
-                      <h4 className="font-bold text-slate-900 text-sm sm:text-base whitespace-pre-wrap leading-relaxed">
+                      <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Question {idx + 1}</span>
+                      <h4 className="font-bold text-stone-900 dark:text-white text-base sm:text-lg font-serif whitespace-pre-wrap leading-relaxed">
                         {q.questionText}
                       </h4>
                     </div>
                     {isCorrect ? (
-                      <span className="text-emerald-800 bg-emerald-100 border border-emerald-200 text-xs font-bold px-3 py-1 rounded-full shrink-0 flex items-center gap-1.5">
+                      <span className="text-indigo-800 bg-indigo-50 border border-indigo-200 text-xs font-bold px-3 py-1.5 rounded-xl shrink-0 flex items-center gap-1.5">
                         <CheckCircle2 size={14} /> Correct
                       </span>
                     ) : (
-                      <span className="text-rose-800 bg-rose-100 border border-rose-200 text-xs font-bold px-3 py-1 rounded-full shrink-0 flex items-center gap-1.5">
+                      <span className="text-rose-800 bg-rose-50 border border-rose-200 text-xs font-bold px-3 py-1.5 rounded-xl shrink-0 flex items-center gap-1.5">
                         <XCircle size={14} /> Incorrect
                       </span>
                     )}
                   </div>
 
                   {/* Options */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-sm">
                     {q.options.map((opt, oIdx) => {
                       const isCorrectOpt = opt.trim().toLowerCase() === correctAns.toLowerCase();
                       const isStudentOpt = opt.trim().toLowerCase() === studentAns.toLowerCase();
 
-                      let optStyle = "border-slate-200 bg-slate-50/60 text-slate-700";
+                      let optStyle = "border-stone-200 dark:border-stone-800 bg-stone-50/60 dark:bg-stone-900/10 text-stone-700 dark:text-stone-300";
                       if (isCorrectOpt) {
-                        optStyle = "border-emerald-300 bg-emerald-50 text-emerald-950 font-bold ring-1 ring-emerald-400";
+                        optStyle = "border-indigo-300 bg-indigo-50/50 text-indigo-950 dark:border-indigo-900/60 dark:bg-indigo-950/20 dark:text-indigo-300 font-bold ring-1 ring-indigo-400/40";
                       } else if (isStudentOpt && !isCorrectOpt) {
-                        optStyle = "border-rose-300 bg-rose-50 text-rose-950 font-medium ring-1 ring-rose-300";
+                        optStyle = "border-rose-300 bg-rose-50 text-rose-950 dark:border-rose-900/40 dark:bg-rose-950/10 dark:text-rose-300 font-medium ring-1 ring-rose-300/40";
                       }
 
                       return (
-                        <div key={oIdx} className={`p-3 rounded-xl border flex items-center justify-between ${optStyle}`}>
-                          <span>{opt}</span>
+                        <div key={oIdx} className={`p-3.5 rounded-xl border flex items-center justify-between ${optStyle}`}>
+                          <span className="leading-relaxed">{opt}</span>
                           {isCorrectOpt && (
-                            <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
+                            <span className="text-[10px] font-bold text-indigo-800 bg-indigo-100 dark:bg-indigo-950/60 dark:text-indigo-300 px-2 py-0.5 rounded">
                               Correct answer
                             </span>
                           )}
                           {!isCorrectOpt && isStudentOpt && (
-                            <span className="text-[10px] font-bold text-rose-800 bg-rose-100 px-2 py-0.5 rounded">
+                            <span className="text-[10px] font-bold text-rose-800 bg-rose-100 dark:bg-rose-950/40 dark:text-rose-300 px-2 py-0.5 rounded">
                               Your answer
                             </span>
                           )}
@@ -533,9 +547,9 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
 
                   {/* Explanation */}
                   {q.explanation && (
-                    <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-1">
-                      <span className="font-bold text-slate-800 block">Explanation</span>
-                      <p className="text-slate-600 leading-relaxed">{q.explanation}</p>
+                    <div className="p-4 bg-stone-50 dark:bg-stone-900/20 border border-stone-200 dark:border-stone-800/80 rounded-xl text-xs sm:text-sm space-y-1.5">
+                      <span className="font-bold text-stone-800 dark:text-stone-200 block">Explanation</span>
+                      <p className="text-stone-600 dark:text-stone-300 leading-relaxed font-sans">{q.explanation}</p>
                     </div>
                   )}
                 </div>
@@ -545,7 +559,7 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
         </div>
 
         {/* Action Row */}
-        <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row gap-3 justify-between">
+        <div className="pt-4 border-t border-stone-200 dark:border-stone-800 flex flex-col sm:flex-row gap-3 justify-between">
           <button
             type="button"
             onClick={() => {
