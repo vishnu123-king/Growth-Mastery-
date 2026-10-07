@@ -228,7 +228,8 @@ export default function App() {
   // Helper: Refresh all state
   const refreshAllState = async () => {
     try {
-      const [domRes, progRes, gapsRes, recRes, matRes, featRes, tmplRes] = await Promise.all([
+      const [meRes, domRes, progRes, gapsRes, recRes, matRes, featRes, tmplRes] = await Promise.all([
+        apiFetch("/api/v1/auth/me"),
         apiFetch("/api/v1/domains"),
         apiFetch("/api/v1/progress"),
         apiFetch("/api/v1/skill-gaps"),
@@ -238,7 +239,8 @@ export default function App() {
         apiFetch("/api/v1/assessment-templates")
       ]);
 
-      const [doms, sum, gaps, recs, mats, feats, tmpls] = await Promise.all([
+      const [me, doms, sum, gaps, recs, mats, feats, tmpls] = await Promise.all([
+        meRes.json(),
         domRes.json(),
         progRes.json(),
         gapsRes.json(),
@@ -248,6 +250,7 @@ export default function App() {
         tmplRes.ok ? tmplRes.json() : []
       ]);
 
+      setCurrentUser(me);
       setDomains(doms || []);
       setSummary(sum || null);
       setSkillGaps(gaps || []);
@@ -672,10 +675,19 @@ export default function App() {
         </div>
 
         {/* Role Badge in Drawer */}
-        <div className="px-4 pt-3">
+        <div className="px-4 pt-3 flex items-center justify-between">
           <span className={`inline-flex text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${roleConfig.bg}`}>
             {roleConfig.label}
           </span>
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="p-1.5 rounded-lg border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-200 transition-colors cursor-pointer"
+            title={themeMode === 'dark' ? "Switch to White Mode" : "Switch to Dark Mode"}
+            aria-label="Toggle theme mode"
+          >
+            {themeMode === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+          </button>
         </div>
 
         {/* Navigation items scrollable list */}

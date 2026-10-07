@@ -189,7 +189,7 @@ export const TeacherPortal: React.FC<TeacherPortalProps> = ({ currentUser, onRef
   }
 
   return (
-    <div className="space-y-7" id="teacher-portal-root">
+    <div className="space-y-7 min-h-full" id="teacher-portal-root">
       {/* Alert Notifications */}
       {errorMsg && (
         <div className="p-3.5 bg-rose-50 border border-rose-200 text-rose-800 text-xs rounded-xl flex items-center justify-between font-semibold fade-in">
