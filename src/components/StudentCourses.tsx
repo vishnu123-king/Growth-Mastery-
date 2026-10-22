@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LearningDomain, AssessmentTemplate, User } from "../types";
-import { Calendar, Clock, Plus, Loader2, ArrowRight, BookOpen, CheckCircle2, Sparkles, UserCheck, ChevronRight, AlertCircle } from "lucide-react";
+import { Calendar, Clock, Plus, Loader2, ArrowRight, BookOpen, CheckCircle2, Sparkles, AlertCircle } from "lucide-react";
 import { apiFetch } from "../lib/api";
 
 interface StudentCoursesProps {
@@ -100,53 +100,56 @@ export const StudentCourses: React.FC<StudentCoursesProps> = ({
   };
 
   return (
-    <div className="space-y-10" id="student-courses-view">
+    <div className="space-y-8" id="student-courses-view">
       
-      {/* Dynamic inline notification - Flat, no rounded box wrappers */}
+      {/* Dynamic inline notification */}
       {statusMessage && (
-        <div className="p-4 bg-indigo-50 dark:bg-[#1e2736] border-b border-indigo-200 dark:border-stone-800 text-indigo-900 dark:text-indigo-200 text-xs font-semibold flex items-center justify-between fade-in">
+        <div className="p-3.5 bg-[#222222] border border-[#C47C4A]/40 text-[#F3EEE6] text-xs font-medium rounded-xl flex items-center justify-between fade-in">
           <span>{statusMessage}</span>
-          <button type="button" onClick={() => setStatusMessage("")} className="text-indigo-500 hover:text-indigo-700">✕</button>
+          <button type="button" onClick={() => setStatusMessage("")} className="text-[#A8A29E] hover:text-[#F3EEE6] ml-3">✕</button>
         </div>
       )}
 
-      {/* 3. COHESIVE HEADER */}
-      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 border-b border-stone-200/60 dark:border-stone-800 pb-5">
+      {/* 1. Header with Title & Action */}
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 border-b border-[#2C2C2C] pb-5">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold font-serif text-stone-900 dark:text-stone-100 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-serif font-semibold text-[#F3EEE6] tracking-tight">
             Curriculum Directory
           </h1>
-          <div className="text-xs text-stone-500 flex items-center gap-2 mt-1.5">
-            <span className="font-bold text-indigo-600 dark:text-indigo-400">
-              {courses.length} Active Syllabus Tracks
+          <div className="text-sm text-[#A8A29E] flex items-center gap-2 mt-1.5 flex-wrap">
+            <span className="font-mono text-xs font-semibold text-[#D7B87B]">
+              {courses.length} Active Tracks
             </span>
-            <span className="text-stone-300 dark:text-stone-700">·</span>
-            <span>Self-directed study and instructor-curated formal pathways</span>
+            <span className="text-[#444444]" aria-hidden="true">·</span>
+            <span>Structured learning paths, diagnostic rubrics, and formal assessments</span>
           </div>
         </div>
 
         <button
           type="button"
           onClick={() => setShowCreateModal(true)}
-          className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer shrink-0 min-h-[44px]"
+          className="btn-copper-primary text-xs shrink-0"
         >
-          <Plus size={14} />
+          <Plus size={15} />
           <span>New Custom Track</span>
         </button>
       </div>
 
-      {/* 10. ASYMMETRICAL 2-COLUMN VIEW (40% / 60%) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      {/* 2. Asymmetrical 2-Column Desktop Grid (5 Cols Feed / 7 Cols Detail) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        {/* Left Column: Course list feed (No card blocks, clean dividers) */}
-        <div className="lg:col-span-5 space-y-4">
-          <h3 className="text-[10px] font-bold text-stone-400 uppercase tracking-widest font-mono px-1">
-            Learning Paths
-          </h3>
+        {/* Left Column: Learning Paths List */}
+        <div className="lg:col-span-5 space-y-3">
+          <div className="flex items-center justify-between px-1">
+            <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#A8A29E]">
+              Learning Paths
+            </h2>
+            <span className="text-xs font-mono text-[#78716C]">{courses.length} tracks</span>
+          </div>
 
-          <div className="divide-y divide-stone-200/60 dark:divide-stone-800 border-t border-b border-stone-200/60 dark:border-stone-800">
+          <div className="space-y-2.5">
             {courses.length === 0 ? (
-              <div className="py-8 text-stone-400 text-xs">
+              <div className="p-8 text-center border border-[#2C2C2C] rounded-xl bg-[#1B1B1B] text-[#A8A29E] text-xs">
                 No active courses compiled yet.
               </div>
             ) : (
@@ -158,44 +161,45 @@ export const StudentCourses: React.FC<StudentCoursesProps> = ({
                   <div
                     key={course.id}
                     onClick={() => setSelectedCourse(course)}
-                    className={`py-5 px-3 transition-colors cursor-pointer flex flex-col justify-between gap-2.5 rounded-lg ${
+                    className={`p-4 rounded-xl border transition-all cursor-pointer flex flex-col justify-between gap-3 ${
                       isSelected
-                        ? "bg-indigo-50/60 dark:bg-indigo-900/10 font-bold"
-                        : "hover:bg-stone-50/40 dark:hover:bg-stone-800/10"
+                        ? "bg-[#222222] border-[#C47C4A]/60 ring-1 ring-[#C47C4A]/30"
+                        : "bg-[#1B1B1B] border-[#2C2C2C] hover:border-[#3A3A3A] hover:bg-[#1E1E1E]"
                     }`}
                   >
-                    <div className="flex items-start justify-between gap-4">
-                      <h4 className={`font-bold text-sm leading-snug transition-colors ${
-                        isSelected ? "text-indigo-600 dark:text-indigo-400" : "text-stone-900 dark:text-stone-100"
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className={`text-base font-semibold leading-snug transition-colors ${
+                        isSelected ? "text-[#C47C4A]" : "text-[#F3EEE6]"
                       }`}>
                         {course.name}
-                      </h4>
+                      </h3>
 
                       <button
                         type="button"
                         onClick={(e) => handleToggleEnrollment(course.id, e)}
                         disabled={enrollingId === course.id}
-                        className={`text-[10px] font-bold px-2.5 py-1 rounded transition-all cursor-pointer ${
+                        className={`text-xs font-medium px-2.5 py-1 rounded-md transition-all cursor-pointer shrink-0 ${
                           enrolled
-                            ? "bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100"
-                            : "bg-indigo-600 text-white hover:bg-indigo-700 shadow-2xs"
+                            ? "bg-[#6D927A]/15 text-[#6D927A] border border-[#6D927A]/30 hover:bg-[#6D927A]/25"
+                            : "bg-[#282828] hover:bg-[#C47C4A] hover:text-white text-[#F3EEE6] border border-[#3A3A3A]"
                         }`}
                       >
                         {enrollingId === course.id ? "..." : enrolled ? "Enrolled" : "Enroll"}
                       </button>
                     </div>
 
-                    <p className="text-stone-500 dark:text-stone-400 text-xs line-clamp-2 leading-relaxed font-sans">
+                    <p className="text-[#A8A29E] text-xs line-clamp-2 leading-relaxed">
                       {course.description}
                     </p>
                     
-                    <div className="flex items-center justify-between text-[11px] text-stone-400 font-mono mt-1 pt-2 border-t border-stone-100/50 dark:border-stone-800/20">
-                      <span className="truncate max-w-[130px]">
-                        {course.instructor || "Faculty Instructor"}
+                    <div className="flex items-center justify-between text-xs text-[#78716C] font-mono pt-2 border-t border-[#262626]">
+                      <span className="truncate max-w-[150px]">
+                        {course.instructor || "Faculty Director"}
                       </span>
                       {course.deadline && (
-                        <span className="shrink-0 flex items-center gap-1 text-[10px]">
-                          <Calendar size={11} /> {course.deadline}
+                        <span className="shrink-0 flex items-center gap-1.5 text-xs text-[#A8A29E]">
+                          <Calendar size={12} className="text-[#78716C]" />
+                          <span>{course.deadline}</span>
                         </span>
                       )}
                     </div>
@@ -206,64 +210,68 @@ export const StudentCourses: React.FC<StudentCoursesProps> = ({
           </div>
         </div>
 
-        {/* Right Column: Selected Course details rendering directly */}
-        <div className="lg:col-span-7 space-y-8">
+        {/* Right Column: Selected Course Workspace Details */}
+        <div className="lg:col-span-7">
           {selectedCourse ? (
             (() => {
               const enrolled = isEnrolled(selectedCourse);
+              const assignedTemplates = templates.filter(t => t.domainId === selectedCourse.id);
+
               return (
-                <div className="space-y-8">
-                  {/* Selected syllabus meta section */}
-                  <div className="space-y-3.5 border-b border-stone-200/60 dark:border-stone-800 pb-6">
-                    <div className="flex items-center justify-between gap-2 text-[11px] font-mono font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
-                      <div className="flex items-center gap-2">
-                        <BookOpen size={13} />
-                        <span>Syllabus & Competency Rubrics</span>
-                        <span className="text-stone-300 dark:text-stone-700">·</span>
-                        <span className="text-stone-500 dark:text-stone-400 font-normal">{selectedCourse.instructor || "Faculty Director"}</span>
+                <div className="p-6 sm:p-7 bg-[#1B1B1B] border border-[#2C2C2C] rounded-2xl space-y-6">
+                  
+                  {/* Selected Syllabus Meta */}
+                  <div className="space-y-3 border-b border-[#2C2C2C] pb-5">
+                    <div className="flex items-center justify-between gap-2 text-xs font-mono">
+                      <div className="flex items-center gap-2 text-[#A8A29E] flex-wrap">
+                        <BookOpen size={14} className="text-[#C47C4A]" />
+                        <span className="uppercase tracking-wider font-semibold">Syllabus Overview</span>
+                        <span className="text-[#444444]" aria-hidden="true">·</span>
+                        <span>{selectedCourse.instructor || "Faculty Director"}</span>
                       </div>
                       <div>
                         {enrolled ? (
-                          <span className="px-2.5 py-1 text-[10px] font-bold text-indigo-700 bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800/40 rounded-lg">
-                            Enrolled
+                          <span className="text-xs font-mono font-medium text-[#6D927A] flex items-center gap-1">
+                            <CheckCircle2 size={13} />
+                            <span>Enrolled</span>
                           </span>
                         ) : (
-                          <span className="px-2.5 py-1 text-[10px] font-bold text-stone-500 bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-lg">
-                            Unenrolled
+                          <span className="text-xs font-mono font-medium text-[#D7B87B]">
+                            Not Enrolled
                           </span>
                         )}
                       </div>
                     </div>
 
-                    <h2 className="text-xl sm:text-2xl font-bold font-serif text-stone-900 dark:text-stone-100 tracking-tight leading-snug">
+                    <h2 className="text-xl sm:text-2xl font-serif font-semibold text-[#F3EEE6] tracking-tight leading-snug">
                       {selectedCourse.name}
                     </h2>
                     
-                    <p className="text-stone-600 dark:text-stone-300 text-xs sm:text-sm leading-relaxed font-sans">
+                    <p className="text-[#D6D0C7] text-sm leading-relaxed">
                       {selectedCourse.description}
                     </p>
                     
                     {selectedCourse.deadline && (
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 text-xs font-mono font-medium">
-                        <Calendar size={12} className="text-stone-400" />
-                        <span>Target completion deadline: {selectedCourse.deadline}</span>
+                      <div className="inline-flex items-center gap-2 text-xs font-mono text-[#A8A29E] pt-1">
+                        <Calendar size={13} className="text-[#78716C]" />
+                        <span>Completion Target: {selectedCourse.deadline}</span>
                       </div>
                     )}
                   </div>
 
-                  {/* Conditional state based on enrollment */}
+                  {/* Primary Next Action State */}
                   {!enrolled ? (
-                    <div className="bg-amber-50/50 dark:bg-amber-950/10 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-5 border border-amber-200/60 dark:border-amber-900/20">
+                    <div className="p-5 rounded-xl bg-[#222222] border border-[#D7B87B]/30 space-y-4">
                       <div className="space-y-1">
-                        <div className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 flex items-center gap-1.5">
-                          <AlertCircle size={13} />
-                          <span>Path Locked</span>
+                        <div className="text-xs font-mono font-semibold uppercase tracking-wider text-[#D7B87B] flex items-center gap-1.5">
+                          <AlertCircle size={14} />
+                          <span>Course Enrollment Required</span>
                         </div>
-                        <h3 className="text-sm font-bold text-stone-900 dark:text-stone-100">
-                          Enroll to Unlock Course Resources
+                        <h3 className="text-sm font-semibold text-[#F3EEE6]">
+                          Activate Diagnostics & Exam Access
                         </h3>
-                        <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed max-w-md font-sans">
-                          You are currently not enrolled in this learning path. Enroll now to take academic diagnostics, launch assigned proctored exams, trace your skill competency matrices, and seek dynamic study guidance from the AI Tutor.
+                        <p className="text-xs text-[#A8A29E] leading-relaxed">
+                          Enroll in this syllabus track to launch dynamic diagnostic evaluations, complete proctored examinations, track skill gap matrices, and receive AI study recommendations.
                         </p>
                       </div>
                       
@@ -271,64 +279,64 @@ export const StudentCourses: React.FC<StudentCoursesProps> = ({
                         type="button"
                         onClick={(e) => handleToggleEnrollment(selectedCourse.id, e)}
                         disabled={enrollingId === selectedCourse.id}
-                        className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 w-full sm:w-auto min-h-[44px]"
+                        className="btn-copper-primary w-full sm:w-auto text-xs"
                       >
                         <span>{enrollingId === selectedCourse.id ? "Enrolling..." : "Enroll in Learning Path"}</span>
-                        <ArrowRight size={13} />
+                        <ArrowRight size={14} />
                       </button>
                     </div>
                   ) : (
-                    <>
-                      {/* Assessment launch bar - unboxed flat design banner */}
-                      <div className="bg-indigo-50/70 dark:bg-indigo-900/10 p-6 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-5 border border-indigo-100 dark:border-indigo-900/20">
+                    <div className="space-y-6">
+                      {/* Dynamic Diagnostics Banner */}
+                      <div className="p-5 rounded-xl bg-[#222222] border border-[#2C2C2C] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div className="space-y-1">
-                          <div className="text-[10px] font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-300 flex items-center gap-1.5">
-                            <Sparkles size={13} />
-                            <span>Dynamic Diagnostics</span>
+                          <div className="text-xs font-mono font-semibold uppercase tracking-wider text-[#C47C4A] flex items-center gap-1.5">
+                            <Sparkles size={14} />
+                            <span>Adaptive Diagnostics</span>
                           </div>
-                          <h3 className="text-sm font-bold text-stone-900 dark:text-stone-100">
-                            Evaluate Topic Understanding
+                          <h3 className="text-sm font-semibold text-[#F3EEE6]">
+                            Evaluate Concept Mastery
                           </h3>
-                          <p className="text-xs text-stone-600 dark:text-stone-300 leading-relaxed max-w-md font-sans">
-                            Take an evaluation for this course to generate skill-gap matrix scores and personalized remediation recommendations.
+                          <p className="text-xs text-[#A8A29E] leading-relaxed max-w-md">
+                            Run a topic evaluation to measure competency, surface target gaps, and generate individualized study steps.
                           </p>
                         </div>
                         
                         <button
                           type="button"
                           onClick={() => onStartAssessment(selectedCourse.id)}
-                          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap shrink-0 w-full sm:w-auto min-h-[44px]"
+                          className="btn-copper-primary whitespace-nowrap shrink-0 text-xs w-full sm:w-auto"
                         >
                           <span>Evaluate Concept</span>
-                          <ArrowRight size={13} />
+                          <ArrowRight size={14} />
                         </button>
                       </div>
 
-                      {/* Scheduled Formal Exams Table */}
-                      {templates.filter(t => t.domainId === selectedCourse.id).length > 0 && (
-                        <div className="space-y-4">
-                          <div className="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-2">
-                            <h3 className="text-xs font-bold uppercase tracking-widest font-mono text-stone-400">
+                      {/* Scheduled Examination Boards */}
+                      {assignedTemplates.length > 0 && (
+                        <div className="space-y-3 pt-2">
+                          <div className="flex items-center justify-between border-b border-[#2C2C2C] pb-2">
+                            <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#A8A29E]">
                               Assigned Examination Boards
                             </h3>
-                            <span className="text-[10px] text-stone-400 font-mono uppercase">Strict Single-Tab</span>
+                            <span className="text-xs font-mono text-[#78716C]">Proctored Sessions</span>
                           </div>
 
-                          <div className="divide-y divide-stone-100 dark:divide-stone-800">
-                            {templates.filter(t => t.domainId === selectedCourse.id).map(tmpl => (
-                              <div key={tmpl.id} className="py-4 flex items-center justify-between gap-4 text-xs">
+                          <div className="divide-y divide-[#262626]">
+                            {assignedTemplates.map(tmpl => (
+                              <div key={tmpl.id} className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                                 <div className="space-y-1">
-                                  <span className="font-bold text-stone-900 dark:text-stone-100 text-sm block">{tmpl.title}</span>
-                                  <div className="flex items-center gap-2.5 text-stone-500 dark:text-stone-400 text-[11px] font-mono">
-                                    <span className="flex items-center gap-1 font-semibold text-stone-700 dark:text-stone-300">
-                                      <Clock size={11} className="text-indigo-500" /> {tmpl.timeLimitMinutes} min limit
+                                  <span className="font-semibold text-[#F3EEE6] text-sm block">{tmpl.title}</span>
+                                  <div className="flex items-center gap-2 text-[#A8A29E] text-xs font-mono flex-wrap">
+                                    <span className="flex items-center gap-1">
+                                      <Clock size={12} className="text-[#C47C4A]" /> {tmpl.timeLimitMinutes} min limit
                                     </span>
-                                    <span>·</span>
+                                    <span className="text-[#444444]" aria-hidden="true">·</span>
                                     <span>{tmpl.questions?.length || 0} questions</span>
                                     {tmpl.deadline && (
                                       <>
-                                        <span>·</span>
-                                        <span className="text-amber-700 dark:text-amber-400 font-medium">Due {tmpl.deadline}</span>
+                                        <span className="text-[#444444]" aria-hidden="true">·</span>
+                                        <span className="text-[#D7B87B]">Due {tmpl.deadline}</span>
                                       </>
                                     )}
                                   </div>
@@ -337,24 +345,25 @@ export const StudentCourses: React.FC<StudentCoursesProps> = ({
                                 <button
                                   type="button"
                                   onClick={() => onStartAssessment(selectedCourse.id, tmpl.id)}
-                                  className="px-4 py-2 bg-stone-900 hover:bg-stone-800 dark:bg-stone-800 dark:hover:bg-stone-700 text-white rounded-lg text-xs font-bold cursor-pointer transition-colors shadow-2xs shrink-0"
+                                  className="btn-charcoal-secondary text-xs shrink-0 self-start sm:self-center"
                                 >
-                                  Start Exam
+                                  <span>Start Exam</span>
+                                  <ArrowRight size={13} />
                                 </button>
                               </div>
                             ))}
                           </div>
                         </div>
                       )}
-                    </>
+                    </div>
                   )}
                 </div>
               );
             })()
           ) : (
-            <div className="py-16 text-center text-stone-400 dark:text-stone-500 text-xs">
-              <BookOpen className="w-8 h-8 text-stone-300 dark:text-stone-700 mx-auto mb-2" />
-              <span>Select a course from the catalog to review dynamic diagnostics and scheduled examinations.</span>
+            <div className="p-12 text-center border border-[#2C2C2C] rounded-2xl bg-[#1B1B1B] text-[#A8A29E] text-xs">
+              <BookOpen className="w-8 h-8 text-[#78716C] mx-auto mb-2" />
+              <span>Select a learning track from the left panel to review syllabus contents and assessments.</span>
             </div>
           )}
         </div>
@@ -362,69 +371,70 @@ export const StudentCourses: React.FC<StudentCoursesProps> = ({
 
       {/* CREATE CUSTOM STUDY TRACK DIALOG POPUP */}
       {showCreateModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/70 backdrop-blur-xs fade-in">
-          <div className="bg-white dark:bg-[#151C28] border border-stone-200 dark:border-stone-800 p-6 sm:p-8 max-w-md w-full rounded-2xl shadow-xl space-y-6">
-            <div className="flex items-center justify-between border-b border-stone-100 dark:border-stone-800/80 pb-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 fade-in">
+          <div className="bg-[#1B1B1B] border border-[#2C2C2C] p-6 sm:p-7 max-w-md w-full rounded-2xl shadow-2xl space-y-5">
+            <div className="flex items-center justify-between border-b border-[#2C2C2C] pb-3">
               <div>
-                <h3 className="font-bold text-stone-900 dark:text-stone-100 text-base font-serif">New Custom Study Track</h3>
-                <p className="text-[11px] text-stone-500">Configure customized concepts and evaluation rubrics</p>
+                <h3 className="font-semibold text-[#F3EEE6] text-base font-serif">New Custom Study Track</h3>
+                <p className="text-xs text-[#A8A29E] mt-0.5">Define study concepts and custom evaluation rubrics</p>
               </div>
               <button 
                 type="button" 
                 onClick={() => setShowCreateModal(false)} 
-                className="text-stone-400 hover:text-stone-600 dark:hover:text-stone-300 font-bold"
+                className="text-[#A8A29E] hover:text-[#F3EEE6] p-1 cursor-pointer"
+                aria-label="Close dialog"
               >
                 ✕
               </button>
             </div>
 
             <form onSubmit={handleCreateCustomTrack} className="space-y-4">
-              <div className="space-y-1">
-                <label className="block text-xs font-bold text-stone-700 dark:text-stone-300">Track title</label>
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-[#F3EEE6]">Track Title</label>
                 <input
                   type="text"
                   required
                   value={newTrack.name}
                   onChange={(e) => setNewTrack(prev => ({ ...prev, name: e.target.value }))}
-                  placeholder="e.g. Python Complexity & Structures"
-                  className="w-full px-3.5 py-2 bg-stone-50 dark:bg-[#192231] border border-stone-300 dark:border-stone-800 rounded-xl text-xs text-stone-900 dark:text-stone-100"
+                  placeholder="e.g. Distributed Computing & Algorithms"
+                  className="w-full px-3 py-2 bg-[#222222] border border-[#2C2C2C] rounded-lg text-xs text-[#F3EEE6] focus:border-[#C47C4A]"
                 />
               </div>
 
-              <div className="space-y-1">
-                <label className="block text-xs font-bold text-stone-700 dark:text-stone-300">Objectives & syllabus notes</label>
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-[#F3EEE6]">Objectives & Syllabus Scope</label>
                 <textarea
                   rows={3}
                   required
                   value={newTrack.description}
                   onChange={(e) => setNewTrack(prev => ({ ...prev, description: e.target.value }))}
-                  placeholder="Syllabus goals..."
-                  className="w-full p-3 bg-stone-50 dark:bg-[#192231] border border-stone-300 dark:border-stone-800 rounded-xl text-xs text-stone-900 dark:text-stone-100"
+                  placeholder="Summary of topics, learning goals, and key competencies..."
+                  className="w-full p-3 bg-[#222222] border border-[#2C2C2C] rounded-lg text-xs text-[#F3EEE6] focus:border-[#C47C4A]"
                 />
               </div>
 
-              <div className="space-y-1">
-                <label className="block text-xs font-bold text-stone-700 dark:text-stone-300">Target completion date</label>
+              <div className="space-y-1.5">
+                <label className="block text-xs font-semibold text-[#F3EEE6]">Target Completion Date</label>
                 <input
                   type="date"
                   value={newTrack.deadline}
                   onChange={(e) => setNewTrack(prev => ({ ...prev, deadline: e.target.value }))}
-                  className="w-full px-3.5 py-2 bg-stone-50 dark:bg-[#192231] border border-stone-300 dark:border-stone-800 rounded-xl text-xs text-stone-900 dark:text-stone-100"
+                  className="w-full px-3 py-2 bg-[#222222] border border-[#2C2C2C] rounded-lg text-xs text-[#F3EEE6] focus:border-[#C47C4A]"
                 />
               </div>
 
-              <div className="flex justify-end gap-3.5 pt-3 border-t border-stone-100 dark:border-stone-800/80">
+              <div className="flex justify-end gap-3 pt-3 border-t border-[#2C2C2C]">
                 <button
                   type="button"
                   onClick={() => setShowCreateModal(false)}
-                  className="px-4 py-2 bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 rounded-lg text-xs font-bold cursor-pointer"
+                  className="btn-charcoal-secondary text-xs"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={creatingTrack}
-                  className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                  className="btn-copper-primary text-xs"
                 >
                   {creatingTrack ? <Loader2 size={13} className="animate-spin" /> : null}
                   <span>Create Track</span>

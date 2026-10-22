@@ -224,16 +224,16 @@ export const FreePracticeSources: React.FC = () => {
   return (
     <div className="space-y-7" id="free-practice-sources-view">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 border-b border-slate-200 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 border-b border-[#2C2C2C] pb-5">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+          <h1 className="font-serif text-2xl sm:text-3xl font-semibold text-[#F3EEE6] tracking-tight">
             Curated Practice Hubs & Sandboxes
           </h1>
-          <div className="text-xs text-slate-500 flex items-center gap-2 mt-1">
-            <span className="px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 font-bold text-[10px]">
+          <div className="text-xs text-[#A8A29E] flex items-center gap-2 mt-1">
+            <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-[#C47C4A]/15 text-[#C47C4A] border border-[#C47C4A]/30">
               {sources.length} Open Platforms
             </span>
-            <span aria-hidden="true" className="text-slate-300">·</span>
+            <span aria-hidden="true" className="text-[#78716C]">·</span>
             <span>In-browser IDEs, algorithmic challenges, and SQL database playgrounds</span>
           </div>
         </div>
@@ -241,7 +241,7 @@ export const FreePracticeSources: React.FC = () => {
         <button
           type="button"
           onClick={() => setShowAddModal(true)}
-          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1.5 cursor-pointer shrink-0"
+          className="px-4 py-2 bg-[#C47C4A] hover:bg-[#D18958] text-white rounded-lg text-xs font-semibold transition-all inline-flex items-center gap-1.5 cursor-pointer shrink-0 min-h-[40px]"
         >
           <PlusCircle size={15} />
           <span>Suggest Source</span>

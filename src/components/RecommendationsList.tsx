@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import { Recommendation } from "../types";
 import { 
   Inbox, 
-  ArrowUpRight,
-  Sparkles,
-  BookOpen,
-  Check,
-  CheckCircle2,
-  Compass,
-  Flame,
-  Clock,
-  Layers
+  ArrowUpRight, 
+  BookOpen, 
+  Check, 
+  Compass, 
+  Flame, 
+  CheckCircle2, 
+  Layers 
 } from "lucide-react";
 
 interface RecommendationsListProps {
@@ -36,59 +34,58 @@ export const RecommendationsList: React.FC<RecommendationsListProps> = ({
   const completedCount = recommendations.filter(r => r.completed).length;
 
   return (
-    <div className="space-y-6" id="recommendations-view">
-      {/* Editorial Hero Banner */}
-      <div className="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 rounded-2xl p-6 sm:p-7 text-white shadow-md relative overflow-hidden">
-        <div className="absolute right-0 top-0 translate-x-8 -translate-y-8 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="space-y-8" id="recommendations-view">
+      {/* Editorial Header Banner */}
+      <div className="bg-[#1B1B1B] border border-[#2C2C2C] rounded-2xl p-6 sm:p-7 text-[#F3EEE6] relative">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
           <div className="space-y-2 max-w-xl">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-white/15 border border-white/20 text-white text-[11px] font-bold uppercase tracking-wider backdrop-blur-xs">
-              <Compass size={13} className="text-amber-200" />
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-wider text-[#D7B87B]">
+              <Compass size={13} className="text-[#D7B87B]" />
               <span>Adaptive Study Engine</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold font-serif tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-serif font-semibold tracking-tight text-[#F3EEE6]">
               Remediation Pathways
             </h1>
-            <p className="text-amber-100 text-xs sm:text-sm leading-relaxed">
-              Curated study assignments synthesized automatically from your diagnostic performance to target critical skill gaps.
+            <p className="text-sm text-[#D6D0C7] leading-relaxed">
+              Targeted study units synthesized automatically from your diagnostic performance to resolve specific competency gaps.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="bg-white/15 border border-white/20 rounded-xl px-4 py-3 backdrop-blur-xs text-center min-w-[100px]">
-              <span className="block text-2xl font-bold text-white font-mono">{activeCount}</span>
-              <span className="text-[10px] uppercase font-bold tracking-wider text-amber-200">Pending</span>
+            <div className="bg-[#222222] border border-[#2C2C2C] rounded-xl px-4 py-3 text-center min-w-[100px]">
+              <span className="block text-2xl font-bold text-[#D7B87B] font-mono tabular-nums">{activeCount}</span>
+              <span className="text-xs font-mono font-medium uppercase tracking-wider text-[#A8A29E]">Pending</span>
             </div>
-            <div className="bg-white/15 border border-white/20 rounded-xl px-4 py-3 backdrop-blur-xs text-center min-w-[100px]">
-              <span className="block text-2xl font-bold text-white font-mono">{completedCount}</span>
-              <span className="text-[10px] uppercase font-bold tracking-wider text-indigo-200">Mastered</span>
+            <div className="bg-[#222222] border border-[#2C2C2C] rounded-xl px-4 py-3 text-center min-w-[100px]">
+              <span className="block text-2xl font-bold text-[#6D927A] font-mono tabular-nums">{completedCount}</span>
+              <span className="text-xs font-mono font-medium uppercase tracking-wider text-[#A8A29E]">Mastered</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Segmented Filter Bar & Status Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-white p-2.5 rounded-xl border border-stone-200 shadow-xs">
-        <div className="flex items-center gap-1.5 text-xs font-semibold">
+      {/* Segmented Filter Bar & Action */}
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-[#1B1B1B] p-2.5 rounded-xl border border-[#2C2C2C]">
+        <div className="flex items-center gap-1.5 text-xs font-medium">
           <button
             type="button"
             onClick={() => setFilterMode('active')}
             className={`py-2 px-3.5 rounded-lg transition-all cursor-pointer flex items-center gap-2 ${
               filterMode === 'active' 
-                ? "bg-amber-600 text-white font-bold shadow-xs" 
-                : "text-stone-600 hover:text-stone-900 hover:bg-stone-100"
+                ? "bg-[#C47C4A] text-white font-semibold" 
+                : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
             }`}
           >
             <Flame size={13} />
-            <span>Active Target ({activeCount})</span>
+            <span>Active Targets ({activeCount})</span>
           </button>
           <button
             type="button"
             onClick={() => setFilterMode('completed')}
             className={`py-2 px-3.5 rounded-lg transition-all cursor-pointer flex items-center gap-2 ${
               filterMode === 'completed' 
-                ? "bg-indigo-650 text-white font-bold shadow-xs" 
-                : "text-stone-600 hover:text-stone-900 hover:bg-stone-100"
+                ? "bg-[#C47C4A] text-white font-semibold" 
+                : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
             }`}
           >
             <CheckCircle2 size={13} />
@@ -99,8 +96,8 @@ export const RecommendationsList: React.FC<RecommendationsListProps> = ({
             onClick={() => setFilterMode('all')}
             className={`py-2 px-3.5 rounded-lg transition-all cursor-pointer flex items-center gap-2 ${
               filterMode === 'all' 
-                ? "bg-stone-900 text-white font-bold shadow-xs" 
-                : "text-stone-600 hover:text-stone-900 hover:bg-stone-100"
+                ? "bg-[#282828] text-white font-semibold" 
+                : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
             }`}
           >
             <Layers size={13} />
@@ -111,7 +108,7 @@ export const RecommendationsList: React.FC<RecommendationsListProps> = ({
         <button 
           type="button"
           onClick={onNavigateToAssessment}
-          className="text-xs font-bold text-indigo-700 hover:text-indigo-900 px-3 py-1.5 rounded-lg hover:bg-indigo-50 transition-colors flex items-center gap-1"
+          className="text-xs font-semibold text-[#C47C4A] hover:text-[#D18958] px-3 py-1.5 rounded-lg hover:bg-[#222222] transition-colors flex items-center gap-1 cursor-pointer"
         >
           <span>Refresh via New Exam</span>
           <ArrowUpRight size={13} />
@@ -120,17 +117,17 @@ export const RecommendationsList: React.FC<RecommendationsListProps> = ({
 
       {/* Recommendations Cards Layout */}
       {filteredRecs.length === 0 ? (
-        <div className="p-12 sm:p-16 bg-white border border-stone-200 rounded-2xl text-center space-y-4 shadow-xs">
-          <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mx-auto border border-amber-200">
+        <div className="p-12 sm:p-16 bg-[#1B1B1B] border border-[#2C2C2C] rounded-2xl text-center space-y-4">
+          <div className="w-14 h-14 bg-[#222222] text-[#D7B87B] rounded-2xl flex items-center justify-center mx-auto border border-[#2C2C2C]">
             <Inbox size={26} />
           </div>
           <div className="space-y-1.5 max-w-md mx-auto">
-            <h3 className="font-bold text-stone-900 text-base">
-              {filterMode === 'active' ? "All active recommendations completed!" : "No completed lessons yet"}
+            <h3 className="font-semibold text-[#F3EEE6] text-base">
+              {filterMode === 'active' ? "All active recommendations completed" : "No completed lessons yet"}
             </h3>
-            <p className="text-stone-500 text-xs leading-relaxed">
+            <p className="text-[#A8A29E] text-xs leading-relaxed">
               {filterMode === 'active'
-                ? "You have completed all currently assigned lessons. Take an assessment or diagnostic quiz to update your skill profile."
+                ? "You have completed all currently assigned lessons. Take a diagnostic assessment to update your skill profile."
                 : "Mark study items complete as you finish reviewing them to build your mastery timeline."}
             </p>
           </div>
@@ -138,86 +135,71 @@ export const RecommendationsList: React.FC<RecommendationsListProps> = ({
             <button 
               type="button"
               onClick={onNavigateToAssessment}
-              className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-colors shadow-xs"
+              className="btn-copper-primary text-xs"
             >
               Take Assessment Now
             </button>
           )}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredRecs.map((rec) => {
             const isHigh = rec.priority === "High";
 
             return (
               <div 
                 key={rec.id}
-                className={`rounded-2xl border flex flex-col justify-between transition-all relative overflow-hidden ${
+                className={`rounded-xl border flex flex-col justify-between transition-all bg-[#1B1B1B] ${
                   rec.completed 
-                    ? "bg-stone-50/80 border-stone-200 opacity-80" 
+                    ? "border-[#2C2C2C] opacity-75" 
                     : isHigh
-                      ? "bg-white border-rose-200 hover:border-rose-300 shadow-xs hover:shadow-md"
-                      : "bg-white border-stone-200 hover:border-stone-300 shadow-xs hover:shadow-md"
+                      ? "border-[#D96B6B]/40 hover:border-[#D96B6B]/70"
+                      : "border-[#2C2C2C] hover:border-[#383838]"
                 }`}
               >
-                {/* Top color indicator stripe */}
-                <div className={`h-1.5 w-full ${
-                  rec.completed 
-                    ? "bg-indigo-600" 
-                    : isHigh 
-                      ? "bg-rose-500" 
-                      : "bg-amber-500"
-                }`} />
-
                 <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-[11px] font-bold text-stone-700 truncate max-w-[170px] uppercase tracking-wider">
+                  <div className="space-y-2.5">
+                    <div className="flex items-center justify-between gap-2 text-xs font-mono">
+                      <span className="text-[#A8A29E] truncate max-w-[170px] uppercase tracking-wider">
                         {rec.competencyName}
                       </span>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
-                        isHigh 
-                          ? "bg-rose-100 text-rose-800" 
-                          : "bg-amber-100 text-amber-800"
-                      }`}>
+                      <span className={isHigh ? "text-[#D96B6B] font-semibold" : "text-[#D7B87B]"}>
                         {rec.priority} Priority
                       </span>
                     </div>
 
-                    <h3 className="font-bold text-stone-900 text-sm leading-snug hover:text-indigo-600 transition-colors">
+                    <h3 className="font-semibold text-[#F3EEE6] text-sm leading-snug">
                       {rec.customTitle || "Targeted Skill Reference Module"}
                     </h3>
 
-                    <p className="text-stone-600 text-xs line-clamp-3 leading-relaxed">
+                    <p className="text-[#A8A29E] text-xs line-clamp-3 leading-relaxed">
                       {rec.customDescription || "Complete this tailored unit to address foundational competency gaps identified in your latest evaluation."}
                     </p>
                   </div>
 
                   <div className="space-y-3 pt-2">
-                    {/* Reasoning note - flat left-border accent, no full border-box */}
-                    <div className="pl-3 border-l-2 border-amber-500/60 py-1 space-y-1">
-                      <div className="flex items-center gap-1.5 text-[9px] font-bold text-stone-400 dark:text-stone-500 uppercase tracking-wider font-mono">
-                        <Sparkles size={11} className="text-amber-500" />
-                        <span>Diagnostic Reason</span>
+                    <div className="pl-3 border-l-2 border-[#C47C4A]/50 py-1 space-y-0.5">
+                      <div className="text-[11px] font-mono font-medium text-[#78716C] uppercase tracking-wider">
+                        Diagnostic Insight
                       </div>
-                      <p className="text-stone-600 dark:text-stone-300 text-xs leading-relaxed font-sans italic">
+                      <p className="text-[#D6D0C7] text-xs leading-relaxed italic">
                         {rec.reason}
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between pt-2 border-t border-stone-100 text-xs">
+                    <div className="flex items-center justify-between pt-3 border-t border-[#262626] text-xs">
                       {rec.customUrl ? (
                         <a 
                           href={rec.customUrl} 
                           target="_blank" 
                           rel="noreferrer"
-                          className="text-indigo-600 hover:text-indigo-800 font-bold inline-flex items-center gap-1 group"
+                          className="text-[#C47C4A] hover:text-[#D18958] font-semibold inline-flex items-center gap-1 group"
                         >
                           <span>Open Material</span>
                           <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </a>
                       ) : (
-                        <span className="text-stone-400 text-[11px] font-medium flex items-center gap-1">
+                        <span className="text-[#78716C] text-xs font-mono flex items-center gap-1">
                           <BookOpen size={12} />
                           <span>Self-directed</span>
                         </span>
@@ -226,15 +208,15 @@ export const RecommendationsList: React.FC<RecommendationsListProps> = ({
                       <button 
                         type="button"
                         onClick={() => onCompleteRec(rec.id)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
                           rec.completed 
-                            ? "bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100/50" 
-                            : "bg-stone-900 hover:bg-indigo-600 text-white shadow-2xs"
+                            ? "bg-[#6D927A]/15 text-[#6D927A] border border-[#6D927A]/30" 
+                            : "btn-charcoal-secondary text-xs"
                         }`}
                       >
                         {rec.completed ? (
                           <>
-                            <Check size={12} className="stroke-[3]" />
+                            <Check size={12} />
                             <span>Completed</span>
                           </>
                         ) : (

@@ -211,25 +211,28 @@ export const TeacherPortal: React.FC<TeacherPortalProps> = ({ currentUser, onRef
       )}
 
       {/* Header bar */}
-      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 border-b border-slate-200 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 border-b border-[#2C2C2C] pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[10px] uppercase tracking-wider flex items-center gap-1">
+            <span className="px-2.5 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase bg-[#C47C4A]/15 text-[#C47C4A] border border-[#C47C4A]/30 flex items-center gap-1">
               <Briefcase size={12} /> Faculty Portal
             </span>
-            <span className="text-xs text-slate-400">·</span>
-            <span className="text-xs text-slate-500 font-medium">Instructor: {currentUser.name}</span>
+            <span className="text-xs text-[#78716C]">·</span>
+            <span className="text-xs text-[#A8A29E] font-medium">Instructor: {currentUser.name}</span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mt-1">
+          <h1 className="font-serif text-2xl sm:text-3xl font-semibold text-[#F3EEE6] tracking-tight mt-1.5">
             Instructor Gradebook & Exam Manager
           </h1>
+          <p className="text-xs text-[#A8A29E] mt-0.5">
+            Manage course examinations, review proctoring audits, and track student mastery.
+          </p>
         </div>
 
         <div className="flex items-center gap-2.5">
           <button
             type="button"
             onClick={fetchPortalData}
-            className="px-3 py-2 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 rounded-xl text-xs font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 shadow-2xs"
+            className="px-3.5 py-2 bg-[#222222] hover:bg-[#282828] border border-[#2C2C2C] text-[#F3EEE6] rounded-lg text-xs font-medium transition-colors cursor-pointer inline-flex items-center gap-1.5 min-h-[40px]"
           >
             <RefreshCw size={13} />
             <span>Sync</span>
@@ -249,7 +252,7 @@ export const TeacherPortal: React.FC<TeacherPortalProps> = ({ currentUser, onRef
               });
               setShowCreateExamModal(true);
             }}
-            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1.5 cursor-pointer"
+            className="px-4 py-2 bg-[#C47C4A] hover:bg-[#D18958] text-white rounded-lg text-xs font-semibold transition-all inline-flex items-center gap-1.5 cursor-pointer min-h-[40px]"
           >
             <Plus size={15} />
             <span>Schedule Examination</span>
@@ -258,7 +261,7 @@ export const TeacherPortal: React.FC<TeacherPortalProps> = ({ currentUser, onRef
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex border-b border-slate-200 text-xs font-bold overflow-x-auto gap-1">
+      <div className="flex border-b border-[#2C2C2C] text-xs font-semibold overflow-x-auto gap-1">
         {[
           { id: 'assessments', label: `Scheduled Exams (${templates.length})`, icon: FileCheck },
           { id: 'courses', label: `Course Syllabi (${courses.length})`, icon: BookOpen },
@@ -275,11 +278,11 @@ export const TeacherPortal: React.FC<TeacherPortalProps> = ({ currentUser, onRef
               onClick={() => setActiveTab(tab.id as any)}
               className={`pb-3 px-3.5 transition-all cursor-pointer border-b-2 whitespace-nowrap flex items-center gap-2 ${
                 isActive
-                  ? "border-emerald-600 text-emerald-800 dark:text-emerald-400 font-extrabold bg-emerald-50/90 dark:bg-emerald-950/30 rounded-t-lg"
-                  : "border-transparent text-slate-500 hover:text-slate-800 dark:text-stone-400 dark:hover:text-stone-200"
+                  ? "border-[#C47C4A] text-[#C47C4A] font-bold bg-[#C47C4A]/10 rounded-t"
+                  : "border-transparent text-[#A8A29E] hover:text-[#F3EEE6]"
               }`}
             >
-              <Icon size={15} className={isActive ? "text-emerald-600" : "text-slate-400"} />
+              <Icon size={15} className={isActive ? "text-[#C47C4A]" : "text-[#78716C]"} />
               <span>{tab.label}</span>
             </button>
           );

@@ -439,24 +439,27 @@ export const AdminConsole: React.FC<AdminConsoleProps> = ({ currentUser, onRefre
       )}
 
       {/* Header bar */}
-      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 border-b border-slate-200 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 border-b border-[#2C2C2C] pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 font-bold text-[10px] uppercase tracking-wider">
+            <span className="px-2.5 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase bg-[#C47C4A]/15 text-[#C47C4A] border border-[#C47C4A]/30">
               Governance Console
             </span>
-            <span className="text-slate-400">·</span>
-            <span className="text-xs text-slate-500 font-medium">{currentUser.name}</span>
+            <span className="text-xs text-[#78716C]">·</span>
+            <span className="text-xs text-[#A8A29E] font-medium">{currentUser.name}</span>
           </div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight mt-1">
+          <h1 className="font-serif text-2xl sm:text-3xl font-semibold text-[#F3EEE6] tracking-tight mt-1.5">
             System Administration
           </h1>
+          <p className="text-xs text-[#A8A29E] mt-0.5">
+            Institutional governance, curriculum management, and academic integrity policies.
+          </p>
         </div>
 
         <button
           type="button"
           onClick={fetchAllAdminData}
-          className="px-4 py-2 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 rounded-xl text-xs font-bold transition-colors cursor-pointer inline-flex items-center gap-1.5 shadow-2xs"
+          className="px-3.5 py-2 bg-[#222222] hover:bg-[#282828] border border-[#2C2C2C] text-[#F3EEE6] rounded-lg text-xs font-medium transition-colors cursor-pointer inline-flex items-center gap-1.5 min-h-[40px]"
         >
           <RefreshCw size={13} />
           <span>Sync Records</span>
@@ -464,7 +467,7 @@ export const AdminConsole: React.FC<AdminConsoleProps> = ({ currentUser, onRefre
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex border-b border-slate-200 text-xs font-bold overflow-x-auto gap-1">
+      <div className="flex border-b border-[#2C2C2C] text-xs font-semibold overflow-x-auto gap-1">
         {[
           { id: 'overview', label: 'Platform Overview', icon: BarChart3 },
           { id: 'users', label: `Accounts (${users.length})`, icon: Users },
@@ -482,11 +485,11 @@ export const AdminConsole: React.FC<AdminConsoleProps> = ({ currentUser, onRefre
               onClick={() => setActiveTab(tab.id as any)}
               className={`pb-3 px-3.5 transition-all cursor-pointer border-b-2 whitespace-nowrap flex items-center gap-2 ${
                 isActive
-                  ? "border-purple-600 text-purple-800 dark:text-purple-400 font-extrabold bg-purple-50/90 dark:bg-purple-950/30 rounded-t-lg"
-                  : "border-transparent text-slate-500 hover:text-slate-800 dark:text-stone-400 dark:hover:text-stone-200"
+                  ? "border-[#C47C4A] text-[#C47C4A] font-bold bg-[#C47C4A]/10 rounded-t"
+                  : "border-transparent text-[#A8A29E] hover:text-[#F3EEE6]"
               }`}
             >
-              <Icon size={15} className={isActive ? "text-purple-600" : "text-slate-400"} />
+              <Icon size={15} className={isActive ? "text-[#C47C4A]" : "text-[#78716C]"} />
               <span>{tab.label}</span>
             </button>
           );
@@ -497,32 +500,32 @@ export const AdminConsole: React.FC<AdminConsoleProps> = ({ currentUser, onRefre
       {activeTab === 'overview' && (
         <div className="space-y-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="p-4 pl-5 rounded-xl border-l-4 border-purple-500 bg-purple-50/30 dark:bg-purple-950/10 space-y-1.5 shadow-2xs">
-              <div className="text-xs font-bold text-purple-700 dark:text-purple-400 uppercase tracking-wider">Total Accounts</div>
-              <div className="text-3xl font-extrabold text-slate-900 dark:text-white tabular-nums">{users.length}</div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+            <div className="p-4 pl-5 rounded-lg border-l-2 border-[#C47C4A] bg-[#1B1B1B] border-t border-r border-b border-[#2C2C2C] space-y-1">
+              <div className="text-[11px] font-semibold text-[#A8A29E] uppercase tracking-wider">Total Accounts</div>
+              <div className="font-mono text-3xl font-bold text-[#F3EEE6] tabular-nums">{users.length}</div>
+              <div className="text-xs text-[#78716C] font-normal">
                 {users.filter(u => u.role === 'student').length} students · {users.filter(u => u.role === 'teacher').length} faculty
               </div>
             </div>
 
-            <div className="p-4 pl-5 rounded-xl border-l-4 border-blue-500 bg-blue-50/30 dark:bg-blue-950/10 space-y-1.5 shadow-2xs">
-              <div className="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider">Active Courses</div>
-              <div className="text-3xl font-extrabold text-slate-900 dark:text-white tabular-nums">{courses.length}</div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Enrolled cohorts</div>
+            <div className="p-4 pl-5 rounded-lg border-l-2 border-[#D7B87B] bg-[#1B1B1B] border-t border-r border-b border-[#2C2C2C] space-y-1">
+              <div className="text-[11px] font-semibold text-[#A8A29E] uppercase tracking-wider">Active Courses</div>
+              <div className="font-mono text-3xl font-bold text-[#F3EEE6] tabular-nums">{courses.length}</div>
+              <div className="text-xs text-[#78716C] font-normal">Enrolled cohorts</div>
             </div>
 
-            <div className="p-4 pl-5 rounded-xl border-l-4 border-emerald-500 bg-emerald-50/30 dark:bg-emerald-950/10 space-y-1.5 shadow-2xs">
-              <div className="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">Scheduled Exams</div>
-              <div className="text-3xl font-extrabold text-slate-900 dark:text-white tabular-nums">{templates.length}</div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Proctored assessments</div>
+            <div className="p-4 pl-5 rounded-lg border-l-2 border-[#6D927A] bg-[#1B1B1B] border-t border-r border-b border-[#2C2C2C] space-y-1">
+              <div className="text-[11px] font-semibold text-[#A8A29E] uppercase tracking-wider">Scheduled Exams</div>
+              <div className="font-mono text-3xl font-bold text-[#F3EEE6] tabular-nums">{templates.length}</div>
+              <div className="text-xs text-[#78716C] font-normal">Proctored assessments</div>
             </div>
 
-            <div className="p-4 pl-5 rounded-xl border-l-4 border-amber-500 bg-amber-50/30 dark:bg-amber-950/10 space-y-1.5 shadow-2xs">
-              <div className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider">Proctoring Lock</div>
-              <div className="text-3xl font-extrabold text-slate-900 dark:text-white tabular-nums">
+            <div className="p-4 pl-5 rounded-lg border-l-2 border-[#C47C4A] bg-[#1B1B1B] border-t border-r border-b border-[#2C2C2C] space-y-1">
+              <div className="text-[11px] font-semibold text-[#A8A29E] uppercase tracking-wider">Proctoring Lock</div>
+              <div className="font-mono text-3xl font-bold text-[#F3EEE6] tabular-nums">
                 {features.enableStrictProctoring ? "Active" : "Off"}
               </div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Single-tab continuity</div>
+              <div className="text-xs text-[#78716C] font-normal">Single-tab continuity</div>
             </div>
           </div>
 

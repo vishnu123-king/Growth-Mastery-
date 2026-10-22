@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { KeyRound, Mail, User as UserIcon, LogIn, AlertCircle, CheckCircle, Shield, Briefcase, GraduationCap, Sparkles } from "lucide-react";
+import { KeyRound, Mail, User as UserIcon, LogIn, AlertCircle, CheckCircle, Shield, Briefcase, GraduationCap, Sparkles, Sun, Moon } from "lucide-react";
 import { apiFetch } from "../lib/api";
 import { UserRole } from "../types";
 import logoUrl from "../assets/images/growth_mastery_logo_purple_1791037785600.jpg";
@@ -18,6 +18,28 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [themeMode, setThemeMode] = useState<'light' | 'dark'>(() => {
+    return (localStorage.getItem("app_theme_mode") as 'light' | 'dark') || 'dark';
+  });
+
+  const toggleTheme = () => {
+    const next = themeMode === 'dark' ? 'light' : 'dark';
+    setThemeMode(next);
+    if (next === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.body.classList.add('dark');
+      document.body.classList.remove('light');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      document.documentElement.setAttribute('data-theme', 'light');
+      document.body.classList.remove('dark');
+      document.body.classList.add('light');
+    }
+    localStorage.setItem("app_theme_mode", next);
+  };
 
   // Listen for Google OAuth messages
   useEffect(() => {
@@ -149,15 +171,38 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] flex flex-col items-center justify-center p-4 selection:bg-indigo-600 selection:text-white relative">
-      <div className="w-full max-w-[440px] bg-white border border-stone-300 rounded-2xl shadow-lg overflow-hidden relative z-10">
-        {/* Top Accent Strip */}
-        <div className="h-1.5 bg-gradient-to-r from-indigo-600 via-violet-600 to-amber-500 w-full" />
+    <div className="min-h-screen bg-[#151515] flex flex-col items-center justify-center p-4 selection:bg-[#C47C4A] selection:text-white relative">
+      {/* Theme Toggle Button in Top Right */}
+      <div className="absolute top-4 right-4 z-20">
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="px-3 py-1.5 rounded-lg border border-[#2C2C2C] bg-[#1B1B1B] hover:bg-[#242424] text-[#F3EEE6] transition-colors cursor-pointer min-h-[40px] inline-flex items-center gap-2 shadow-2xs"
+          title={themeMode === 'dark' ? "Switch to White Mode" : "Switch to Dark Mode"}
+          aria-label="Toggle theme mode"
+        >
+          {themeMode === 'dark' ? (
+            <>
+              <Sun size={15} className="text-[#D7B87B]" />
+              <span className="text-xs font-semibold">White Mode</span>
+            </>
+          ) : (
+            <>
+              <Moon size={15} className="text-[#C47C4A]" />
+              <span className="text-xs font-semibold">Dark Mode</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      <div className="w-full max-w-[440px] bg-[#1B1B1B] border border-[#2C2C2C] rounded-2xl shadow-2xl overflow-hidden relative z-10">
+        {/* Subtle Top Copper Accent Strip */}
+        <div className="h-1 bg-[#C47C4A] w-full" />
 
         {/* Brand Header */}
-        <div className="p-7 pb-5 border-b border-stone-100 text-center">
+        <div className="p-7 pb-5 border-b border-[#2C2C2C] text-center">
           <div className="flex items-center justify-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-700 via-indigo-600 to-violet-500 p-0.5 shadow-xs flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-[#242424] border border-[#2C2C2C] p-0.5 flex items-center justify-center shrink-0">
               <img 
                 src={logoUrl} 
                 alt="Growth Mastery Logo" 
@@ -165,24 +210,24 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
               />
             </div>
             <div className="text-left">
-              <span className="font-bold text-lg text-stone-900 tracking-tight font-serif block">Growth Mastery</span>
-              <span className="text-[10px] text-stone-400 uppercase tracking-wider font-mono">Academic Diagnostic Engine</span>
+              <span className="font-semibold text-lg text-[#F3EEE6] tracking-tight font-serif block">Growth Mastery</span>
+              <span className="text-xs text-[#A8A29E] uppercase tracking-wider font-mono">Academic Diagnostic Engine</span>
             </div>
           </div>
-          <p className="text-xs text-stone-500 max-w-xs mx-auto">
+          <p className="text-xs text-[#A8A29E] max-w-xs mx-auto leading-relaxed">
             Competency evaluation, AI-synthesized exams, and personalized skill-gap mastery.
           </p>
         </div>
 
         {/* Tab Selection */}
-        <div className="flex border-b border-stone-200 text-xs font-semibold">
+        <div className="flex border-b border-[#2C2C2C] text-xs font-semibold">
           <button
             type="button"
             onClick={() => { setIsRegister(false); setError(""); setSuccess(""); }}
             className={`flex-1 py-3 text-center transition-all cursor-pointer ${
               !isRegister
-                ? "text-indigo-950 border-b-2 border-indigo-600 font-bold bg-indigo-50/40"
-                : "text-stone-500 hover:text-stone-800 hover:bg-stone-50"
+                ? "text-[#F3EEE6] border-b-2 border-[#C47C4A] font-semibold bg-[#222222]"
+                : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#202020]"
             }`}
           >
             Sign In
@@ -192,8 +237,8 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
             onClick={() => { setIsRegister(true); setError(""); setSuccess(""); }}
             className={`flex-1 py-3 text-center transition-all cursor-pointer ${
               isRegister
-                ? "text-indigo-950 border-b-2 border-indigo-600 font-bold bg-indigo-50/40"
-                : "text-stone-500 hover:text-stone-800 hover:bg-stone-50"
+                ? "text-[#F3EEE6] border-b-2 border-[#C47C4A] font-semibold bg-[#222222]"
+                : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#202020]"
             }`}
           >
             Create Account
@@ -202,46 +247,46 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
 
         {/* Quick Demo Access Bar */}
         {!isRegister && (
-          <div className="p-4 bg-stone-50/80 border-b border-stone-200">
-            <div className="flex items-center justify-between text-[11px] font-bold text-stone-600 mb-2">
+          <div className="p-4 bg-[#222222] border-b border-[#2C2C2C]">
+            <div className="flex items-center justify-between text-xs font-semibold text-[#A8A29E] mb-2 font-mono">
               <span className="uppercase tracking-wider">Quick Workspace Preview</span>
-              <span className="text-[10px] text-stone-400 font-normal">Click to sign in</span>
+              <span className="text-[11px] text-[#78716C] font-normal">Click to sign in</span>
             </div>
             <div className="grid grid-cols-3 gap-2">
               <button
                 type="button"
                 onClick={() => handleQuickDemoLogin("vishnutech10@gmail.com", "vishnu12@#3")}
-                className="p-2.5 bg-white hover:bg-indigo-50/80 border border-stone-200 rounded-xl text-left transition-all cursor-pointer shadow-2xs hover:border-indigo-300 group"
+                className="p-2.5 bg-[#1B1B1B] hover:bg-[#282828] border border-[#2C2C2C] rounded-xl text-left transition-all cursor-pointer hover:border-[#C47C4A] group"
               >
-                <div className="flex items-center gap-1.5 text-stone-900 text-xs font-bold group-hover:text-indigo-700">
-                  <GraduationCap size={14} className="text-indigo-600" />
+                <div className="flex items-center gap-1.5 text-[#F3EEE6] text-xs font-semibold group-hover:text-[#C47C4A]">
+                  <GraduationCap size={14} className="text-[#C47C4A]" />
                   <span>Student</span>
                 </div>
-                <div className="text-[10px] text-stone-500 truncate mt-0.5 font-medium">Learner portal</div>
+                <div className="text-[11px] text-[#A8A29E] truncate mt-0.5 font-mono">Learner portal</div>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleQuickDemoLogin("teacher@skillgap.ai", "teacher123")}
-                className="p-2.5 bg-white hover:bg-emerald-50/80 border border-stone-200 rounded-xl text-left transition-all cursor-pointer shadow-2xs hover:border-emerald-300 group"
+                className="p-2.5 bg-[#1B1B1B] hover:bg-[#282828] border border-[#2C2C2C] rounded-xl text-left transition-all cursor-pointer hover:border-[#6D927A] group"
               >
-                <div className="flex items-center gap-1.5 text-stone-900 text-xs font-bold group-hover:text-emerald-700">
-                  <Briefcase size={14} className="text-emerald-600" />
+                <div className="flex items-center gap-1.5 text-[#F3EEE6] text-xs font-semibold group-hover:text-[#6D927A]">
+                  <Briefcase size={14} className="text-[#6D927A]" />
                   <span>Teacher</span>
                 </div>
-                <div className="text-[10px] text-stone-500 truncate mt-0.5 font-medium">Gradebook</div>
+                <div className="text-[11px] text-[#A8A29E] truncate mt-0.5 font-mono">Gradebook</div>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleQuickDemoLogin("admin@skillgap.ai", "admin123")}
-                className="p-2.5 bg-white hover:bg-purple-50/80 border border-stone-200 rounded-xl text-left transition-all cursor-pointer shadow-2xs hover:border-purple-300 group"
+                className="p-2.5 bg-[#1B1B1B] hover:bg-[#282828] border border-[#2C2C2C] rounded-xl text-left transition-all cursor-pointer hover:border-[#D7B87B] group"
               >
-                <div className="flex items-center gap-1.5 text-stone-900 text-xs font-bold group-hover:text-purple-700">
-                  <Shield size={14} className="text-purple-600" />
+                <div className="flex items-center gap-1.5 text-[#F3EEE6] text-xs font-semibold group-hover:text-[#D7B87B]">
+                  <Shield size={14} className="text-[#D7B87B]" />
                   <span>Admin</span>
                 </div>
-                <div className="text-[10px] text-stone-500 truncate mt-0.5 font-medium">System control</div>
+                <div className="text-[11px] text-[#A8A29E] truncate mt-0.5 font-mono">System control</div>
               </button>
             </div>
           </div>
@@ -250,15 +295,15 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
         {/* Form Body */}
         <div className="p-6 space-y-4">
           {error && (
-            <div className="bg-rose-50 border border-rose-200 rounded-xl p-3.5 text-rose-800 text-xs flex items-start gap-2.5 shadow-2xs">
-              <AlertCircle size={16} className="shrink-0 mt-0.5 text-rose-600" />
+            <div className="bg-[#D96B6B]/15 border border-[#D96B6B]/35 rounded-xl p-3.5 text-[#D96B6B] text-xs flex items-start gap-2.5">
+              <AlertCircle size={16} className="shrink-0 mt-0.5 text-[#D96B6B]" />
               <span className="font-medium leading-relaxed">{error}</span>
             </div>
           )}
 
           {success && (
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 text-emerald-800 text-xs flex items-start gap-2.5 shadow-2xs">
-              <CheckCircle size={16} className="shrink-0 mt-0.5 text-emerald-600" />
+            <div className="bg-[#6D927A]/15 border border-[#6D927A]/35 rounded-xl p-3.5 text-[#6D927A] text-xs flex items-start gap-2.5">
+              <CheckCircle size={16} className="shrink-0 mt-0.5 text-[#6D927A]" />
               <span className="font-medium leading-relaxed">{success}</span>
             </div>
           )}
@@ -267,26 +312,26 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
             {isRegister && (
               <>
                 <div className="space-y-1">
-                  <label className="block text-xs font-bold text-stone-700">Full Name</label>
+                  <label className="block text-xs font-semibold text-[#F3EEE6]">Full Name</label>
                   <div className="relative">
-                    <UserIcon className="absolute left-3.5 top-3 w-4 h-4 text-stone-400" />
+                    <UserIcon className="absolute left-3.5 top-3 w-4 h-4 text-[#78716C]" />
                     <input
                       type="text"
                       required
                       placeholder="Jane Doe"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full pl-10 pr-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-medium"
+                      className="w-full pl-10 pr-3.5 py-2.5 bg-[#222222] border border-[#2C2C2C] rounded-xl text-xs text-[#F3EEE6] placeholder-[#78716C] focus:border-[#C47C4A] transition-all font-medium"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="block text-xs font-bold text-stone-700">Account Role</label>
+                  <label className="block text-xs font-semibold text-[#F3EEE6]">Account Role</label>
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value as UserRole)}
-                    className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs font-semibold text-stone-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white cursor-pointer"
+                    className="w-full px-3.5 py-2.5 bg-[#222222] border border-[#2C2C2C] rounded-xl text-xs font-semibold text-[#F3EEE6] focus:border-[#C47C4A] cursor-pointer"
                   >
                     <option value="student">Student / Learner</option>
                     <option value="teacher">Instructor / Faculty</option>
@@ -297,31 +342,31 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
             )}
 
             <div className="space-y-1">
-              <label className="block text-xs font-bold text-stone-700">Email Address</label>
+              <label className="block text-xs font-semibold text-[#F3EEE6]">Email Address</label>
               <div className="relative">
-                <Mail className="absolute left-3.5 top-3 w-4 h-4 text-stone-400" />
+                <Mail className="absolute left-3.5 top-3 w-4 h-4 text-[#78716C]" />
                 <input
                   type="email"
                   required
                   placeholder="name@university.edu"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-medium"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-[#222222] border border-[#2C2C2C] rounded-xl text-xs text-[#F3EEE6] placeholder-[#78716C] focus:border-[#C47C4A] transition-all font-medium"
                 />
               </div>
             </div>
 
             <div className="space-y-1">
-              <label className="block text-xs font-bold text-stone-700">Password</label>
+              <label className="block text-xs font-semibold text-[#F3EEE6]">Password</label>
               <div className="relative">
-                <KeyRound className="absolute left-3.5 top-3 w-4 h-4 text-stone-400" />
+                <KeyRound className="absolute left-3.5 top-3 w-4 h-4 text-[#78716C]" />
                 <input
                   type="password"
                   required
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all font-medium font-mono"
+                  className="w-full pl-10 pr-3.5 py-2.5 bg-[#222222] border border-[#2C2C2C] rounded-xl text-xs text-[#F3EEE6] placeholder-[#78716C] focus:border-[#C47C4A] transition-all font-medium font-mono"
                 />
               </div>
             </div>
@@ -329,7 +374,7 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2.5 mt-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shadow-xs"
+              className="btn-copper-primary w-full text-xs mt-2"
             >
               <LogIn size={15} />
               <span>{loading ? "Processing..." : isRegister ? "Create Student Account" : "Sign In to Platform"}</span>
@@ -338,16 +383,16 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
 
           {/* Divider */}
           <div className="relative flex py-1 items-center">
-            <div className="flex-grow border-t border-stone-200"></div>
-            <span className="flex-shrink mx-3 text-[11px] font-bold text-stone-400 uppercase tracking-wider">or</span>
-            <div className="flex-grow border-t border-stone-200"></div>
+            <div className="flex-grow border-t border-[#2C2C2C]"></div>
+            <span className="flex-shrink mx-3 text-xs font-mono font-medium text-[#78716C] uppercase tracking-wider">or</span>
+            <div className="flex-grow border-t border-[#2C2C2C]"></div>
           </div>
 
           {/* Google Sign-In */}
           <button
             type="button"
             onClick={handleGoogleSignIn}
-            className="w-full py-2.5 bg-white hover:bg-stone-50 border border-stone-300 text-stone-800 font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-2.5 cursor-pointer shadow-2xs"
+            className="btn-charcoal-secondary w-full text-xs"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24">
               <path fill="#EA4335" d="M5.266 9.765A7.077 7.077 0 0 1 12 4.909c1.69 0 3.218.6 4.418 1.582l3.51-3.51C17.642 1.09 14.97 0 12 0 7.354 0 3.307 2.67 1.242 6.58l4.024 3.185z" />
@@ -360,7 +405,7 @@ export function AuthPage({ onAuthSuccess }: AuthPageProps) {
         </div>
       </div>
 
-      <div className="mt-6 text-center text-xs text-stone-500 font-medium">
+      <div className="mt-6 text-center text-xs text-[#78716C] font-mono">
         Growth Mastery Academic Assessment Platform
       </div>
     </div>

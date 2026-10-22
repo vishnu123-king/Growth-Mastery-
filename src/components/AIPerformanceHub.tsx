@@ -149,18 +149,17 @@ export const AIPerformanceHub: React.FC = () => {
   return (
     <div className="space-y-6" id="ai-performance-hub-root">
       {/* Editorial Hero Banner */}
-      <div className="bg-gradient-to-r from-violet-900 via-indigo-900 to-slate-900 rounded-2xl p-6 sm:p-7 text-white shadow-md relative overflow-hidden">
-        <div className="absolute right-0 top-0 translate-x-12 -translate-y-8 w-72 h-72 bg-violet-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-2 max-w-xl">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-white/10 border border-white/20 text-white text-[11px] font-bold uppercase tracking-wider backdrop-blur-xs">
-              <Activity size={13} className="text-violet-300" />
+      <div className="bg-[#1B1B1B] border border-[#2C2C2C] rounded-xl p-6 sm:p-7 relative overflow-hidden">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1.5 max-w-xl">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#222222] border border-[#2C2C2C] text-[#C47C4A] text-[11px] font-semibold uppercase tracking-wider">
+              <Activity size={13} className="text-[#C47C4A]" />
               <span>Real-Time Engine Telemetry</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold font-serif tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-serif font-semibold text-[#F3EEE6] tracking-tight">
               Diagnostic Synthesis & Infrastructure
             </h1>
-            <p className="text-violet-200 text-xs sm:text-sm leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#A8A29E] leading-relaxed">
               Live monitoring and configuration for algorithmic generation, inference latency, and AI evaluation services.
             </p>
           </div>
@@ -169,7 +168,7 @@ export const AIPerformanceHub: React.FC = () => {
             type="button"
             onClick={() => { fetchLogs(); fetchAiConfig(); }}
             disabled={loading}
-            className="px-4 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl text-xs font-bold transition-all cursor-pointer inline-flex items-center gap-2 backdrop-blur-xs shadow-xs shrink-0 self-start sm:self-auto"
+            className="px-4 py-2 bg-[#222222] hover:bg-[#282828] border border-[#2C2C2C] text-[#F3EEE6] rounded-lg text-xs font-medium transition-all cursor-pointer inline-flex items-center gap-2 min-h-[40px] shrink-0 self-start sm:self-auto"
           >
             <RefreshCw size={13} className={loading ? "animate-spin" : ""} />
             <span>Refresh Telemetry</span>
@@ -179,36 +178,32 @@ export const AIPerformanceHub: React.FC = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl bg-white border border-emerald-200 shadow-xs space-y-2 relative overflow-hidden">
-          <div className="h-1 bg-emerald-500 absolute top-0 left-0 right-0" />
-          <div className="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">Engine Uptime & Health</div>
-          <div className="text-3xl font-extrabold text-stone-900 font-mono">{successRate}%</div>
-          <div className="text-xs text-stone-500 font-medium">
-            <span className="font-bold text-emerald-700">{successCalls}</span> valid of {totalCalls} runs
+        <div className="p-4 pl-5 rounded-lg border-l-2 border-[#6D927A] bg-[#1B1B1B] border-t border-r border-b border-[#2C2C2C] space-y-1">
+          <div className="text-[11px] font-semibold text-[#A8A29E] uppercase tracking-wider">Engine Uptime & Health</div>
+          <div className="text-3xl font-bold text-[#F3EEE6] font-mono tabular-nums">{successRate}%</div>
+          <div className="text-xs text-[#78716C] font-normal">
+            <span className="font-semibold text-[#6D927A]">{successCalls}</span> valid of {totalCalls} runs
           </div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white border border-indigo-200 shadow-xs space-y-2 relative overflow-hidden">
-          <div className="h-1 bg-indigo-500 absolute top-0 left-0 right-0" />
-          <div className="text-[11px] font-bold text-indigo-800 uppercase tracking-wider">Total Diagnostic Calls</div>
-          <div className="text-3xl font-extrabold text-stone-900 font-mono">{totalCalls}</div>
-          <div className="text-xs text-stone-500 font-medium">Synthesized assessments</div>
+        <div className="p-4 pl-5 rounded-lg border-l-2 border-[#C47C4A] bg-[#1B1B1B] border-t border-r border-b border-[#2C2C2C] space-y-1">
+          <div className="text-[11px] font-semibold text-[#A8A29E] uppercase tracking-wider">Total Diagnostic Calls</div>
+          <div className="text-3xl font-bold text-[#F3EEE6] font-mono tabular-nums">{totalCalls}</div>
+          <div className="text-xs text-[#78716C] font-normal">Synthesized assessments</div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white border border-amber-200 shadow-xs space-y-2 relative overflow-hidden">
-          <div className="h-1 bg-amber-500 absolute top-0 left-0 right-0" />
-          <div className="text-[11px] font-bold text-amber-800 uppercase tracking-wider">Average Latency</div>
-          <div className="text-3xl font-extrabold text-stone-900 font-mono">{avgLatency}ms</div>
-          <div className="text-xs text-stone-500 font-medium">Response turnaround</div>
+        <div className="p-4 pl-5 rounded-lg border-l-2 border-[#D7B87B] bg-[#1B1B1B] border-t border-r border-b border-[#2C2C2C] space-y-1">
+          <div className="text-[11px] font-semibold text-[#A8A29E] uppercase tracking-wider">Average Latency</div>
+          <div className="text-3xl font-bold text-[#F3EEE6] font-mono tabular-nums">{avgLatency}ms</div>
+          <div className="text-xs text-[#78716C] font-normal">Response turnaround</div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white border border-violet-200 shadow-xs space-y-2 relative overflow-hidden">
-          <div className="h-1 bg-violet-500 absolute top-0 left-0 right-0" />
-          <div className="text-[11px] font-bold text-violet-800 uppercase tracking-wider">Active Provider</div>
-          <div className="text-2xl font-extrabold text-stone-900 capitalize truncate">
+        <div className="p-4 pl-5 rounded-lg border-l-2 border-[#C47C4A] bg-[#1B1B1B] border-t border-r border-b border-[#2C2C2C] space-y-1">
+          <div className="text-[11px] font-semibold text-[#A8A29E] uppercase tracking-wider">Active Provider</div>
+          <div className="text-2xl font-bold text-[#F3EEE6] capitalize truncate">
             {aiConfig?.provider || "Local"}
           </div>
-          <div className="text-xs text-stone-500 font-mono truncate">
+          <div className="text-xs text-[#78716C] font-mono truncate">
             {aiConfig?.model || "Standard"}
           </div>
         </div>

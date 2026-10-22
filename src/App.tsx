@@ -29,19 +29,24 @@ export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [themeMode, setThemeMode] = useState<'light' | 'dark'>(() => {
-    return (localStorage.getItem("app_theme_mode") as 'light' | 'dark') || 'light';
+    return (localStorage.getItem("app_theme_mode") as 'light' | 'dark') || 'dark';
   });
 
-  // Apply dark/light theme mode
+  // Apply dark/light theme mode to both documentElement and body
   useEffect(() => {
-    if (themeMode === 'dark') {
+    const isDark = themeMode === 'dark';
+    if (isDark) {
       document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
       document.documentElement.setAttribute('data-theme', 'dark');
       document.body.classList.add('dark');
+      document.body.classList.remove('light');
     } else {
       document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
       document.documentElement.setAttribute('data-theme', 'light');
       document.body.classList.remove('dark');
+      document.body.classList.add('light');
     }
     localStorage.setItem("app_theme_mode", themeMode);
   }, [themeMode]);
@@ -403,15 +408,15 @@ export default function App() {
   }
 
   const roleConfig = {
-    admin: { label: "System Administrator", bg: "bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300" },
-    teacher: { label: "Faculty Instructor", bg: "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300" },
-    student: { label: "Student Scholar", bg: "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300" }
-  }[currentUser.role] || { label: "Learner", bg: "bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300" };
+    admin: { label: "System Administrator", bg: "bg-[#D7B87B]/10 text-[#D7B87B] border border-[#D7B87B]/30" },
+    teacher: { label: "Faculty Instructor", bg: "bg-[#6D927A]/10 text-[#6D927A] border border-[#6D927A]/30" },
+    student: { label: "Student Scholar", bg: "bg-[#C47C4A]/10 text-[#C47C4A] border border-[#C47C4A]/30" }
+  }[currentUser.role] || { label: "Learner", bg: "bg-[#222222] text-[#A8A29E] border border-[#2C2C2C]" };
 
   // Reusable navigation items renderer for both Desktop Sidebar and Mobile Drawer
   const renderNavLinks = (isMobileDrawer: boolean = false) => (
-    <nav className={`flex-grow ${isMobileDrawer ? 'p-4' : 'p-5'} space-y-1`}>
-      <div className="px-3.5 py-1 text-[10px] font-bold text-stone-400 dark:text-stone-500 uppercase tracking-wider block">
+    <nav className={`flex-grow ${isMobileDrawer ? 'p-3' : 'p-4'} space-y-1`}>
+      <div className="px-3 py-1.5 text-[11px] font-semibold text-[#78716C] uppercase tracking-wider font-mono">
         Navigation
       </div>
 
@@ -421,26 +426,26 @@ export default function App() {
           <button
             type="button"
             onClick={() => handleTabClick("admin")}
-            className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
+            className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
               activeTab === "admin" 
-                ? "bg-indigo-600 text-white shadow-xs" 
-                : "text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/40"
+                ? "bg-[#242424] text-[#F3EEE6] border-l-2 border-[#C47C4A] pl-2.5 font-semibold" 
+                : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
             }`}
           >
-            <UserCog size={16} />
+            <UserCog size={16} className={activeTab === "admin" ? "text-[#C47C4A]" : "text-[#78716C]"} />
             <span>Admin Governance</span>
           </button>
 
           <button
             type="button"
             onClick={() => handleTabClick("teacher")}
-            className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
+            className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
               activeTab === "teacher" 
-                ? "bg-indigo-600 text-white shadow-xs" 
-                : "text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/40"
+                ? "bg-[#242424] text-[#F3EEE6] border-l-2 border-[#C47C4A] pl-2.5 font-semibold" 
+                : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
             }`}
           >
-            <Briefcase size={16} />
+            <Briefcase size={16} className={activeTab === "teacher" ? "text-[#C47C4A]" : "text-[#78716C]"} />
             <span>Teacher Portal</span>
           </button>
         </>
@@ -451,13 +456,13 @@ export default function App() {
         <button
           type="button"
           onClick={() => handleTabClick("teacher")}
-          className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
+          className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
             activeTab === "teacher" 
-              ? "bg-indigo-600 text-white shadow-xs" 
-              : "text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/40"
+              ? "bg-[#242424] text-[#F3EEE6] border-l-2 border-[#C47C4A] pl-2.5 font-semibold" 
+              : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
           }`}
         >
-          <Briefcase size={16} />
+          <Briefcase size={16} className={activeTab === "teacher" ? "text-[#C47C4A]" : "text-[#78716C]"} />
           <span>Instructor Gradebook</span>
         </button>
       )}
@@ -466,70 +471,70 @@ export default function App() {
       <button
         type="button"
         onClick={() => handleTabClick("courses")}
-        className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
+        className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
           activeTab === "courses" 
-            ? "bg-indigo-600 text-white shadow-xs" 
-            : "text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/40"
+            ? "bg-[#242424] text-[#F3EEE6] border-l-2 border-[#C47C4A] pl-2.5 font-semibold" 
+            : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
         }`}
       >
-        <BookOpen size={16} />
+        <BookOpen size={16} className={activeTab === "courses" ? "text-[#C47C4A]" : "text-[#78716C]"} />
         <span>Course Directory</span>
       </button>
 
       <button
         type="button"
         onClick={() => handleTabClick("dashboard")}
-        className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
+        className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
           activeTab === "dashboard" 
-            ? "bg-indigo-600 text-white shadow-xs" 
-            : "text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/40"
+            ? "bg-[#242424] text-[#F3EEE6] border-l-2 border-[#C47C4A] pl-2.5 font-semibold" 
+            : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
         }`}
       >
-        <LayoutDashboard size={16} />
+        <LayoutDashboard size={16} className={activeTab === "dashboard" ? "text-[#C47C4A]" : "text-[#78716C]"} />
         <span>Learning Progress</span>
       </button>
 
       <button
         type="button"
         onClick={() => handleTabClick("assessment")}
-        className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
+        className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
           activeTab === "assessment" 
-            ? "bg-indigo-600 text-white shadow-xs" 
-            : "text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/40"
+            ? "bg-[#242424] text-[#F3EEE6] border-l-2 border-[#C47C4A] pl-2.5 font-semibold" 
+            : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
         }`}
       >
-        <BookMarked size={16} />
+        <BookMarked size={16} className={activeTab === "assessment" ? "text-[#C47C4A]" : "text-[#78716C]"} />
         <span>Diagnostic Assessment</span>
       </button>
 
       <button
         type="button"
         onClick={() => handleTabClick("skill-gaps")}
-        className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
+        className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
           activeTab === "skill-gaps" 
-            ? "bg-indigo-600 text-white shadow-xs" 
-            : "text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/40"
+            ? "bg-[#242424] text-[#F3EEE6] border-l-2 border-[#C47C4A] pl-2.5 font-semibold" 
+            : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
         }`}
       >
-        <TrendingUp size={16} />
+        <TrendingUp size={16} className={activeTab === "skill-gaps" ? "text-[#C47C4A]" : "text-[#78716C]"} />
         <span>Skills & Gap Matrix</span>
       </button>
 
       <button
         type="button"
         onClick={() => handleTabClick("recommendations")}
-        className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
+        className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
           activeTab === "recommendations" 
-            ? "bg-indigo-600 text-white shadow-xs" 
-            : "text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/40"
+            ? "bg-[#242424] text-[#F3EEE6] border-l-2 border-[#C47C4A] pl-2.5 font-semibold" 
+            : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
         }`}
       >
-        <Award size={16} />
+        <Award size={16} className={activeTab === "recommendations" ? "text-[#C47C4A]" : "text-[#78716C]"} />
         <span>Recommended Actions</span>
       </button>
 
       {/* Supplemental Tooling tabs */}
-      <div className="pt-3 px-3.5 py-1 text-[10px] font-bold text-stone-400 dark:text-stone-500 uppercase tracking-wider block">
+      <div className="pt-4 px-3 py-1.5 text-[11px] font-semibold text-[#78716C] uppercase tracking-wider font-mono block">
         Adaptive Utilities
       </div>
 
@@ -537,13 +542,13 @@ export default function App() {
         <button
           type="button"
           onClick={() => handleTabClick("practice-sources")}
-          className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
+          className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
             activeTab === "practice-sources" 
-              ? "bg-indigo-600 text-white shadow-xs" 
-              : "text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/40"
+              ? "bg-[#242424] text-[#F3EEE6] border-l-2 border-[#C47C4A] pl-2.5 font-semibold" 
+              : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
           }`}
         >
-          <Globe size={16} />
+          <Globe size={16} className={activeTab === "practice-sources" ? "text-[#C47C4A]" : "text-[#78716C]"} />
           <span>Practice Resources</span>
         </button>
       )}
@@ -552,13 +557,13 @@ export default function App() {
         <button
           type="button"
           onClick={() => handleTabClick("quiz")}
-          className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
+          className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
             activeTab === "quiz" 
-              ? "bg-indigo-600 text-white shadow-xs" 
-              : "text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/40"
+              ? "bg-[#242424] text-[#F3EEE6] border-l-2 border-[#C47C4A] pl-2.5 font-semibold" 
+              : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
           }`}
         >
-          <Sparkles size={16} />
+          <Sparkles size={16} className={activeTab === "quiz" ? "text-[#C47C4A]" : "text-[#78716C]"} />
           <span>Document Quiz Studio</span>
         </button>
       )}
@@ -567,13 +572,13 @@ export default function App() {
         <button
           type="button"
           onClick={() => handleTabClick("ai-tutor")}
-          className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
+          className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
             activeTab === "ai-tutor" 
-              ? "bg-indigo-600 text-white shadow-xs" 
-              : "text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/40"
+              ? "bg-[#242424] text-[#F3EEE6] border-l-2 border-[#C47C4A] pl-2.5 font-semibold" 
+              : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
           }`}
         >
-          <MessageSquare size={16} />
+          <MessageSquare size={16} className={activeTab === "ai-tutor" ? "text-[#C47C4A]" : "text-[#78716C]"} />
           <span>AI Study Tutor</span>
         </button>
       )}
@@ -582,13 +587,13 @@ export default function App() {
         <button
           type="button"
           onClick={() => handleTabClick("ai-telemetry")}
-          className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
+          className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2.5 cursor-pointer min-h-[44px] ${
             activeTab === "ai-telemetry" 
-              ? "bg-indigo-600 text-white shadow-xs" 
-              : "text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/40"
+              ? "bg-[#242424] text-[#F3EEE6] border-l-2 border-[#C47C4A] pl-2.5 font-semibold" 
+              : "text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#222222]"
           }`}
         >
-          <Activity size={16} />
+          <Activity size={16} className={activeTab === "ai-telemetry" ? "text-[#C47C4A]" : "text-[#78716C]"} />
           <span>Inference Telemetry</span>
         </button>
       )}
@@ -599,18 +604,18 @@ export default function App() {
   const isStudent = currentUser?.role === "student";
 
   const renderLockedUnenrolledView = (tabName: string, description: string) => (
-    <div className="p-8 sm:p-12 text-center bg-white dark:bg-[#151C28] rounded-3xl border border-stone-200 dark:border-stone-800 shadow-sm max-w-2xl mx-auto space-y-6 my-6 sm:my-10 fade-in">
-      <div className="w-16 h-16 bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center mx-auto border border-amber-200 dark:border-amber-800/60 shadow-xs">
-        <AlertCircle size={32} />
+    <div className="p-8 sm:p-12 text-center bg-[#1B1B1B] rounded-2xl border border-[#2C2C2C] max-w-2xl mx-auto space-y-6 my-6 sm:my-10 fade-in">
+      <div className="w-14 h-14 bg-[#D7B87B]/10 text-[#D7B87B] rounded-xl flex items-center justify-center mx-auto border border-[#D7B87B]/30">
+        <AlertCircle size={28} />
       </div>
-      <div className="space-y-3">
-        <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-900/30">
-          Learning Path Locked
+      <div className="space-y-2.5">
+        <span className="text-xs font-mono font-medium tracking-wider uppercase text-[#D7B87B]">
+          Path Enrollment Required
         </span>
-        <h2 className="text-2xl font-bold font-serif text-stone-900 dark:text-white tracking-tight pt-1">
+        <h2 className="text-2xl font-serif font-semibold text-[#F3EEE6] tracking-tight">
           {tabName} Locked
         </h2>
-        <p className="text-stone-600 dark:text-stone-300 text-sm max-w-md mx-auto leading-relaxed">
+        <p className="text-[#A8A29E] text-sm max-w-md mx-auto leading-relaxed">
           {description}
         </p>
       </div>
@@ -618,9 +623,9 @@ export default function App() {
         <button
           type="button"
           onClick={() => handleTabClick("courses")}
-          className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer mx-auto min-h-[44px]"
+          className="btn-copper-primary mx-auto"
         >
-          <BookOpen size={14} />
+          <BookOpen size={15} />
           <span>Explore Course Directory & Enroll</span>
         </button>
       </div>
@@ -628,21 +633,21 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] dark:bg-[#0B0F17] flex font-sans text-stone-900 dark:text-stone-100 selection:bg-indigo-600 selection:text-white" id="application-container">
+    <div className="min-h-screen bg-[#151515] flex font-sans text-[#F3EEE6] selection:bg-[#C47C4A] selection:text-white" id="application-container">
       
       {/* ==================================================================== */}
       {/* MOBILE DRAWER (SLIDE-OUT MENU FOR <= 1024px VIEWPORTS)               */}
       {/* ==================================================================== */}
       {isMobileMenuOpen && (
         <div 
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs lg:hidden transition-opacity"
+          className="fixed inset-0 z-50 bg-black/75 lg:hidden transition-opacity"
           onClick={() => setIsMobileMenuOpen(false)}
           aria-hidden="true"
         />
       )}
 
       <div 
-        className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-white dark:bg-[#151C28] border-r border-stone-200 dark:border-stone-800 shadow-2xl flex flex-col transform transition-transform duration-250 ease-out lg:hidden ${
+        className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-[#1B1B1B] border-r border-[#2C2C2C] shadow-2xl flex flex-col transform transition-transform duration-200 ease-out lg:hidden ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         role="dialog"
@@ -650,9 +655,9 @@ export default function App() {
         aria-label="Navigation Menu"
       >
         {/* Mobile Drawer Header with Close Button */}
-        <div className="p-4 border-b border-stone-100 dark:border-stone-800/80 flex items-center justify-between">
+        <div className="p-4 border-b border-[#2C2C2C] flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-700 via-indigo-600 to-blue-500 p-0.5 shadow-xs flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-[#242424] border border-[#2C2C2C] p-0.5 flex items-center justify-center shrink-0">
               <img 
                 src={logoUrl} 
                 alt="Growth Mastery Logo" 
@@ -660,14 +665,14 @@ export default function App() {
               />
             </div>
             <div>
-              <span className="font-bold text-stone-900 dark:text-stone-100 tracking-tight text-sm block">Growth Mastery</span>
-              <span className="text-[10px] text-stone-400 dark:text-stone-500 uppercase tracking-widest font-mono">Academic Portal</span>
+              <span className="font-bold text-[#F3EEE6] tracking-tight text-sm font-serif block">Growth Mastery</span>
+              <span className="text-[11px] text-[#A8A29E] uppercase tracking-wider font-mono">Academic Portal</span>
             </div>
           </div>
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="p-2 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
+            className="p-2 text-[#A8A29E] hover:text-[#F3EEE6] rounded-lg hover:bg-[#242424] min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
             aria-label="Close menu"
           >
             <X size={20} />
@@ -676,17 +681,18 @@ export default function App() {
 
         {/* Role Badge in Drawer */}
         <div className="px-4 pt-3 flex items-center justify-between">
-          <span className={`inline-flex text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${roleConfig.bg}`}>
+          <span className={`inline-flex text-[11px] font-mono font-medium uppercase tracking-wider px-2 py-0.5 rounded ${roleConfig.bg}`}>
             {roleConfig.label}
           </span>
           <button
             type="button"
             onClick={toggleTheme}
-            className="p-1.5 rounded-lg border border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-200 transition-colors cursor-pointer"
+            className="px-2.5 py-1.5 rounded-lg border border-[#2C2C2C] text-[#F3EEE6] hover:bg-[#242424] transition-colors cursor-pointer flex items-center gap-1.5 min-h-[38px]"
             title={themeMode === 'dark' ? "Switch to White Mode" : "Switch to Dark Mode"}
             aria-label="Toggle theme mode"
           >
-            {themeMode === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+            {themeMode === 'dark' ? <Sun size={15} className="text-[#D7B87B]" /> : <Moon size={15} className="text-[#C47C4A]" />}
+            <span className="text-xs font-semibold">{themeMode === 'dark' ? "White Mode" : "Dark Mode"}</span>
           </button>
         </div>
 
@@ -696,38 +702,38 @@ export default function App() {
         </div>
 
         {/* Focus Settings in Drawer */}
-        <div className="p-4 border-t border-stone-100 dark:border-stone-800 space-y-2 bg-stone-50/50 dark:bg-stone-900/20">
-          <div className="flex items-center gap-2 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider">
-            <Settings size={12} />
+        <div className="p-4 border-t border-[#2C2C2C] space-y-2 bg-[#1B1B1B]">
+          <div className="flex items-center gap-2 text-[11px] font-semibold text-[#A8A29E] uppercase tracking-wider font-mono">
+            <Settings size={12} className="text-[#C47C4A]" />
             <span>Focus Settings</span>
           </div>
           <textarea
             rows={2}
-            placeholder="e.g. Hands-on algorithms..."
+            placeholder="e.g. Algorithms & distributed state..."
             value={learningPreferences}
             onChange={(e) => setLearningPreferences(e.target.value)}
-            className="w-full p-2 bg-white dark:bg-[#192231] border border-stone-200 dark:border-stone-800 rounded-lg text-xs text-stone-800 dark:text-stone-200 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full p-2 bg-[#222222] border border-[#2C2C2C] rounded-lg text-xs text-[#F3EEE6] focus:border-[#C47C4A]"
           />
           <button
             type="button"
             disabled={savingPrefs}
             onClick={handleUpdatePreferences}
-            className="w-full py-2 bg-stone-900 hover:bg-stone-800 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white text-xs font-bold rounded-lg min-h-[44px] flex items-center justify-center cursor-pointer disabled:opacity-50"
+            className="w-full py-2 bg-[#C47C4A] hover:bg-[#D18958] text-white text-xs font-semibold rounded-lg min-h-[44px] flex items-center justify-center cursor-pointer disabled:opacity-50"
           >
             {savingPrefs ? "Saving..." : "Apply Profile"}
           </button>
         </div>
 
         {/* User Account & Logout in Drawer */}
-        <div className="p-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between gap-2 bg-stone-50 dark:bg-stone-900/40 pb-safe">
+        <div className="p-4 border-t border-[#2C2C2C] flex items-center justify-between gap-2 bg-[#181818] pb-safe">
           <div className="truncate min-w-0">
-            <span className="text-xs font-bold text-stone-900 dark:text-stone-100 block truncate">{currentUser.name}</span>
-            <span className="text-[10px] text-stone-400 dark:text-stone-500 block truncate">{currentUser.email}</span>
+            <span className="text-xs font-medium text-[#F3EEE6] block truncate">{currentUser.name}</span>
+            <span className="text-[11px] text-[#A8A29E] font-mono block truncate">{currentUser.email}</span>
           </div>
           <button
             type="button"
             onClick={handleLogout}
-            className="p-2 text-stone-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
+            className="p-2 text-[#A8A29E] hover:text-[#D96B6B] hover:bg-[#282828] rounded-lg min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
             title="Sign out of platform"
             aria-label="Sign out"
           >
@@ -739,10 +745,10 @@ export default function App() {
       {/* ==================================================================== */}
       {/* DESKTOP SIDEBAR (>= 1024px VIEWPORTS)                                */}
       {/* ==================================================================== */}
-      <aside className="hidden lg:flex lg:w-64 border-r border-stone-200 dark:border-stone-800 bg-white dark:bg-[#151C28] flex-col shrink-0 sticky top-0 h-screen overflow-y-auto">
-        <div className="p-6 border-b border-stone-100 dark:border-stone-800/80">
+      <aside className="hidden lg:flex lg:w-64 border-r border-[#2C2C2C] bg-[#1B1B1B] flex-col shrink-0 sticky top-0 h-screen overflow-y-auto">
+        <div className="p-5 border-b border-[#2C2C2C]">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-700 via-indigo-600 to-blue-500 p-0.5 shadow-xs flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-[#242424] border border-[#2C2C2C] p-0.5 flex items-center justify-center shrink-0">
               <img 
                 src={logoUrl} 
                 alt="Growth Mastery Logo" 
@@ -750,15 +756,24 @@ export default function App() {
               />
             </div>
             <div>
-              <span className="font-bold text-stone-900 dark:text-stone-100 tracking-tight text-sm block">Growth Mastery</span>
-              <span className="text-[10px] text-stone-400 dark:text-stone-500 uppercase tracking-widest font-mono">Academic Portal</span>
+              <span className="font-bold text-[#F3EEE6] tracking-tight text-sm font-serif block">Growth Mastery</span>
+              <span className="text-[11px] text-[#A8A29E] uppercase tracking-wider font-mono">Academic Portal</span>
             </div>
           </div>
           
-          <div className="mt-3">
-            <span className={`inline-flex text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${roleConfig.bg}`}>
+          <div className="mt-3 flex items-center justify-between">
+            <span className={`inline-flex text-[11px] font-mono font-medium uppercase tracking-wider px-2 py-0.5 rounded ${roleConfig.bg}`}>
               {roleConfig.label}
             </span>
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="p-1.5 rounded-lg border border-[#2C2C2C] text-[#A8A29E] hover:text-[#F3EEE6] hover:bg-[#242424] transition-colors cursor-pointer flex items-center justify-center"
+              title={themeMode === 'dark' ? "Switch to White Mode" : "Switch to Dark Mode"}
+              aria-label="Toggle theme mode"
+            >
+              {themeMode === 'dark' ? <Sun size={14} className="text-[#D7B87B]" /> : <Moon size={14} className="text-[#C47C4A]" />}
+            </button>
           </div>
         </div>
 
@@ -766,41 +781,42 @@ export default function App() {
         {renderNavLinks(false)}
 
         {/* Learning Preferences Form built right into Sidebar */}
-        <div className="p-4 border-t border-stone-100 dark:border-stone-800 space-y-2.5 bg-transparent">
-          <div className="flex items-center gap-2 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider">
-            <Settings size={12} />
+        <div className="p-4 border-t border-[#2C2C2C] space-y-2 bg-[#1B1B1B]">
+          <div className="flex items-center gap-2 text-[11px] font-semibold text-[#A8A29E] uppercase tracking-wider font-mono">
+            <Settings size={12} className="text-[#C47C4A]" />
             <span>Focus Settings</span>
           </div>
           <textarea
             rows={2}
-            placeholder="e.g. Hands-on algorithms..."
+            placeholder="e.g. Distributed algorithms..."
             value={learningPreferences}
             onChange={(e) => setLearningPreferences(e.target.value)}
-            className="w-full p-2 bg-white dark:bg-[#192231] border border-stone-200 dark:border-stone-800 rounded-lg text-[11px] text-stone-800 dark:text-stone-200 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full p-2 bg-[#222222] border border-[#2C2C2C] rounded-lg text-xs text-[#F3EEE6] placeholder-[#78716C] focus:border-[#C47C4A]"
           />
           <button
             type="button"
             disabled={savingPrefs}
             onClick={handleUpdatePreferences}
-            className="w-full py-1.5 bg-stone-900 hover:bg-stone-800 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white text-[10px] font-bold rounded-lg transition-colors cursor-pointer disabled:opacity-50"
+            className="w-full py-2 bg-[#C47C4A] hover:bg-[#D18958] text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer disabled:opacity-50"
           >
             {savingPrefs ? "Saving..." : "Apply Profile"}
           </button>
         </div>
 
         {/* User Account Session Info & Logout */}
-        <div className="p-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between gap-2">
+        <div className="p-4 border-t border-[#2C2C2C] flex items-center justify-between gap-2 bg-[#181818]">
           <div className="truncate min-w-0">
-            <span className="text-[11px] font-bold text-stone-900 dark:text-stone-100 block truncate">{currentUser.name}</span>
-            <span className="text-[9px] text-stone-400 dark:text-stone-500 block truncate">{currentUser.email}</span>
+            <span className="text-xs font-medium text-[#F3EEE6] block truncate">{currentUser.name}</span>
+            <span className="text-[11px] text-[#A8A29E] font-mono block truncate">{currentUser.email}</span>
           </div>
           <button
             type="button"
             onClick={handleLogout}
-            className="p-1.5 text-stone-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-[#A8A29E] hover:text-[#D96B6B] hover:bg-[#282828] rounded-lg transition-colors cursor-pointer"
             title="Sign out of platform"
+            aria-label="Sign out"
           >
-            <LogOut size={14} />
+            <LogOut size={15} />
           </button>
         </div>
       </aside>
@@ -808,16 +824,16 @@ export default function App() {
       {/* ==================================================================== */}
       {/* 3. WIDE VIEWPORT CONTINUOUS CANVAS                                  */}
       {/* ==================================================================== */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 bg-[#151515]">
         
         {/* Responsive Header (Mobile & Desktop) */}
-        <header className="h-14 sm:h-16 border-b border-stone-200 dark:border-stone-800/80 bg-white dark:bg-[#151C28] px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30 shrink-0">
+        <header className="h-14 sm:h-16 border-b border-[#2C2C2C] bg-[#1B1B1B] px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30 shrink-0">
           <div className="flex items-center gap-2.5 sm:gap-3">
             {/* Hamburger Button for Mobile (<1024px) */}
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(true)}
-              className="lg:hidden p-2 rounded-lg border border-stone-200 dark:border-stone-800 hover:bg-stone-50 dark:hover:bg-stone-800/40 text-stone-700 dark:text-stone-200 min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
+              className="lg:hidden p-2 rounded-lg border border-[#2C2C2C] hover:bg-[#242424] text-[#F3EEE6] min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
               aria-label="Open navigation menu"
             >
               <Menu size={20} />
@@ -825,65 +841,75 @@ export default function App() {
 
             {/* Mobile Brand Identity */}
             <div className="flex items-center gap-2 lg:hidden">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-700 via-indigo-600 to-blue-500 p-0.5 shadow-xs flex items-center justify-center shrink-0">
+              <div className="w-7 h-7 rounded-lg bg-[#242424] border border-[#2C2C2C] p-0.5 flex items-center justify-center shrink-0">
                 <img 
                   src={logoUrl} 
                   alt="Growth Mastery Logo" 
                   className="w-full h-full object-cover rounded-[5px]" 
                 />
               </div>
-              <span className="font-bold text-stone-900 dark:text-stone-100 tracking-tight text-xs font-serif truncate max-w-[130px] sm:max-w-none">
+              <span className="font-bold text-[#F3EEE6] tracking-tight text-sm font-serif truncate max-w-[130px] sm:max-w-none">
                 Growth Mastery
               </span>
             </div>
 
             {/* Desktop Breadcrumbs */}
             <div className="hidden lg:flex items-center gap-3">
-              <h2 className="text-sm font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest font-mono">
+              <h2 className="text-xs font-semibold text-[#78716C] uppercase tracking-wider font-mono">
                 Workspace
               </h2>
-              <span className="text-stone-300 dark:text-stone-700">/</span>
-              <span className="text-sm font-bold text-stone-900 dark:text-stone-100 capitalize">
+              <span className="text-[#3E3E3E]">/</span>
+              <span className="text-sm font-medium text-[#F3EEE6] capitalize">
                 {activeTab.replace("-", " ")}
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-4">
-            {/* Online Indicator */}
-            <div className="hidden sm:flex items-center gap-1.5 text-xs text-stone-500">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span className="font-medium text-[11px] uppercase tracking-wider font-mono">Active</span>
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Online Status Indicator */}
+            <div className="hidden sm:flex items-center gap-2 text-xs text-[#A8A29E]">
+              <span className="w-2 h-2 rounded-full bg-[#6D927A]"></span>
+              <span className="font-mono text-[11px] uppercase tracking-wider text-[#A8A29E]">System Online</span>
             </div>
 
-            {/* Theme toggle control with 44px minimum tap target */}
+            {/* Theme toggle control */}
             <button
               type="button"
               onClick={toggleTheme}
-              className="p-2 sm:p-2.5 rounded-lg border border-stone-200 dark:border-stone-800 hover:bg-stone-50 dark:hover:bg-stone-800/40 text-stone-700 dark:text-stone-200 transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="px-3 py-1.5 rounded-lg border border-[#2C2C2C] hover:bg-[#242424] text-[#F3EEE6] transition-colors cursor-pointer min-h-[40px] inline-flex items-center gap-2 shadow-2xs"
               title={themeMode === 'dark' ? "Switch to White Mode" : "Switch to Dark Mode"}
               aria-label="Toggle theme mode"
             >
-              {themeMode === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+              {themeMode === 'dark' ? (
+                <>
+                  <Sun size={16} className="text-[#D7B87B]" />
+                  <span className="text-xs font-semibold">White Mode</span>
+                </>
+              ) : (
+                <>
+                  <Moon size={16} className="text-[#C47C4A]" />
+                  <span className="text-xs font-semibold">Dark Mode</span>
+                </>
+              )}
             </button>
           </div>
         </header>
 
         {/* 14. Edge-to-edge customizable layout section */}
-        <div className="flex-1 overflow-y-auto min-h-0 bg-[#FAF9F5] dark:bg-[#0B0F17]">
+        <div className="flex-1 overflow-y-auto min-h-0 bg-[#151515]">
           
           {/* Strict single-tab proctoring warning block */}
           {showAssessmentWarning && (
-            <div className="m-4 sm:m-8 p-4 bg-rose-50 border border-rose-200 rounded-xl flex items-start gap-3 shadow-2xs fade-in">
-              <ShieldAlert className="text-rose-600 shrink-0 mt-0.5" size={18} />
+            <div className="m-4 sm:m-8 p-4 bg-[#D96B6B]/15 border border-[#D96B6B]/35 rounded-xl flex items-start gap-3 shadow-2xs fade-in">
+              <ShieldAlert className="text-[#D96B6B] shrink-0 mt-0.5" size={18} />
               <div className="space-y-1">
-                <span className="text-xs font-bold text-rose-800 uppercase tracking-wider">Academic Integrity Warning</span>
-                <p className="text-xs text-rose-700 leading-relaxed">{assessmentWarningReason}</p>
+                <span className="text-xs font-semibold text-[#D96B6B] uppercase tracking-wider">Academic Integrity Notice</span>
+                <p className="text-xs text-[#F3EEE6] leading-relaxed">{assessmentWarningReason}</p>
               </div>
               <button 
                 type="button" 
                 onClick={() => setShowAssessmentWarning(false)} 
-                className="text-rose-400 hover:text-rose-700 font-bold ml-auto min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="text-[#D96B6B] hover:text-white font-bold ml-auto min-h-[44px] min-w-[44px] flex items-center justify-center"
               >
                 ✕
               </button>
@@ -891,7 +917,7 @@ export default function App() {
           )}
 
           {/* Main content container with responsive padding and mobile bottom clearance */}
-          <div className="p-4 sm:p-6 lg:p-10 max-w-6xl w-full mx-auto space-y-6 sm:space-y-10 pb-28 lg:pb-10">
+          <div className="p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto space-y-6 sm:space-y-8 pb-28 lg:pb-10">
             {activeTab === "admin" && currentUser.role === "admin" && (
               <AdminConsole 
                 currentUser={currentUser} 
@@ -1012,7 +1038,7 @@ export default function App() {
       {/* MOBILE BOTTOM NAVIGATION BAR (FIXED THUMB ZONE FOR <= 1024px)        */}
       {/* ==================================================================== */}
       <nav 
-        className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#151C28]/95 backdrop-blur-md border-t border-stone-200 dark:border-stone-800 lg:hidden pb-safe shadow-lg"
+        className="fixed bottom-0 left-0 right-0 z-40 bg-[#1B1B1B]/95 backdrop-blur-xs border-t border-[#2C2C2C] lg:hidden pb-safe shadow-lg"
         aria-label="Mobile Navigation"
       >
         <div className="grid grid-cols-5 h-16 items-center px-1">
@@ -1022,12 +1048,12 @@ export default function App() {
             onClick={() => handleTabClick("courses")}
             className={`flex flex-col items-center justify-center h-full min-h-[44px] cursor-pointer transition-colors ${
               activeTab === "courses" 
-                ? "text-indigo-600 dark:text-indigo-400 font-bold" 
-                : "text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+                ? "text-[#C47C4A] font-semibold" 
+                : "text-[#A8A29E] hover:text-[#F3EEE6]"
             }`}
           >
             <BookOpen size={18} />
-            <span className="text-[10px] mt-1 tracking-tight">Courses</span>
+            <span className="text-[11px] mt-1 tracking-tight">Courses</span>
           </button>
 
           {/* Progress / Dashboard */}
@@ -1036,12 +1062,12 @@ export default function App() {
             onClick={() => handleTabClick("dashboard")}
             className={`flex flex-col items-center justify-center h-full min-h-[44px] cursor-pointer transition-colors ${
               activeTab === "dashboard" 
-                ? "text-indigo-600 dark:text-indigo-400 font-bold" 
-                : "text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+                ? "text-[#C47C4A] font-semibold" 
+                : "text-[#A8A29E] hover:text-[#F3EEE6]"
             }`}
           >
             <LayoutDashboard size={18} />
-            <span className="text-[10px] mt-1 tracking-tight">Progress</span>
+            <span className="text-[11px] mt-1 tracking-tight">Progress</span>
           </button>
 
           {/* Exams */}
@@ -1050,14 +1076,12 @@ export default function App() {
             onClick={() => handleTabClick("assessment")}
             className={`flex flex-col items-center justify-center h-full min-h-[44px] cursor-pointer transition-colors relative ${
               activeTab === "assessment" 
-                ? "text-indigo-600 dark:text-indigo-400 font-bold" 
-                : "text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+                ? "text-[#C47C4A] font-semibold" 
+                : "text-[#A8A29E] hover:text-[#F3EEE6]"
             }`}
           >
-            <div className={`p-1 rounded-full ${activeTab === "assessment" ? "bg-indigo-50 dark:bg-indigo-950/60" : ""}`}>
-              <BookMarked size={18} />
-            </div>
-            <span className="text-[10px] tracking-tight">Exams</span>
+            <BookMarked size={18} />
+            <span className="text-[11px] mt-1 tracking-tight">Exams</span>
           </button>
 
           {/* Skills Matrix */}
@@ -1066,12 +1090,12 @@ export default function App() {
             onClick={() => handleTabClick("skill-gaps")}
             className={`flex flex-col items-center justify-center h-full min-h-[44px] cursor-pointer transition-colors ${
               activeTab === "skill-gaps" 
-                ? "text-indigo-600 dark:text-indigo-400 font-bold" 
-                : "text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+                ? "text-[#C47C4A] font-semibold" 
+                : "text-[#A8A29E] hover:text-[#F3EEE6]"
             }`}
           >
             <TrendingUp size={18} />
-            <span className="text-[10px] mt-1 tracking-tight">Skills</span>
+            <span className="text-[11px] mt-1 tracking-tight">Skills</span>
           </button>
 
           {/* More Menu Drawer Trigger */}
@@ -1080,13 +1104,13 @@ export default function App() {
             onClick={() => setIsMobileMenuOpen(true)}
             className={`flex flex-col items-center justify-center h-full min-h-[44px] cursor-pointer transition-colors ${
               ["recommendations", "practice-sources", "quiz", "ai-tutor", "ai-telemetry", "admin", "teacher"].includes(activeTab)
-                ? "text-indigo-600 dark:text-indigo-400 font-bold" 
-                : "text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+                ? "text-[#C47C4A] font-semibold" 
+                : "text-[#A8A29E] hover:text-[#F3EEE6]"
             }`}
             aria-label="More navigation items and settings"
           >
             <Menu size={18} />
-            <span className="text-[10px] mt-1 tracking-tight">More</span>
+            <span className="text-[11px] mt-1 tracking-tight">More</span>
           </button>
         </div>
       </nav>
