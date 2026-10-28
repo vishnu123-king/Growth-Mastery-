@@ -66,7 +66,16 @@ function getCurrentUser(req: express.Request, fallbackToDemo = false): any {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+
+  // Port resolution: check CLI flag --port, fallback to 3000 per AI Studio runtime rules
+  let PORT = 3000;
+  const portArgIdx = process.argv.indexOf("--port");
+  if (portArgIdx !== -1 && process.argv[portArgIdx + 1]) {
+    const parsed = parseInt(process.argv[portArgIdx + 1], 10);
+    if (!isNaN(parsed) && parsed > 0) {
+      PORT = parsed;
+    }
+  }
 
   app.use(express.json({ limit: "15mb" }));
 
@@ -1443,9 +1452,19 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
+  const server = app.listen(PORT, "0.0.0.0", () => {
     console.log(`[FULL-STACK PORTAL] Server running successfully on http://localhost:${PORT}`);
+  });
+
+  server.on("error", (err: any) => {
+    console.error(`[FULL-STACK PORTAL ERROR] Failed to bind to port ${PORT}:`, err);
   });
 }
 
-startServer();
+process.on("unhandledRejection", (reason) => {
+  console.error("[FULL-STACK PORTAL] Unhandled Rejection:", reason);
+});
+
+startServer().catch((err) => {
+  console.error("[FULL-STACK PORTAL] Fatal startup error:", err);
+});
