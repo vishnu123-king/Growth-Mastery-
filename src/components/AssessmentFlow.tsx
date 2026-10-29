@@ -153,15 +153,15 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center p-16 space-y-4 bg-[#1B1B1B] border border-[#2C2C2C] rounded-2xl min-h-[440px]">
+      <div className="flex flex-col items-center justify-center p-16 space-y-4 bg-white dark:bg-[#1B1B1B] border border-stone-200 dark:border-[#2C2C2C] rounded-2xl min-h-[440px] shadow-xs">
         <div className="w-12 h-12 rounded-xl bg-[#C47C4A] text-white flex items-center justify-center shadow-md">
           <Loader2 className="w-6 h-6 animate-spin" />
         </div>
         <div className="text-center space-y-1">
-          <h3 className="font-semibold text-[#F3EEE6] text-base">
+          <h3 className="font-semibold text-stone-900 dark:text-[#F3EEE6] text-base">
             {assessment ? "Evaluating and grading exam submission..." : "Preparing diagnostic examination..."}
           </h3>
-          <p className="text-[#A8A29E] text-xs">
+          <p className="text-stone-600 dark:text-[#A8A29E] text-xs">
             Calculating mastery scores and generating diagnostic rubrics.
           </p>
         </div>
@@ -173,22 +173,22 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
   if (!assessment) {
     return (
       <div className="space-y-8" id="assessment-selection">
-        <div className="border-b border-[#2C2C2C] pb-5 space-y-2">
+        <div className="border-b border-stone-200 dark:border-[#2C2C2C] pb-5 space-y-2">
           <div className="flex items-center gap-2 text-xs font-mono">
             <span className="text-[#C47C4A] font-semibold uppercase tracking-wider">Examination Workspace</span>
             {enableStrictProctoring && (
               <>
-                <span className="text-[#444444]" aria-hidden="true">·</span>
-                <span className="inline-flex items-center gap-1.5 text-[#6D927A] font-medium">
+                <span className="text-stone-400 dark:text-[#444444]" aria-hidden="true">·</span>
+                <span className="inline-flex items-center gap-1.5 text-[#2E6B4A] dark:text-[#6D927A] font-medium">
                   <Lock size={12} /> Proctoring Active
                 </span>
               </>
             )}
           </div>
-          <h1 className="text-2xl sm:text-3xl font-serif font-semibold text-[#F3EEE6] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-serif font-semibold text-stone-900 dark:text-[#F3EEE6] tracking-tight">
             Competency Examination
           </h1>
-          <p className="text-[#A8A29E] text-sm">
+          <p className="text-stone-600 dark:text-[#A8A29E] text-sm">
             Select a faculty-scheduled examination board or choose a syllabus topic to launch an adaptive evaluation.
           </p>
         </div>
@@ -197,10 +197,10 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
         {templates.length > 0 && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-xs font-mono font-semibold text-[#A8A29E] uppercase tracking-wider">
+              <h2 className="text-xs font-mono font-semibold text-stone-600 dark:text-[#A8A29E] uppercase tracking-wider">
                 Scheduled Faculty Exams
               </h2>
-              <span className="text-xs font-mono text-[#D7B87B]">Formal Syllabus Credit</span>
+              <span className="text-xs font-mono text-[#8C6616] dark:text-[#D7B87B] font-semibold">Formal Syllabus Credit</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -219,18 +219,18 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
                     }}
                     className={`p-5 rounded-xl border text-left transition-all cursor-pointer space-y-3 ${
                       isDeadlinePassed
-                        ? "border-[#2C2C2C] bg-[#1E1E1E] opacity-50 cursor-not-allowed"
+                        ? "border-stone-200 dark:border-[#2C2C2C] bg-stone-100 dark:bg-[#1E1E1E] opacity-60 cursor-not-allowed"
                         : isSelected
-                        ? "border-[#C47C4A] bg-[#222222] ring-1 ring-[#C47C4A]/40"
-                        : "border-[#2C2C2C] bg-[#1B1B1B] hover:border-[#383838] hover:bg-[#202020]"
+                        ? "border-[#C47C4A] bg-amber-50/70 dark:bg-[#222222] ring-1 ring-[#C47C4A]/40"
+                        : "border-stone-200 dark:border-[#2C2C2C] bg-white dark:bg-[#1B1B1B] hover:border-stone-300 dark:hover:border-[#383838] hover:bg-stone-50 dark:hover:bg-[#202020] shadow-xs"
                     }`}
                   >
                     <div className="flex justify-between items-start gap-2">
                       <div className="space-y-1">
-                        <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#D7B87B] block">
+                        <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#B86B39] dark:text-[#D7B87B] block">
                           Official Examination
                         </span>
-                        <h3 className="font-semibold text-[#F3EEE6] text-base">{tmpl.title}</h3>
+                        <h3 className="font-semibold text-stone-900 dark:text-[#F3EEE6] text-base">{tmpl.title}</h3>
                       </div>
                       {isSelected && (
                         <span className="w-5 h-5 bg-[#C47C4A] text-white rounded-full flex items-center justify-center text-xs">
@@ -239,18 +239,18 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
                       )}
                     </div>
                     
-                    <p className="text-[#A8A29E] text-xs line-clamp-2 leading-relaxed">{tmpl.description}</p>
+                    <p className="text-stone-600 dark:text-[#A8A29E] text-xs line-clamp-2 leading-relaxed">{tmpl.description}</p>
                     
-                    <div className="flex items-center gap-3 pt-3 text-xs text-[#78716C] font-mono border-t border-[#262626]">
-                      <span className="flex items-center gap-1 text-[#D6D0C7]">
+                    <div className="flex items-center gap-3 pt-3 text-xs text-stone-500 dark:text-[#78716C] font-mono border-t border-stone-200 dark:border-[#262626]">
+                      <span className="flex items-center gap-1 text-stone-800 dark:text-[#D6D0C7] font-medium">
                         <Clock size={12} className="text-[#C47C4A]" /> {tmpl.timeLimitMinutes} min limit
                       </span>
-                      <span className="text-[#444444]" aria-hidden="true">·</span>
+                      <span className="text-stone-300 dark:text-[#444444]" aria-hidden="true">·</span>
                       <span>{tmpl.questions?.length || 0} Questions</span>
                       {tmpl.deadline && (
                         <>
-                          <span className="text-[#444444]" aria-hidden="true">·</span>
-                          <span className={isDeadlinePassed ? "text-[#D96B6B]" : "text-[#D7B87B]"}>
+                          <span className="text-stone-300 dark:text-[#444444]" aria-hidden="true">·</span>
+                          <span className={isDeadlinePassed ? "text-red-600 dark:text-[#D96B6B] font-semibold" : "text-[#B86B39] dark:text-[#D7B87B] font-medium"}>
                             {isDeadlinePassed ? "Expired" : `Due ${tmpl.deadline}`}
                           </span>
                         </>
@@ -266,10 +266,10 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
         {/* Course Domains */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-xs font-mono font-semibold text-[#A8A29E] uppercase tracking-wider">
+            <h2 className="text-xs font-mono font-semibold text-stone-600 dark:text-[#A8A29E] uppercase tracking-wider">
               Self-Paced Diagnostic Domains
             </h2>
-            <span className="text-xs font-mono text-[#78716C]">Adaptive Assessments</span>
+            <span className="text-xs font-mono text-stone-500 dark:text-[#78716C]">Adaptive Assessments</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -284,21 +284,21 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
                   }}
                   className={`p-5 rounded-xl border text-left cursor-pointer transition-all space-y-2.5 ${
                     isSelected 
-                      ? "border-[#C47C4A] bg-[#222222] ring-1 ring-[#C47C4A]/40" 
-                      : "border-[#2C2C2C] bg-[#1B1B1B] hover:border-[#383838] hover:bg-[#202020]"
+                      ? "border-[#C47C4A] bg-amber-50/70 dark:bg-[#222222] ring-1 ring-[#C47C4A]/40" 
+                      : "border-stone-200 dark:border-[#2C2C2C] bg-white dark:bg-[#1B1B1B] hover:border-stone-300 dark:hover:border-[#383838] hover:bg-stone-50 dark:hover:bg-[#202020] shadow-xs"
                   }`}
                 >
                   <div className="flex justify-between items-start gap-2">
-                    <h3 className="font-semibold text-[#F3EEE6] text-sm sm:text-base">{dom.name}</h3>
+                    <h3 className="font-semibold text-stone-900 dark:text-[#F3EEE6] text-sm sm:text-base">{dom.name}</h3>
                     {isSelected && (
                       <span className="w-5 h-5 bg-[#C47C4A] text-white rounded-full flex items-center justify-center text-xs">
                         <Check size={13} />
                       </span>
                     )}
                   </div>
-                  <p className="text-[#A8A29E] text-xs line-clamp-2 leading-relaxed">{dom.description}</p>
+                  <p className="text-stone-600 dark:text-[#A8A29E] text-xs line-clamp-2 leading-relaxed">{dom.description}</p>
                   {dom.deadline && (
-                    <div className="text-xs font-mono text-[#78716C] pt-2 border-t border-[#262626]">
+                    <div className="text-xs font-mono text-stone-500 dark:text-[#78716C] pt-2 border-t border-stone-200 dark:border-[#262626]">
                       Target: {dom.deadline}
                     </div>
                   )}
@@ -310,20 +310,20 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
 
         {/* AI Question Generation Option */}
         {selectedDomain && !selectedTemplateId && (
-          <div className="p-4 bg-[#222222] border border-[#2C2C2C] rounded-xl space-y-1.5">
+          <div className="p-4 bg-white dark:bg-[#222222] border border-stone-200 dark:border-[#2C2C2C] rounded-xl space-y-1.5 shadow-xs">
             <label className="flex items-center gap-2.5 cursor-pointer">
               <input 
                 type="checkbox" 
                 checked={useAI}
                 onChange={(e) => setUseAI(e.target.checked)}
-                className="w-4 h-4 rounded text-[#C47C4A] border-[#2C2C2C] bg-[#1E1E1E]"
+                className="w-4 h-4 rounded text-[#C47C4A] border-stone-300 dark:border-[#2C2C2C] bg-stone-100 dark:bg-[#1E1E1E]"
               />
-              <span className="font-medium text-[#F3EEE6] text-xs sm:text-sm flex items-center gap-1.5">
-                <Sparkles size={14} className="text-[#D7B87B]" />
+              <span className="font-medium text-stone-900 dark:text-[#F3EEE6] text-xs sm:text-sm flex items-center gap-1.5">
+                <Sparkles size={14} className="text-[#B86B39] dark:text-[#D7B87B]" />
                 Synthesize customized diagnostic questions using AI Engine
               </span>
             </label>
-            <p className="text-[#A8A29E] text-xs pl-6 leading-relaxed">
+            <p className="text-stone-600 dark:text-[#A8A29E] text-xs pl-6 leading-relaxed">
               Dynamically tailors questions to the specific topics and competency levels of this syllabus track.
             </p>
           </div>
@@ -331,16 +331,16 @@ export const AssessmentFlow: React.FC<AssessmentFlowProps> = ({
 
         {/* Proctoring Notice */}
         {enableStrictProctoring && (
-          <div className="p-4 bg-[#222222] border border-[#2C2C2C] rounded-xl flex items-start gap-3 text-xs text-[#D6D0C7]">
-            <ShieldAlert size={16} className="text-[#D7B87B] shrink-0 mt-0.5" />
+          <div className="p-4 bg-white dark:bg-[#222222] border border-stone-200 dark:border-[#2C2C2C] rounded-xl flex items-start gap-3 text-xs text-stone-700 dark:text-[#D6D0C7] shadow-xs">
+            <ShieldAlert size={16} className="text-[#B86B39] dark:text-[#D7B87B] shrink-0 mt-0.5" />
             <div className="space-y-0.5">
-              <span className="font-semibold block text-[#F3EEE6]">Academic Integrity Policy</span>
-              <span className="text-[#A8A29E]">Navigating away, closing the window, or switching browser tabs during an examination session will submit your active responses for final grading.</span>
+              <span className="font-semibold block text-stone-900 dark:text-[#F3EEE6]">Academic Integrity Policy</span>
+              <span className="text-stone-600 dark:text-[#A8A29E]">Navigating away, closing the window, or switching browser tabs during an examination session will submit your active responses for final grading.</span>
             </div>
           </div>
         )}
 
-        <div className="pt-4 border-t border-[#2C2C2C] flex justify-end">
+        <div className="pt-4 border-t border-stone-200 dark:border-[#2C2C2C] flex justify-end">
           <button
             type="button"
             disabled={!selectedDomain && !selectedTemplateId}
